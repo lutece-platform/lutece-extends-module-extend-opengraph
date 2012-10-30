@@ -43,10 +43,11 @@ import org.apache.commons.lang.StringUtils;
 
 /**
  * 
- * Extender for action bar functionality. <br />
+ * Extender for social hub functionalities. <br />
  * Macro to use in the templates :
- * <strong>@Extender[idResource,resourceType,opengraph]@</strong> <br />
- * Example : @Extender[22,document,opengraph]@
+ * <strong>@Extender[idResource,resourceType,opengraph,{header:true|false}]@</
+ * strong> <br />
+ * Example : @Extender[22,document,opengraph,{header:true}]@
  */
 public class OpengraphResourceExtender extends AbstractResourceExtender
 {

@@ -7,15 +7,18 @@ import java.util.ArrayList;
 import java.util.List;
 
 
+/**
+ * DAO to manage OpengraphSocialHub objects
+ */
 public class OpengraphSocialHubDAO implements IOpengraphSocialHubDAO
 {
-    private static final String SQL_QUERY_SELECT = " SELECT opengraph_social_id, name, content FROM opengraph_socialhub WHERE opengraph_social_id = ? ";
+    private static final String SQL_QUERY_SELECT = " SELECT opengraph_socialhub_id, name, content FROM opengraph_socialhub WHERE opengraph_socialhub_id = ? ";
     private static final String SQL_INSERT = " INSERT INTO opengraph_socialhub ( opengraph_socialhub_id, name, content ) VALUES( ?, ?, ? ) ";
-    private static final String SQL_UPDATE = " UPDATE opengraph_socialhub SET name = ?, content = ? WHERE opengraph_social_id = ? ";
+    private static final String SQL_UPDATE = " UPDATE opengraph_socialhub SET name = ?, content = ? WHERE opengraph_socialhub_id = ? ";
     private static final String SQL_DELETE = " DELETE FROM opengraph_socialhub WHERE opengraph_socialhub_id = ? ";
-    private static final String SQL_QUERY_FIND_ALL = " SELECT opengraph_social_id, name, content FROM opengraph_socialhub ";
+    private static final String SQL_QUERY_FIND_ALL = " SELECT opengraph_socialhub_id, name, content FROM opengraph_socialhub ";
 
-    private static final String SQL_QUERY_NEW_PRIMARY_KEY = " SELECT MAX(opengraph_social_id) FROM opengraph_social ";
+    private static final String SQL_QUERY_NEW_PRIMARY_KEY = " SELECT MAX(opengraph_socialhub_id) FROM opengraph_socialhub ";
 
     private int getNewPrimaryKey( Plugin plugin )
     {

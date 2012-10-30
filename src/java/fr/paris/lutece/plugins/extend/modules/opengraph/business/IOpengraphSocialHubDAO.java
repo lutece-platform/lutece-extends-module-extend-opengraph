@@ -5,6 +5,9 @@ import fr.paris.lutece.portal.service.plugin.Plugin;
 import java.util.List;
 
 
+/**
+ * Interface of OpengraphSocialHubDAO
+ */
 public interface IOpengraphSocialHubDAO
 {
     /**

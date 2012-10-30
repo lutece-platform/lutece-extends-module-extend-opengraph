@@ -39,9 +39,7 @@ import fr.paris.lutece.portal.service.plugin.PluginService;
 
 
 /**
- *
- * RatingPlugin
- *
+ * OpengraphPlugin
  */
 public class OpengraphPlugin extends PluginDefaultImplementation
 {

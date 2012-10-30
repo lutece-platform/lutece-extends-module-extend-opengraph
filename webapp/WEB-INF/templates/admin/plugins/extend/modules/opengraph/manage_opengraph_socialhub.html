@@ -1,0 +1,28 @@
+<div class="row-fluid">
+	<fieldset>
+		<legend>
+			#i18n{module.extend.opengraph.manage_opengraph_socialhub.pageTitle}
+			<#if permissions.ADD_SOCIALHUB?? && permissions.ADD_SOCIALHUB>
+				<div class="pull-right">
+					<a class="btn btn-primary btn-small" href="jsp/admin/plugins/extend/modules/opengraph/GetAddOpengraphSocialHub.jsp" title="#i18n{module.extend.opengraph.manage_opengraph_socialhub.addSocialHub}" >
+						<i class="icon-plus icon-white">&nbsp;</i><span class="hidden-phone">&nbsp;#i18n{module.extend.opengraph.manage_opengraph_socialhub.addSocialHub}</span>
+					</a>
+				</div>
+			</#if>
+		</legend>
+		<@dataTable dataTableManager=dataTableManager actionMacro="getActionsOpengraphSocialHub" />
+	</fieldset>
+</div>
+
+<#macro getActionsOpengraphSocialHub item >
+	<#if permissions.MODIFY_SOCIALHUB?? && permissions.MODIFY_SOCIALHUB>
+		<a class="btn btn-primary btn-small" href="jsp/admin/plugins/extend/modules/opengraph/GetModifyOpengraphSocialHub.jsp?id_socialhub=${item.opengraphSocialHubId}" title="#i18n{module.extend.opengraph.manage_opengraph_socialhub.modifySocialHub}">
+			<i class="icon-edit icon-white"></i>
+		</a>
+	</#if>
+	<#if permissions.REMOVE_SOCIALHUB?? && permissions.REMOVE_SOCIALHUB>
+		<a class="btn btn-danger btn-small" href="jsp/admin/plugins/extend/modules/opengraph/ConfirmRemoveOpengraphSocialHub.jsp?id_socialhub=${item.opengraphSocialHubId}" title="#i18n{module.extend.opengraph.manage_opengraph_socialhub.removeSocialHub}">
+			<i class="icon-trash icon-white"></i>
+		</a>
+	</#if>
+</#macro>

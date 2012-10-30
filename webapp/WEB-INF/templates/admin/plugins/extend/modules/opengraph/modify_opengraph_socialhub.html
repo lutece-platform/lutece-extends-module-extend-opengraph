@@ -1,0 +1,30 @@
+<#include "/admin/util/editor/editor.html" />
+<div class="row-fluid">
+	<form class="form-horizontal" method="post" action="jsp/admin/plugins/extend/modules/opengraph/DoModifyOpengraphSocialHub.jsp">
+		<fieldset>
+			<legend>#i18n{module.extend.opengraph.modify_opengraph_socialhub.pageTitle}</legend>
+			<div class="control-group">
+				<label class="control-label" for="name"> #i18n{module.extend.opengraph.add_opengraph_socialhub.labelName} * : </label>
+					<div class="controls">
+					<input type="text" name="name" value="${socialhub.name!}" size="100" />
+				</div>
+			</div>
+			<div class="control-group">
+				<label class="control-label" for="content"> #i18n{module.extend.opengraph.add_opengraph_socialhub.labelContent} * : </label>
+					<div class="controls">
+					<textarea class="richtext" rows="30" cols="100" id="content" name="content" >${socialhub.content!}</textarea>
+				</div>
+			</div>
+			<div class="form-actions">
+				<input type="hidden" name="id_socialhub" name="id_socialhub" value="${socialhub.opengraphSocialHubId!}" />
+				<button class="btn btn-primary btn-small" name="modify" value="#i18n{portal.util.labelModify}" id="modify" title="#i18n{portal.util.labelModify}">
+					<i class="icon-edit icon-white">&nbsp;</i>&nbsp;#i18n{portal.util.labelModify}
+				</button>
+				<button class="btn btn-small" name="cancel" id="cancel" value="#i18n{portal.util.labelBack}" title="#i18n{portal.util.labelBack}">
+					#i18n{portal.util.labelBack}
+				</button>
+			</div>
+		</fieldset>
+	</form>
+</div>
+<@initEditor />

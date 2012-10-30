@@ -34,19 +34,27 @@
 package fr.paris.lutece.plugins.extend.modules.opengraph.web.component;
 
 import fr.paris.lutece.plugins.extend.business.extender.ResourceExtenderDTO;
+import fr.paris.lutece.plugins.extend.business.extender.config.IExtenderConfig;
+import fr.paris.lutece.plugins.extend.modules.opengraph.business.OpengraphSocialHub;
+import fr.paris.lutece.plugins.extend.modules.opengraph.service.OpengraphService;
 import fr.paris.lutece.plugins.extend.service.extender.IResourceExtenderService;
+import fr.paris.lutece.plugins.extend.service.extender.config.IResourceExtenderConfigService;
 import fr.paris.lutece.plugins.extend.service.extender.history.IResourceExtenderHistoryService;
+import fr.paris.lutece.plugins.extend.util.ExtendErrorException;
 import fr.paris.lutece.plugins.extend.util.JSONUtils;
-import fr.paris.lutece.plugins.extend.web.component.NoConfigResourceExtenderComponent;
+import fr.paris.lutece.plugins.extend.web.component.AbstractResourceExtenderComponent;
+import fr.paris.lutece.portal.service.spring.SpringContextService;
 import fr.paris.lutece.portal.service.template.AppTemplateService;
 import fr.paris.lutece.portal.service.util.AppPathService;
 import fr.paris.lutece.util.html.HtmlTemplate;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
 import javax.inject.Inject;
+import javax.inject.Named;
 import javax.servlet.http.HttpServletRequest;
 
 import net.sf.json.JSONException;
@@ -60,15 +68,19 @@ import org.apache.commons.lang.StringUtils;
  * OpengraphResourceExtenderComponent
  * 
  */
-public class OpengraphResourceExtenderComponent extends NoConfigResourceExtenderComponent
+public class OpengraphResourceExtenderComponent extends AbstractResourceExtenderComponent
 {
     private static final String JSON_KEY_HEADER = "header";
 
+    // MARKS
     private static final String MARK_URL = "url";
     private static final String MARK_TITLE = "title";
     private static final String MARK_DESCRIPTION = "description";
     private static final String MARK_BASE_URL = "base_url";
+
+    // TEMPLATES
     private static final String TEMPLATE_SOCIAL_HEADER = "skin/plugins/extend/modules/opengraph/opengraph_header.html";
+    private static final String TEMPLATE_MODIFY_OPENGRAPH_CONFIG = "admin/plugins/extend/modules/opengraph/modify_opengraph_config";
 
     private static final String CONSTANT_QUESTION_MARK = "?";
 
@@ -77,6 +89,10 @@ public class OpengraphResourceExtenderComponent extends NoConfigResourceExtender
     private IResourceExtenderHistoryService _resourceHistoryService;
     @Inject
     IResourceExtenderService resourceExtenderService;
+    @Inject
+    @Named( "extend-opengraph.opengraphExtenderConfigService" )
+    private IResourceExtenderConfigService _configService;
+    private OpengraphService _opengraphService = SpringContextService.getBean( OpengraphService.BEAN_NAME );
 
     /**
      * {@inheritDoc}
@@ -136,6 +152,43 @@ public class OpengraphResourceExtenderComponent extends NoConfigResourceExtender
      * {@inheritDoc}
      */
     @Override
+    public String getConfigHtml( ResourceExtenderDTO resourceExtender, Locale locale, HttpServletRequest request )
+    {
+        List<OpengraphSocialHub> listOpengraphSocialHub = _opengraphService.findAll( );
+
+        if ( listOpengraphSocialHub == null || listOpengraphSocialHub.size( ) <= 0 )
+        {
+            return null;
+        }
+        Map<String, Object> model = new HashMap<String, Object>( );
+
+
+        return null;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public IExtenderConfig getConfig( int nIdExtender )
+    {
+        return _configService.find( nIdExtender );
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void doSaveConfig( HttpServletRequest request, IExtenderConfig config ) throws ExtendErrorException
+    {
+        // TODO Auto-generated method stub
+
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
     public String getInfoHtml( ResourceExtenderDTO resourceExtender, Locale locale, HttpServletRequest request )
     {
         //TODO : implement me
@@ -166,4 +219,5 @@ public class OpengraphResourceExtenderComponent extends NoConfigResourceExtender
 
         return Boolean.parseBoolean( strHeaderParameter );
     }
+
 }

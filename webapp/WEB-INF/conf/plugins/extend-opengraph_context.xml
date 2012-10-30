@@ -20,8 +20,15 @@
 	<bean id="extend-opengraph.opengraphResourceExtenderComponent" class="fr.paris.lutece.plugins.extend.modules.opengraph.web.component.OpengraphResourceExtenderComponent" 
 		p:resourceExtender-ref="extend-opengraph.opengraphResourceExtender" />
 	
+	<!-- Services -->
+	<bean id="extend-opengraph.opengraphService" class="fr.paris.lutece.plugins.extend.modules.opengraph.service.OpengraphService" />
+	<bean id="extend-opengraph.opengraphExtenderConfigService" class="fr.paris.lutece.plugins.extend.service.extender.config.ResourceExtenderConfigService" 
+		p:extenderConfigDAO-ref="extend-opengraph.opengraphExtenderConfigDAO" />
+	
+	
 	<!-- DAO -->
 	<bean id="extend-opengraph.opengraphSocialHubDAO" class="fr.paris.lutece.plugins.extend.modules.opengraph.business.OpengraphSocialHubDAO" />
+	<bean id="extend-opengraph.opengraphExtenderConfigDAO" class="fr.paris.lutece.plugins.extend.modules.opengraph.business.config.OpengraphExtenderConfigDAO" />
 	
 	<!-- Actions -->
 	<bean id="extend-opengraph.opengraphInstallerPluginAction" class="fr.paris.lutece.plugins.extend.modules.opengraph.web.action.OpengraphInstallerPluginAction" />

@@ -47,9 +47,7 @@ import javax.servlet.http.HttpServletResponse;
 
 
 /**
- * 
- * FeedbackInstallerPluginAction
- * 
+ * OpengraphInstallerPluginAction
  */
 public class OpengraphInstallerPluginAction extends AbstractPluginAction<IExtendableResource>
     implements IExtendableResourcePluginAction

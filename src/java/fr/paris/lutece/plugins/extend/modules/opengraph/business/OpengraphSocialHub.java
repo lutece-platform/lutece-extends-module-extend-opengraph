@@ -1,7 +1,12 @@
 package fr.paris.lutece.plugins.extend.modules.opengraph.business;
 
+/**
+ * Class to represent a social hub html template
+ */
 public class OpengraphSocialHub
 {
+    public static final String RESOURCE_TYPE = "OPENGRAPH_SOCIAL_HUB";
+
     private int _nOpengraphSocialHubId;
     private String _strName;
     private String _strContent;

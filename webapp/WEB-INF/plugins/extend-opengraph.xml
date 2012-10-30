@@ -21,6 +21,27 @@
     <!-- if the plugin must have a connection pool with parameter : 1 - yes, 0 - no -->
     <db-pool-required>1</db-pool-required>
     
+    <admin-features>
+        <admin-feature>
+            <feature-id>MANAGE_OPENGRAPH_SOCIALHUB</feature-id>
+            <feature-title>module.extend.opengraph.adminFeature.manage_opengraph_socialhub.name</feature-title>
+            <feature-description>module.extend.opengraph.adminFeature.manage_opengraph_socialhub.description</feature-description>
+            <feature-level>2</feature-level>
+            <feature-url>jsp/admin/plugins/extend/modules/opengraph/GetManageOpengraphSocialHub.jsp</feature-url>
+            <feature-icon-url>images/admin/skin/plugins/extend/modules/opengraph/extend-opengraph.png</feature-icon-url>
+            <feature-documentation-url>jsp/admin/documentation/AdminDocumentation.jsp?doc=admin-extend-opengraph</feature-documentation-url>
+        </admin-feature>
+    </admin-features>
+    
+    <!-- RBAC Resources -->
+    <rbac-resource-types>
+        <rbac-resource-type>
+            <rbac-resource-type-class>
+                fr.paris.lutece.plugins.extend.modules.opengraph.service.OpengraphResourceIdService
+			</rbac-resource-type-class>
+        </rbac-resource-type>
+    </rbac-resource-types>
+    
     <!-- Xpage configuration -->
     <applications>
         <application>

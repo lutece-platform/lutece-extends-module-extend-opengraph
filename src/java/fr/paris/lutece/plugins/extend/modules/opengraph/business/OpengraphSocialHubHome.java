@@ -6,6 +6,9 @@ import fr.paris.lutece.portal.service.spring.SpringContextService;
 import java.util.List;
 
 
+/**
+ * Home of OpengraphSocialHubDAO
+ */
 public class OpengraphSocialHubHome
 {
     private static IOpengraphSocialHubDAO _dao = SpringContextService
