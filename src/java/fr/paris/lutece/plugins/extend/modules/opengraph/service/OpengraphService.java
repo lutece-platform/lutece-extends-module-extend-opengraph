@@ -18,20 +18,12 @@ public class OpengraphService
     private Plugin _plugin;
 
     /**
-     * Default constructor
-     */
-    public OpengraphService( )
-    {
-        _plugin = PluginService.getPlugin( OpengraphPlugin.PLUGIN_NAME );
-    }
-
-    /**
      * Get the list of every OpengraphSocialHub
      * @return The list of every OpengraphSocialHub
      */
     public List<OpengraphSocialHub> findAll( )
     {
-        return OpengraphSocialHubHome.findAll( _plugin );
+        return OpengraphSocialHubHome.findAll( getPlugin( ) );
     }
 
     /**
@@ -40,7 +32,7 @@ public class OpengraphService
      */
     public void createOpengraphSocialHub( OpengraphSocialHub opengraphSocialHub )
     {
-        OpengraphSocialHubHome.insert( opengraphSocialHub, _plugin );
+        OpengraphSocialHubHome.insert( opengraphSocialHub, getPlugin( ) );
     }
 
     /**
@@ -51,7 +43,7 @@ public class OpengraphService
      */
     public OpengraphSocialHub getOpengraphSocialHub( int nIdOpengraphSocialHub )
     {
-        return OpengraphSocialHubHome.findById( nIdOpengraphSocialHub, _plugin );
+        return OpengraphSocialHubHome.findById( nIdOpengraphSocialHub, getPlugin( ) );
     }
 
     /**
@@ -60,7 +52,7 @@ public class OpengraphService
      */
     public void updateOpengraphSocialHub( OpengraphSocialHub opengraphSocialHub )
     {
-        OpengraphSocialHubHome.update( opengraphSocialHub, _plugin );
+        OpengraphSocialHubHome.update( opengraphSocialHub, getPlugin( ) );
     }
 
     /**
@@ -69,6 +61,19 @@ public class OpengraphService
      */
     public void removeOpengraphSocialHub( int nIdOpengraphSocialHub )
     {
-        OpengraphSocialHubHome.delete( nIdOpengraphSocialHub, _plugin );
+        OpengraphSocialHubHome.delete( nIdOpengraphSocialHub, getPlugin( ) );
+    }
+
+    /**
+     * Get the plugin associated to this service
+     * @return The plugin associated to this service
+     */
+    private Plugin getPlugin( )
+    {
+        if ( _plugin == null )
+        {
+            _plugin = PluginService.getPlugin( OpengraphPlugin.PLUGIN_NAME );
+        }
+        return _plugin;
     }
 }

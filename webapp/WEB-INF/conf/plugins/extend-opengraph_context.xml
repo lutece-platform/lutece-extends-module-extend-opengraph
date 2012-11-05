@@ -14,7 +14,8 @@
 	<bean id="extend-opengraph.opengraphResourceExtender" class="fr.paris.lutece.plugins.extend.modules.opengraph.service.extender.OpengraphResourceExtender" 
 		p:key="opengraph"
 		p:i18nTitleKey="module.extend.opengraph.extender.opengraph.label"
-		p:historyEnable="true"
+		p:configRequired="true" 
+		p:historyEnable="false"
 		p:resourceExtenderComponent-ref="extend-opengraph.opengraphResourceExtenderComponent" />
 		
 	<bean id="extend-opengraph.opengraphResourceExtenderComponent" class="fr.paris.lutece.plugins.extend.modules.opengraph.web.component.OpengraphResourceExtenderComponent" 

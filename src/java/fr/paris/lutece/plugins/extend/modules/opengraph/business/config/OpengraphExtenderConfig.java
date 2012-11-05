@@ -30,7 +30,7 @@ public class OpengraphExtenderConfig extends ExtenderConfig
      * associated to this config
      * @param nOpengraphSocialHubId The id to add
      */
-    public void addOpengraphSocialHubId( int nOpengraphSocialHubId )
+    public void addOpengraphSocialHubId( Integer nOpengraphSocialHubId )
     {
         _listAddedOpengraphSocialHubId.add( nOpengraphSocialHubId );
         _listOpengraphSocialHubId.add( nOpengraphSocialHubId );
@@ -41,7 +41,7 @@ public class OpengraphExtenderConfig extends ExtenderConfig
      * associated to this config
      * @param nOpengraphSocialHubId The id to remove
      */
-    public void removeOpengraphSocialHubId( int nOpengraphSocialHubId )
+    public void removeOpengraphSocialHubId( Integer nOpengraphSocialHubId )
     {
         _listRemovedOpengraphSocialHubId.add( nOpengraphSocialHubId );
         _listOpengraphSocialHubId.remove( nOpengraphSocialHubId );

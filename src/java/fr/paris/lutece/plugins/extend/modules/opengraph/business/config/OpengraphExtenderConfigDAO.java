@@ -16,7 +16,7 @@ public class OpengraphExtenderConfigDAO implements IExtenderConfigDAO<OpengraphE
 {
     private static final String SQL_QUERY_SELECT = " SELECT id_socialhub FROM opengraph_config WHERE id_extender = ? ";
     private static final String SQL_INSERT_SOCIAL_HUB = " INSERT INTO opengraph_config( id_extender, id_socialhub) VALUES ";
-    private static final String SQL_REMOVE_SOCIAL_HUB = " DELETE FROM opengraph_config WHERE id_extender = ? AND id_socialhub IN (= ";
+    private static final String SQL_REMOVE_SOCIAL_HUB = " DELETE FROM opengraph_config WHERE id_extender = ? AND id_socialhub IN ";
 
     private static final String SQL_DELETE_CONFIG = " DELETE FROM opengraph_config WHERE id_extender = ? ";
 

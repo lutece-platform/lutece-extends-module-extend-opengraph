@@ -10,5 +10,5 @@ DROP TABLE IF EXISTS opengraph_config;
 CREATE TABLE opengraph_config (
 	id_extender INT NOT NULL,
 	id_socialhub INT NOT NULL,
-	PRIMARY KEY (opengraph_socialhub_id, id_socialhub)
+	PRIMARY KEY (id_extender, id_socialhub)
 );

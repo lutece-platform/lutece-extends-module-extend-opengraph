@@ -1,0 +1,18 @@
+<#if socialhubs?? && socialhubs?has_content>
+	<div class="control-group">
+			#i18n{module.extend.opengraph.modify_opengraph_config.labelSocialHubsToDisplay} :
+	</div>
+	<#list socialhubs as socialhub>
+		<div class="control-group">
+			<div class="controls">
+				<label class="checkbox" for="socialhub_${socialhub.opengraphSocialHubId}">
+					<input type="checkbox" name="socialhub_${socialhub.opengraphSocialHubId}" <#if config.listOpengraphSocialHubId?seq_contains(socialhub.opengraphSocialHubId)>checked="checked"</#if> size="100" />
+					${socialhub.name!}
+				</label>
+			</div>
+		</div>
+	</#list>
+<#else>
+	#i18n{module.extend.opengraph.modify_opengraph_config.labelNoSocialHub}
+</#if>
+<input type="hidden" name="id_extender" name="id_extender" value="${config.idExtender!}" />
