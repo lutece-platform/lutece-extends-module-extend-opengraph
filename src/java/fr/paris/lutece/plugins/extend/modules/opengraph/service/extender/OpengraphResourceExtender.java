@@ -34,8 +34,12 @@
 package fr.paris.lutece.plugins.extend.modules.opengraph.service.extender;
 
 import fr.paris.lutece.plugins.extend.business.extender.ResourceExtenderDTO;
+import fr.paris.lutece.plugins.extend.modules.opengraph.business.config.OpengraphExtenderConfig;
 import fr.paris.lutece.plugins.extend.service.extender.AbstractResourceExtender;
+import fr.paris.lutece.plugins.extend.service.extender.config.IResourceExtenderConfigService;
 
+import javax.inject.Inject;
+import javax.inject.Named;
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.commons.lang.StringUtils;
@@ -54,6 +58,10 @@ public class OpengraphResourceExtender extends AbstractResourceExtender
 
     /** The Constant EXTENDER_TYPE. */
     public static final String EXTENDER_TYPE = "opengraph";
+
+    @Inject
+    @Named( "extend-opengraph.opengraphExtenderConfigService" )
+    private IResourceExtenderConfigService _configService;
 
     /**
      * {@inheritDoc}
@@ -86,7 +94,16 @@ public class OpengraphResourceExtender extends AbstractResourceExtender
     @Override
     public void doCreateResourceAddOn( ResourceExtenderDTO extender )
     {
-        // Do nothing
+        OpengraphExtenderConfig config = new OpengraphExtenderConfig( );
+        config.setIdExtender( extender.getIdExtender( ) );
+
+        // Default values
+        OpengraphExtenderConfig defaultConfig = _configService.find( -1 );
+        if ( defaultConfig != null )
+        {
+            config.setListOpengraphSocialHubId( defaultConfig.getListOpengraphSocialHubId( ) );
+        }
+        _configService.create( config );
     }
 
     /**
@@ -95,6 +112,6 @@ public class OpengraphResourceExtender extends AbstractResourceExtender
     @Override
     public void doDeleteResourceAddOn( ResourceExtenderDTO extender )
     {
-        // Do nothing
+        _configService.remove( extender.getIdExtender( ) );
     }
 }

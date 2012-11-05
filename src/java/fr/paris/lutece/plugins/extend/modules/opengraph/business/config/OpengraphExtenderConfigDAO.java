@@ -14,11 +14,11 @@ import java.util.List;
  */
 public class OpengraphExtenderConfigDAO implements IExtenderConfigDAO<OpengraphExtenderConfig>
 {
-    private static final String SQL_QUERY_SELECT = " SELECT id_socialhub FROM opengraph_config WHERE id_extender = ? ";
-    private static final String SQL_INSERT_SOCIAL_HUB = " INSERT INTO opengraph_config( id_extender, id_socialhub) VALUES ";
-    private static final String SQL_REMOVE_SOCIAL_HUB = " DELETE FROM opengraph_config WHERE id_extender = ? AND id_socialhub IN ";
+    private static final String SQL_QUERY_SELECT = " SELECT id_socialhub FROM extend_opengraph_config WHERE id_extender = ? ";
+    private static final String SQL_INSERT_SOCIAL_HUB = " INSERT INTO extend_opengraph_config( id_extender, id_socialhub) VALUES ";
+    private static final String SQL_REMOVE_SOCIAL_HUB = " DELETE FROM extend_opengraph_config WHERE id_extender = ? AND id_socialhub IN ";
 
-    private static final String SQL_DELETE_CONFIG = " DELETE FROM opengraph_config WHERE id_extender = ? ";
+    private static final String SQL_DELETE_CONFIG = " DELETE FROM extend_opengraph_config WHERE id_extender = ? ";
 
     private static final String SQL_VALUE_SOCIAL_HUB = " (?,?) ";
 
@@ -98,6 +98,7 @@ public class OpengraphExtenderConfigDAO implements IExtenderConfigDAO<OpengraphE
     @Override
     public void insert( OpengraphExtenderConfig config )
     {
+        insertSocialHub( config.getIdExtender( ), config.getListOpengraphSocialHubId( ), OpengraphPlugin.getPlugin( ) );
         insertSocialHub( config.getIdExtender( ), config.getAndResetListAddedOpengraphSocialHubId( ),
                 OpengraphPlugin.getPlugin( ) );
         removeSocialHub( config.getIdExtender( ), config.getAndResetListRemovedOpengraphSocialHubId( ),
@@ -110,7 +111,10 @@ public class OpengraphExtenderConfigDAO implements IExtenderConfigDAO<OpengraphE
     @Override
     public void store( OpengraphExtenderConfig config )
     {
-        insert( config );
+        insertSocialHub( config.getIdExtender( ), config.getAndResetListAddedOpengraphSocialHubId( ),
+                OpengraphPlugin.getPlugin( ) );
+        removeSocialHub( config.getIdExtender( ), config.getAndResetListRemovedOpengraphSocialHubId( ),
+                OpengraphPlugin.getPlugin( ) );
     }
 
     /**

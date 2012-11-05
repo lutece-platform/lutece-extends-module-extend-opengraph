@@ -38,6 +38,7 @@ import fr.paris.lutece.plugins.extend.business.extender.config.IExtenderConfig;
 import fr.paris.lutece.plugins.extend.modules.opengraph.business.OpengraphSocialHub;
 import fr.paris.lutece.plugins.extend.modules.opengraph.business.config.OpengraphExtenderConfig;
 import fr.paris.lutece.plugins.extend.modules.opengraph.service.OpengraphService;
+import fr.paris.lutece.plugins.extend.modules.opengraph.service.extender.OpengraphResourceExtender;
 import fr.paris.lutece.plugins.extend.service.extender.IResourceExtenderService;
 import fr.paris.lutece.plugins.extend.service.extender.config.IResourceExtenderConfigService;
 import fr.paris.lutece.plugins.extend.util.ExtendErrorException;
@@ -148,9 +149,20 @@ public class OpengraphResourceExtenderComponent extends AbstractResourceExtender
         }
         else
         {
-
+            StringBuilder sb = new StringBuilder( );
+            OpengraphExtenderConfig config = _configService.find( OpengraphResourceExtender.EXTENDER_TYPE,
+                    strIdExtendableResource, strExtendableResourceType );
+            List<OpengraphSocialHub> listOpengraphSocialHub = _opengraphService.findAll( );
+            List<Integer> listSocialHubId = config.getListOpengraphSocialHubId( );
+            for ( OpengraphSocialHub socialHub : listOpengraphSocialHub )
+            {
+                if ( listSocialHubId.contains( (Integer) socialHub.getOpengraphSocialHubId( ) ) )
+                {
+                    sb.append( socialHub.getContent( ) );
+                }
+            }
+            return sb.toString( );
         }
-        return StringUtils.EMPTY;
     }
 
     /**
