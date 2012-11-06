@@ -1,8 +1,11 @@
-
-	<meta property="og:title" content="${title!}"/>
-	<meta property="og:image" content="${base_url!}images/logo.png"/>
-	<meta property="og:description" content="${description!}"/>
-	<meta property="og:url" content="${url!}"/>
-	<meta property="og:site_name" content="${site_name!}" />
+<meta property="og:title" content="${title!}"/>
+<meta property="og:image" content="${image_url!}"/>
+<meta property="og:description" content="${description!}"/>
+<meta property="og:url" content="${url!}"/>
+<meta property="og:site_name" content="${site_name!}" />
 	
-	<link rel="canonical" href="${url!}" />
+<link rel="canonical" href="${url!}" />
+
+<#list socialhubs as socialhub>
+	${socialhub}
+</#list>

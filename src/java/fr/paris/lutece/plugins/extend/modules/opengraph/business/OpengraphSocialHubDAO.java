@@ -12,11 +12,11 @@ import java.util.List;
  */
 public class OpengraphSocialHubDAO implements IOpengraphSocialHubDAO
 {
-    private static final String SQL_QUERY_SELECT = " SELECT opengraph_socialhub_id, name, content FROM extend_opengraph_socialhub WHERE opengraph_socialhub_id = ? ";
-    private static final String SQL_INSERT = " INSERT INTO extend_opengraph_socialhub ( opengraph_socialhub_id, name, content ) VALUES( ?, ?, ? ) ";
-    private static final String SQL_UPDATE = " UPDATE extend_opengraph_socialhub SET name = ?, content = ? WHERE opengraph_socialhub_id = ? ";
+    private static final String SQL_QUERY_SELECT = " SELECT opengraph_socialhub_id, name, content_header, content_body, content_footer FROM extend_opengraph_socialhub WHERE opengraph_socialhub_id = ? ";
+    private static final String SQL_INSERT = " INSERT INTO extend_opengraph_socialhub ( opengraph_socialhub_id, name, content_header, content_body, content_footer ) VALUES( ?, ?, ?, ?, ? ) ";
+    private static final String SQL_UPDATE = " UPDATE extend_opengraph_socialhub SET name = ?, content_header = ?, content_body = ?, content_footer = ? WHERE opengraph_socialhub_id = ? ";
     private static final String SQL_DELETE = " DELETE FROM extend_opengraph_socialhub WHERE opengraph_socialhub_id = ? ";
-    private static final String SQL_QUERY_FIND_ALL = " SELECT opengraph_socialhub_id, name, content FROM extend_opengraph_socialhub ";
+    private static final String SQL_QUERY_FIND_ALL = " SELECT opengraph_socialhub_id, name, content_header, content_body, content_footer FROM extend_opengraph_socialhub ";
 
     private static final String SQL_QUERY_NEW_PRIMARY_KEY = " SELECT MAX(opengraph_socialhub_id) FROM extend_opengraph_socialhub ";
 
@@ -51,7 +51,9 @@ public class OpengraphSocialHubDAO implements IOpengraphSocialHubDAO
             opengraphSocialHub = new OpengraphSocialHub( );
             opengraphSocialHub.setOpengraphSocialHubId( daoUtil.getInt( 1 ) );
             opengraphSocialHub.setName( daoUtil.getString( 2 ) );
-            opengraphSocialHub.setContent( daoUtil.getString( 3 ) );
+            opengraphSocialHub.setContentHeader( daoUtil.getString( 3 ) );
+            opengraphSocialHub.setContentBody( daoUtil.getString( 4 ) );
+            opengraphSocialHub.setContentFooter( daoUtil.getString( 5 ) );
         }
         daoUtil.free( );
         return opengraphSocialHub;
@@ -66,7 +68,9 @@ public class OpengraphSocialHubDAO implements IOpengraphSocialHubDAO
         DAOUtil daoUtil = new DAOUtil( SQL_INSERT, plugin );
         daoUtil.setInt( 1, getNewPrimaryKey( plugin ) );
         daoUtil.setString( 2, opengraphSocialHub.getName( ) );
-        daoUtil.setString( 3, opengraphSocialHub.getContent( ) );
+        daoUtil.setString( 3, opengraphSocialHub.getContentHeader( ) );
+        daoUtil.setString( 4, opengraphSocialHub.getContentBody( ) );
+        daoUtil.setString( 5, opengraphSocialHub.getContentFooter( ) );
         daoUtil.executeUpdate( );
         daoUtil.free( );
     }
@@ -79,8 +83,10 @@ public class OpengraphSocialHubDAO implements IOpengraphSocialHubDAO
     {
         DAOUtil daoUtil = new DAOUtil( SQL_UPDATE, plugin );
         daoUtil.setString( 1, opengraphSocialHub.getName( ) );
-        daoUtil.setString( 2, opengraphSocialHub.getContent( ) );
-        daoUtil.setInt( 3, opengraphSocialHub.getOpengraphSocialHubId( ) );
+        daoUtil.setString( 2, opengraphSocialHub.getContentHeader( ) );
+        daoUtil.setString( 3, opengraphSocialHub.getContentBody( ) );
+        daoUtil.setString( 4, opengraphSocialHub.getContentFooter( ) );
+        daoUtil.setInt( 5, opengraphSocialHub.getOpengraphSocialHubId( ) );
         daoUtil.executeUpdate( );
         daoUtil.free( );
     }
@@ -114,7 +120,9 @@ public class OpengraphSocialHubDAO implements IOpengraphSocialHubDAO
             opengraphSocialHub = new OpengraphSocialHub( );
             opengraphSocialHub.setOpengraphSocialHubId( daoUtil.getInt( 1 ) );
             opengraphSocialHub.setName( daoUtil.getString( 2 ) );
-            opengraphSocialHub.setContent( daoUtil.getString( 3 ) );
+            opengraphSocialHub.setContentHeader( daoUtil.getString( 3 ) );
+            opengraphSocialHub.setContentBody( daoUtil.getString( 4 ) );
+            opengraphSocialHub.setContentFooter( daoUtil.getString( 5 ) );
             listOpengraphSocialHub.add( opengraphSocialHub );
         }
         daoUtil.free( );

@@ -45,10 +45,13 @@ import fr.paris.lutece.plugins.extend.util.ExtendErrorException;
 import fr.paris.lutece.plugins.extend.util.JSONUtils;
 import fr.paris.lutece.plugins.extend.web.component.AbstractResourceExtenderComponent;
 import fr.paris.lutece.portal.service.admin.AdminUserService;
+import fr.paris.lutece.portal.service.resource.IExtendableResource;
 import fr.paris.lutece.portal.service.template.AppTemplateService;
 import fr.paris.lutece.portal.service.util.AppPathService;
+import fr.paris.lutece.portal.service.util.AppPropertiesService;
 import fr.paris.lutece.util.html.HtmlTemplate;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
@@ -72,12 +75,13 @@ import org.apache.commons.lang.StringUtils;
 public class OpengraphResourceExtenderComponent extends AbstractResourceExtenderComponent
 {
     private static final String JSON_KEY_HEADER = "header";
+    private static final String JSON_KEY_FOOTER = "footer";
 
     // MARKS
     private static final String MARK_URL = "url";
     private static final String MARK_TITLE = "title";
     private static final String MARK_DESCRIPTION = "description";
-    private static final String MARK_BASE_URL = "base_url";
+    private static final String MARK_IMAGE_URL = "image_url";
     private static final String MARK_SOCIALHUBS = "socialhubs";
     private static final String MARK_CONFIG = "config";
 
@@ -86,10 +90,16 @@ public class OpengraphResourceExtenderComponent extends AbstractResourceExtender
 
     // TEMPLATES
     private static final String TEMPLATE_SOCIAL_HEADER = "skin/plugins/extend/modules/opengraph/opengraph_header.html";
+    private static final String TEMPLATE_SOCIAL_BODY = "skin/plugins/extend/modules/opengraph/opengraph_body.html";
+    private static final String TEMPLATE_SOCIAL_FOOTER = "skin/plugins/extend/modules/opengraph/opengraph_footer.html";
     private static final String TEMPLATE_MODIFY_OPENGRAPH_CONFIG = "admin/plugins/extend/modules/opengraph/modify_opengraph_config.html";
+
+    // PROPERTIES
+    private static final String PROPERTY_DEFAULT_IMAGE_URL = "module.extend.opengraph.defaultImageUrl";
 
     private static final String CONSTANT_QUESTION_MARK = "?";
     private static final String CONSTANT_UNDERSCORE = "_";
+    private static final String CONSTANT_HTTP = "http://";
 
     // SERVICES
     @Inject
@@ -119,14 +129,28 @@ public class OpengraphResourceExtenderComponent extends AbstractResourceExtender
     {
         if ( isHeader( strParameters ) )
         {
+            // header
+            IExtendableResource extendableResource = resourceExtenderService.getExtendableResource(
+                    strIdExtendableResource, strExtendableResourceType );
+
             Map<String, Object> model = new HashMap<String, Object>( );
 
-            String strUrl = AppPathService.getBaseUrl( request );
-            model.put( MARK_BASE_URL, strUrl );
+            String strImageUrl = extendableResource.getExtendableResourceImageUrl( );
+            if ( StringUtils.isEmpty( strImageUrl ) )
+            {
+                strImageUrl = AppPropertiesService.getProperty( PROPERTY_DEFAULT_IMAGE_URL );
+            }
+            if ( StringUtils.isNotEmpty( strImageUrl ) )
+            {
+                if ( !strImageUrl.startsWith( CONSTANT_HTTP ) )
+                {
+                    strImageUrl = AppPathService.getBaseUrl( request ) + strImageUrl;
+                }
+            }
+            model.put( MARK_IMAGE_URL, strImageUrl );
             StringBuffer sbUrl = request.getRequestURL( );
             if ( sbUrl != null )
             {
-                strUrl = sbUrl.toString( );
                 String strQuery = request.getQueryString( );
                 if ( StringUtils.isNotBlank( strQuery ) )
                 {
@@ -134,14 +158,23 @@ public class OpengraphResourceExtenderComponent extends AbstractResourceExtender
                     sbUrl.append( strQuery );
                 }
             }
+            OpengraphExtenderConfig config = _configService.find( OpengraphResourceExtender.EXTENDER_TYPE,
+                    strIdExtendableResource, strExtendableResourceType );
+            List<Integer> listSocialHubId = config.getListOpengraphSocialHubId( );
+            List<String> listSocialHubs = new ArrayList<String>( );
+            for ( OpengraphSocialHub socialHub : _opengraphService.findAll( ) )
+            {
+                if ( listSocialHubId.contains( (Integer) socialHub.getOpengraphSocialHubId( ) ) )
+                {
+                    listSocialHubs.add( socialHub.getContentHeader( ) );
+                }
+            }
+
+            model.put( MARK_SOCIALHUBS, listSocialHubs );
             model.put( MARK_URL, sbUrl );
 
-            String strResourceName = resourceExtenderService.getExtendableResourceName( strIdExtendableResource,
-                    strExtendableResourceType );
-            model.put( MARK_TITLE, strResourceName );
-            String strResourceDescription = resourceExtenderService.getExtendableResourceDescription(
-                    strIdExtendableResource, strExtendableResourceType );
-            model.put( MARK_DESCRIPTION, strResourceDescription );
+            model.put( MARK_TITLE, extendableResource.getExtendableResourceName( ) );
+            model.put( MARK_DESCRIPTION, extendableResource.getExtendableResourceDescription( ) );
 
             HtmlTemplate template = AppTemplateService
                     .getTemplate( TEMPLATE_SOCIAL_HEADER, request.getLocale( ), model );
@@ -149,19 +182,48 @@ public class OpengraphResourceExtenderComponent extends AbstractResourceExtender
         }
         else
         {
-            StringBuilder sb = new StringBuilder( );
-            OpengraphExtenderConfig config = _configService.find( OpengraphResourceExtender.EXTENDER_TYPE,
-                    strIdExtendableResource, strExtendableResourceType );
-            List<OpengraphSocialHub> listOpengraphSocialHub = _opengraphService.findAll( );
-            List<Integer> listSocialHubId = config.getListOpengraphSocialHubId( );
-            for ( OpengraphSocialHub socialHub : listOpengraphSocialHub )
+            if ( isFooter( strParameters ) )
             {
-                if ( listSocialHubId.contains( (Integer) socialHub.getOpengraphSocialHubId( ) ) )
+                // footer
+                OpengraphExtenderConfig config = _configService.find( OpengraphResourceExtender.EXTENDER_TYPE,
+                        strIdExtendableResource, strExtendableResourceType );
+                List<OpengraphSocialHub> listOpengraphSocialHub = _opengraphService.findAll( );
+                List<Integer> listSocialHubId = config.getListOpengraphSocialHubId( );
+                List<String> listSocialHubs = new ArrayList<String>( );
+                for ( OpengraphSocialHub socialHub : listOpengraphSocialHub )
                 {
-                    sb.append( socialHub.getContent( ) );
+                    if ( listSocialHubId.contains( (Integer) socialHub.getOpengraphSocialHubId( ) ) )
+                    {
+                        listSocialHubs.add( socialHub.getContentFooter( ) );
+                    }
                 }
+                Map<String, Object> model = new HashMap<String, Object>( );
+                model.put( MARK_SOCIALHUBS, listSocialHubs );
+                HtmlTemplate template = AppTemplateService.getTemplate( TEMPLATE_SOCIAL_FOOTER, request.getLocale( ),
+                        model );
+                return template.getHtml( );
             }
-            return sb.toString( );
+            else
+            {
+                // body
+                OpengraphExtenderConfig config = _configService.find( OpengraphResourceExtender.EXTENDER_TYPE,
+                        strIdExtendableResource, strExtendableResourceType );
+                List<OpengraphSocialHub> listOpengraphSocialHub = _opengraphService.findAll( );
+                List<Integer> listSocialHubId = config.getListOpengraphSocialHubId( );
+                List<String> listSocialHubs = new ArrayList<String>( );
+                for ( OpengraphSocialHub socialHub : listOpengraphSocialHub )
+                {
+                    if ( listSocialHubId.contains( (Integer) socialHub.getOpengraphSocialHubId( ) ) )
+                    {
+                        listSocialHubs.add( socialHub.getContentBody( ) );
+                    }
+                }
+                Map<String, Object> model = new HashMap<String, Object>( );
+                model.put( MARK_SOCIALHUBS, listSocialHubs );
+                HtmlTemplate template = AppTemplateService.getTemplate( TEMPLATE_SOCIAL_BODY, request.getLocale( ),
+                        model );
+                return template.getHtml( );
+            }
         }
     }
 
@@ -238,8 +300,9 @@ public class OpengraphResourceExtenderComponent extends AbstractResourceExtender
 
     /**
      * Check if the <i>header</i> parameter is set to true
-     * @param strParameters the str parameters
-     * @return the string
+     * @param strParameters the parameters
+     * @return True if the <i>header</i> parameter is set to true, false
+     *         otherwise
      */
     private boolean isHeader( String strParameters )
     {
@@ -259,6 +322,32 @@ public class OpengraphResourceExtenderComponent extends AbstractResourceExtender
         }
 
         return Boolean.parseBoolean( strHeaderParameter );
+    }
+
+    /**
+     * Check if the <i>footer</i> parameter is set to true
+     * @param strParameters the parameters
+     * @return True if the <i>footer</i> parameter is set to true, false
+     *         otherwise
+     */
+    private boolean isFooter( String strParameters )
+    {
+        String strFooterParameter = StringUtils.EMPTY;
+        JSONObject jsonParameters = JSONUtils.parseParameters( strParameters );
+
+        if ( jsonParameters != null )
+        {
+            try
+            {
+                strFooterParameter = jsonParameters.getString( JSON_KEY_FOOTER );
+            }
+            catch ( JSONException je )
+            {
+                return false;
+            }
+        }
+
+        return Boolean.parseBoolean( strFooterParameter );
     }
 
 }

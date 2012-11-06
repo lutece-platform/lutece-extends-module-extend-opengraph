@@ -50,7 +50,9 @@ public class OpengraphJspBean extends AdminFeaturesPageJspBean
     private static final String PARAMETER_CANCEL = "cancel";
     private static final String PARAMETER_ID_SOCIALHUB = "id_socialhub";
     private static final String PARAM_NAME = "name";
-    private static final String PARAM_CONTENT = "content";
+    private static final String PARAM_CONTENT_HEADER = "content_header";
+    private static final String PARAM_CONTENT_BODY = "content_body";
+    private static final String PARAM_CONTENT_FOOTER = "content_footer";
 
     // MARKS
     private static final String MARK_DATA_TABLE_MANAGER = "dataTableManager";
@@ -162,15 +164,19 @@ public class OpengraphJspBean extends AdminFeaturesPageJspBean
             return AdminMessageService.getMessageUrl( request, MESSAGE_MANDATORY_FIELDS, AdminMessage.TYPE_STOP );
         }
 
-        String strContent = request.getParameter( PARAM_CONTENT );
-        if ( StringUtils.isBlank( strContent ) )
+        String strContentHeader = request.getParameter( PARAM_CONTENT_HEADER );
+        String strContentBody = request.getParameter( PARAM_CONTENT_BODY );
+        if ( StringUtils.isBlank( strContentBody ) )
         {
             return AdminMessageService.getMessageUrl( request, MESSAGE_MANDATORY_FIELDS, AdminMessage.TYPE_STOP );
         }
+        String strContentFooter = request.getParameter( PARAM_CONTENT_FOOTER );
 
         OpengraphSocialHub opengraphSocialHub = new OpengraphSocialHub( );
         opengraphSocialHub.setName( strName );
-        opengraphSocialHub.setContent( strContent );
+        opengraphSocialHub.setContentHeader( strContentHeader );
+        opengraphSocialHub.setContentBody( strContentBody );
+        opengraphSocialHub.setContentFooter( strContentFooter );
 
         _opengraphService.createOpengraphSocialHub( opengraphSocialHub );
 
@@ -245,11 +251,13 @@ public class OpengraphJspBean extends AdminFeaturesPageJspBean
             return AdminMessageService.getMessageUrl( request, MESSAGE_MANDATORY_FIELDS, AdminMessage.TYPE_STOP );
         }
 
-        String strContent = request.getParameter( PARAM_CONTENT );
-        if ( StringUtils.isBlank( strContent ) )
+        String strContentHeader = request.getParameter( PARAM_CONTENT_HEADER );
+        String strContentBody = request.getParameter( PARAM_CONTENT_BODY );
+        if ( StringUtils.isBlank( strContentBody ) )
         {
             return AdminMessageService.getMessageUrl( request, MESSAGE_MANDATORY_FIELDS, AdminMessage.TYPE_STOP );
         }
+        String strContentFooter = request.getParameter( PARAM_CONTENT_FOOTER );
 
         int nOpengraphSocialHubId = 0;
         try
@@ -263,7 +271,9 @@ public class OpengraphJspBean extends AdminFeaturesPageJspBean
 
         OpengraphSocialHub opengraphSocialHub = new OpengraphSocialHub( );
         opengraphSocialHub.setName( strName );
-        opengraphSocialHub.setContent( strContent );
+        opengraphSocialHub.setContentHeader( strContentHeader );
+        opengraphSocialHub.setContentBody( strContentBody );
+        opengraphSocialHub.setContentFooter( strContentFooter );
         opengraphSocialHub.setOpengraphSocialHubId( nOpengraphSocialHubId );
 
         _opengraphService.updateOpengraphSocialHub( opengraphSocialHub );

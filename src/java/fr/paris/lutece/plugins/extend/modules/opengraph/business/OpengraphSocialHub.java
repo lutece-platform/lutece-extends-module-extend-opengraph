@@ -9,7 +9,9 @@ public class OpengraphSocialHub
 
     private int _nOpengraphSocialHubId;
     private String _strName;
-    private String _strContent;
+    private String _strContentHeader;
+    private String _strContentBody;
+    private String _strContentFooter;
 
     /**
      * Get the id of the OpengraphSocialHub
@@ -48,20 +50,56 @@ public class OpengraphSocialHub
     }
 
     /**
-     * Get the html content of the OpengraphSocialHub
-     * @return The html content of the OpengraphSocialHub
+     * Get the html header content of the OpengraphSocialHub
+     * @return The html header content of the OpengraphSocialHub
      */
-    public String getContent( )
+    public String getContentHeader( )
     {
-        return _strContent;
+        return _strContentHeader;
     }
 
     /**
-     * Set the html content of the OpengraphSocialHub
-     * @param strContent The html content of the OpengraphSocialHub
+     * Set the html header content of the OpengraphSocialHub
+     * @param strContent The html header content of the OpengraphSocialHub
      */
-    public void setContent( String strContent )
+    public void setContentHeader( String strContentHeader )
     {
-        _strContent = strContent;
+        _strContentHeader = strContentHeader;
+    }
+
+    /**
+     * Get the html body content of the OpengraphSocialHub
+     * @return The html body content of the OpengraphSocialHub
+     */
+    public String getContentBody( )
+    {
+        return _strContentBody;
+    }
+
+    /**
+     * Set the html body content of the OpengraphSocialHub
+     * @param strContent The html body content of the OpengraphSocialHub
+     */
+    public void setContentBody( String strContentBody )
+    {
+        _strContentBody = strContentBody;
+    }
+
+    /**
+     * Get the html footer content of the OpengraphSocialHub
+     * @return The html footer content of the OpengraphSocialHub
+     */
+    public String getContentFooter( )
+    {
+        return _strContentFooter;
+    }
+
+    /**
+     * Set the html footer content of the OpengraphSocialHub
+     * @param strContent The html footer content of the OpengraphSocialHub
+     */
+    public void setContentFooter( String strContentFooter )
+    {
+        _strContentFooter = strContentFooter;
     }
 }

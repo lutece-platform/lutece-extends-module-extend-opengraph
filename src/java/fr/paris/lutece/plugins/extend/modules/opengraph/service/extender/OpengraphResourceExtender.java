@@ -51,7 +51,9 @@ import org.apache.commons.lang.StringUtils;
  * Macro to use in the templates :
  * <strong>@Extender[idResource,resourceType,opengraph,{header:true|false}]@</
  * strong> <br />
- * Example : @Extender[22,document,opengraph,{header:true}]@
+ * Examples : @Extender[22,document,opengraph,{header:true}]@ for header<br />
+ * @Extender[25,PAGE,opengraph,{footer:true ]@ for footer
+ * @Extender[25,PAGE,opengraph,{header:false, footer:false}]@ for body
  */
 public class OpengraphResourceExtender extends AbstractResourceExtender
 {
