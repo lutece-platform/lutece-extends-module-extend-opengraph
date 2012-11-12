@@ -1,7 +1,6 @@
 package fr.paris.lutece.plugins.extend.modules.opengraph.service;
 
 import fr.paris.lutece.plugins.extend.modules.opengraph.business.OpengraphSocialHub;
-import fr.paris.lutece.plugins.extend.service.ExtendableResourceResourceIdService;
 import fr.paris.lutece.portal.service.rbac.Permission;
 import fr.paris.lutece.portal.service.rbac.ResourceIdService;
 import fr.paris.lutece.portal.service.rbac.ResourceType;
@@ -41,7 +40,7 @@ public class OpengraphResourceIdService extends ResourceIdService
     public void register( )
     {
         ResourceType rt = new ResourceType( );
-        rt.setResourceIdServiceClass( ExtendableResourceResourceIdService.class.getName( ) );
+        rt.setResourceIdServiceClass( OpengraphResourceIdService.class.getName( ) );
         rt.setPluginName( OpengraphPlugin.PLUGIN_NAME );
         rt.setResourceTypeKey( OpengraphSocialHub.RESOURCE_TYPE );
         rt.setResourceTypeLabelKey( PROPERTY_LABEL_RESOURCE_TYPE );
