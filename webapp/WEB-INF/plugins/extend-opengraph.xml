@@ -41,13 +41,4 @@
 			</rbac-resource-type-class>
         </rbac-resource-type>
     </rbac-resource-types>
-    
-    <!-- Xpage configuration -->
-    <applications>
-        <application>
-            <application-id>extend-opengraph</application-id>
-            <application-class>fr.paris.lutece.plugins.extend.modules.opengraph.web.OpengraphApp</application-class>
-        </application>
-    </applications>
-
 </plug-in>
