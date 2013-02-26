@@ -27,6 +27,9 @@ import javax.servlet.http.HttpServletRequest;
 import org.apache.commons.lang.StringUtils;
 
 
+/**
+ * JspBean of module extend Opengraph.
+ */
 public class OpengraphJspBean extends AdminFeaturesPageJspBean
 {
     public static final String MANAGE_OPENGRAPH_SOCIALHUB = "MANAGE_OPENGRAPH_SOCIALHUB";
@@ -119,6 +122,11 @@ public class OpengraphJspBean extends AdminFeaturesPageJspBean
         return strContent;
     }
 
+    /**
+     * Get the page to add a social hub
+     * @param request The request
+     * @return The result
+     */
     public IPluginActionResult getAddOpengraphSocialHub( HttpServletRequest request )
     {
         if ( !RBACService.isAuthorized( OpengraphSocialHub.RESOURCE_TYPE, null,
@@ -145,6 +153,11 @@ public class OpengraphJspBean extends AdminFeaturesPageJspBean
         return result;
     }
 
+    /**
+     * Do add a social hub
+     * @param request The request
+     * @return The URL of the next page to display
+     */
     public String doAddOpengraphSocialHub( HttpServletRequest request )
     {
         if ( request.getParameter( PARAMETER_CANCEL ) != null )
@@ -183,6 +196,11 @@ public class OpengraphJspBean extends AdminFeaturesPageJspBean
         return AppPathService.getBaseUrl( request ) + JSP_URL_MANAGE_OPENGRAPH_SOCIALHUB;
     }
 
+    /**
+     * Get the page to modify a social hub
+     * @param request The request
+     * @return The result
+     */
     public IPluginActionResult getModifyOpengraphSocialHub( HttpServletRequest request )
     {
         if ( !RBACService.isAuthorized( OpengraphSocialHub.RESOURCE_TYPE, null,
@@ -232,6 +250,11 @@ public class OpengraphJspBean extends AdminFeaturesPageJspBean
         return result;
     }
 
+    /**
+     * Do modify a social hub
+     * @param request The request
+     * @return The URL of the next page to display
+     */
     public String doModifyOpengraphSocialHub( HttpServletRequest request )
     {
         if ( request.getParameter( PARAMETER_CANCEL ) != null )
@@ -281,6 +304,12 @@ public class OpengraphJspBean extends AdminFeaturesPageJspBean
         return AppPathService.getBaseUrl( request ) + JSP_URL_MANAGE_OPENGRAPH_SOCIALHUB;
     }
 
+    /**
+     * Get a confirmation page to ask a user to confirm that he wants to remove
+     * a social hub
+     * @param request The request
+     * @return The URL of the next page to display
+     */
     public String confirmRemoveOpengraphSocialHub( HttpServletRequest request )
     {
         String strId = request.getParameter( PARAMETER_ID_SOCIALHUB );
@@ -296,6 +325,11 @@ public class OpengraphJspBean extends AdminFeaturesPageJspBean
                 AdminMessage.TYPE_CONFIRMATION );
     }
 
+    /**
+     * Remove a social hub
+     * @param request The request
+     * @return The URL of the next page to display
+     */
     public String doRemoveOpengraphSocialHub( HttpServletRequest request )
     {
         String strId = request.getParameter( PARAMETER_ID_SOCIALHUB );

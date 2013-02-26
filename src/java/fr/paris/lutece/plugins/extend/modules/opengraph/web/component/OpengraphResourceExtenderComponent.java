@@ -164,7 +164,7 @@ public class OpengraphResourceExtenderComponent extends AbstractResourceExtender
             List<String> listSocialHubs = new ArrayList<String>( );
             for ( OpengraphSocialHub socialHub : _opengraphService.findAll( ) )
             {
-                if ( listSocialHubId.contains( (Integer) socialHub.getOpengraphSocialHubId( ) ) )
+                if ( listSocialHubId.contains( socialHub.getOpengraphSocialHubId( ) ) )
                 {
                     listSocialHubs.add( socialHub.getContentHeader( ) );
                 }
@@ -180,51 +180,44 @@ public class OpengraphResourceExtenderComponent extends AbstractResourceExtender
                     .getTemplate( TEMPLATE_SOCIAL_HEADER, request.getLocale( ), model );
             return template.getHtml( );
         }
-        else
+        if ( isFooter( strParameters ) )
         {
-            if ( isFooter( strParameters ) )
+            // footer
+            OpengraphExtenderConfig config = _configService.find( OpengraphResourceExtender.EXTENDER_TYPE,
+                    strIdExtendableResource, strExtendableResourceType );
+            List<OpengraphSocialHub> listOpengraphSocialHub = _opengraphService.findAll( );
+            List<Integer> listSocialHubId = config.getListOpengraphSocialHubId( );
+            List<String> listSocialHubs = new ArrayList<String>( );
+            for ( OpengraphSocialHub socialHub : listOpengraphSocialHub )
             {
-                // footer
-                OpengraphExtenderConfig config = _configService.find( OpengraphResourceExtender.EXTENDER_TYPE,
-                        strIdExtendableResource, strExtendableResourceType );
-                List<OpengraphSocialHub> listOpengraphSocialHub = _opengraphService.findAll( );
-                List<Integer> listSocialHubId = config.getListOpengraphSocialHubId( );
-                List<String> listSocialHubs = new ArrayList<String>( );
-                for ( OpengraphSocialHub socialHub : listOpengraphSocialHub )
+                if ( listSocialHubId.contains( socialHub.getOpengraphSocialHubId( ) ) )
                 {
-                    if ( listSocialHubId.contains( (Integer) socialHub.getOpengraphSocialHubId( ) ) )
-                    {
-                        listSocialHubs.add( socialHub.getContentFooter( ) );
-                    }
+                    listSocialHubs.add( socialHub.getContentFooter( ) );
                 }
-                Map<String, Object> model = new HashMap<String, Object>( );
-                model.put( MARK_SOCIALHUBS, listSocialHubs );
-                HtmlTemplate template = AppTemplateService.getTemplate( TEMPLATE_SOCIAL_FOOTER, request.getLocale( ),
-                        model );
-                return template.getHtml( );
             }
-            else
-            {
-                // body
-                OpengraphExtenderConfig config = _configService.find( OpengraphResourceExtender.EXTENDER_TYPE,
-                        strIdExtendableResource, strExtendableResourceType );
-                List<OpengraphSocialHub> listOpengraphSocialHub = _opengraphService.findAll( );
-                List<Integer> listSocialHubId = config.getListOpengraphSocialHubId( );
-                List<String> listSocialHubs = new ArrayList<String>( );
-                for ( OpengraphSocialHub socialHub : listOpengraphSocialHub )
-                {
-                    if ( listSocialHubId.contains( (Integer) socialHub.getOpengraphSocialHubId( ) ) )
-                    {
-                        listSocialHubs.add( socialHub.getContentBody( ) );
-                    }
-                }
-                Map<String, Object> model = new HashMap<String, Object>( );
-                model.put( MARK_SOCIALHUBS, listSocialHubs );
-                HtmlTemplate template = AppTemplateService.getTemplate( TEMPLATE_SOCIAL_BODY, request.getLocale( ),
-                        model );
-                return template.getHtml( );
-            }
+            Map<String, Object> model = new HashMap<String, Object>( );
+            model.put( MARK_SOCIALHUBS, listSocialHubs );
+            HtmlTemplate template = AppTemplateService
+                    .getTemplate( TEMPLATE_SOCIAL_FOOTER, request.getLocale( ), model );
+            return template.getHtml( );
         }
+        // body
+        OpengraphExtenderConfig config = _configService.find( OpengraphResourceExtender.EXTENDER_TYPE,
+                strIdExtendableResource, strExtendableResourceType );
+        List<OpengraphSocialHub> listOpengraphSocialHub = _opengraphService.findAll( );
+        List<Integer> listSocialHubId = config.getListOpengraphSocialHubId( );
+        List<String> listSocialHubs = new ArrayList<String>( );
+        for ( OpengraphSocialHub socialHub : listOpengraphSocialHub )
+            {
+            if ( listSocialHubId.contains( socialHub.getOpengraphSocialHubId( ) ) )
+                {
+                listSocialHubs.add( socialHub.getContentBody( ) );
+                }
+            }
+        Map<String, Object> model = new HashMap<String, Object>( );
+        model.put( MARK_SOCIALHUBS, listSocialHubs );
+        HtmlTemplate template = AppTemplateService.getTemplate( TEMPLATE_SOCIAL_BODY, request.getLocale( ), model );
+        return template.getHtml( );
     }
 
     /**

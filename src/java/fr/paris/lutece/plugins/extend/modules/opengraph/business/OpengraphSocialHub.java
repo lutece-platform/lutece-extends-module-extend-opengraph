@@ -60,7 +60,7 @@ public class OpengraphSocialHub
 
     /**
      * Set the html header content of the OpengraphSocialHub
-     * @param strContent The html header content of the OpengraphSocialHub
+     * @param strContentHeader The html header content of the OpengraphSocialHub
      */
     public void setContentHeader( String strContentHeader )
     {
@@ -78,7 +78,7 @@ public class OpengraphSocialHub
 
     /**
      * Set the html body content of the OpengraphSocialHub
-     * @param strContent The html body content of the OpengraphSocialHub
+     * @param strContentBody The html body content of the OpengraphSocialHub
      */
     public void setContentBody( String strContentBody )
     {
@@ -96,7 +96,7 @@ public class OpengraphSocialHub
 
     /**
      * Set the html footer content of the OpengraphSocialHub
-     * @param strContent The html footer content of the OpengraphSocialHub
+     * @param strContentFooter The html footer content of the OpengraphSocialHub
      */
     public void setContentFooter( String strContentFooter )
     {

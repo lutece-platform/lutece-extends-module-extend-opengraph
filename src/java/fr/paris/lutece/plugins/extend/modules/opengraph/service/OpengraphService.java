@@ -13,6 +13,9 @@ import java.util.List;
  */
 public class OpengraphService
 {
+    /**
+     * Name of the bean of this service.
+     */
     public static final String BEAN_NAME = "extend-opengraph.opengraphService";
 
     private Plugin _plugin;
