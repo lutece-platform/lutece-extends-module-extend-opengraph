@@ -11,7 +11,7 @@
 	<artifactId>module-extend-opengraph</artifactId>
 	<packaging>lutece-plugin</packaging>
 	<version>1.0.1-SNAPSHOT</version>
-	<name>Lutece Extend Open Graph module</name>
+	<name>Lutece extend opengraph module</name>
 
 	<repositories>
 	  <repository>
