@@ -15,8 +15,19 @@ import java.util.Locale;
  */
 public class OpengraphResourceIdService extends ResourceIdService
 {
+    /**
+     * Permission to add social hubs
+     */
+
     public static final String PERMISSION_ADD_SOCIALHUB = "ADD_SOCIALHUB";
+    /**
+     * Permission to modify social hubs
+     */
     public static final String PERMISSION_MODIFY_SOCIALHUB = "MODIFY_SOCIALHUB";
+
+    /**
+     * Permission to remove social hubs
+     */
     public static final String PERMISSION_REMOVE_SOCIALHUB = "REMOVE_SOCIALHUB";
 
     private static final String PROPERTY_LABEL_ADD_SOCIALHUB = "module.extend.opengraph.permission.label.addSocialHub";

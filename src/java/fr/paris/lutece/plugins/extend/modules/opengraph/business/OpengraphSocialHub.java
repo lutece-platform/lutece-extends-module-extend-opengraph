@@ -5,6 +5,9 @@ package fr.paris.lutece.plugins.extend.modules.opengraph.business;
  */
 public class OpengraphSocialHub
 {
+    /**
+     * Opengraph social hub resource type
+     */
     public static final String RESOURCE_TYPE = "OPENGRAPH_SOCIAL_HUB";
 
     private int _nOpengraphSocialHubId;
