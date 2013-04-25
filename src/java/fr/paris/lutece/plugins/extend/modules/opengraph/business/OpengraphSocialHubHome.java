@@ -9,7 +9,7 @@ import java.util.List;
 /**
  * Home of OpengraphSocialHubDAO
  */
-public class OpengraphSocialHubHome
+public final class OpengraphSocialHubHome
 {
     private static IOpengraphSocialHubDAO _dao = SpringContextService
             .getBean( "extend-opengraph.opengraphSocialHubDAO" );
