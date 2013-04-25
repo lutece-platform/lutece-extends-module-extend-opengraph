@@ -15,6 +15,14 @@ public class OpengraphSocialHubHome
             .getBean( "extend-opengraph.opengraphSocialHubDAO" );
 
     /**
+     * Private constructor
+     */
+    private OpengraphSocialHubHome( )
+    {
+
+    }
+
+    /**
      * Find an OpengraphSocialHub by id
      * @param nId Id
      * @param plugin The plugin

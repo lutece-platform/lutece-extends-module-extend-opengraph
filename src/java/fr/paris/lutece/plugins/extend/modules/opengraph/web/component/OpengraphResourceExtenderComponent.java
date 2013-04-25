@@ -103,7 +103,7 @@ public class OpengraphResourceExtenderComponent extends AbstractResourceExtender
 
     // SERVICES
     @Inject
-    IResourceExtenderService resourceExtenderService;
+    private IResourceExtenderService _resourceExtenderService;
     @Inject
     @Named( "extend-opengraph.opengraphExtenderConfigService" )
     private IResourceExtenderConfigService _configService;
@@ -130,7 +130,7 @@ public class OpengraphResourceExtenderComponent extends AbstractResourceExtender
         if ( isHeader( strParameters ) )
         {
             // header
-            IExtendableResource extendableResource = resourceExtenderService.getExtendableResource(
+            IExtendableResource extendableResource = _resourceExtenderService.getExtendableResource(
                     strIdExtendableResource, strExtendableResourceType );
 
             Map<String, Object> model = new HashMap<String, Object>( );

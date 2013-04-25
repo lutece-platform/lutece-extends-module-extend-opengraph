@@ -20,6 +20,11 @@ public class OpengraphSocialHubDAO implements IOpengraphSocialHubDAO
 
     private static final String SQL_QUERY_NEW_PRIMARY_KEY = " SELECT MAX(opengraph_socialhub_id) FROM extend_opengraph_socialhub ";
 
+    /**
+     * Get a new primary key
+     * @param plugin The plugin
+     * @return The new primary key
+     */
     private int getNewPrimaryKey( Plugin plugin )
     {
         DAOUtil daoUtil = new DAOUtil( SQL_QUERY_NEW_PRIMARY_KEY, plugin );

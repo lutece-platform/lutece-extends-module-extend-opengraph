@@ -32,7 +32,16 @@ import org.apache.commons.lang.StringUtils;
  */
 public class OpengraphJspBean extends AdminFeaturesPageJspBean
 {
+
+    /**
+     * Right to manage opengraph social hub
+     */
     public static final String MANAGE_OPENGRAPH_SOCIALHUB = "MANAGE_OPENGRAPH_SOCIALHUB";
+
+    /**
+     * Serial Version UID
+     */
+    private static final long serialVersionUID = -7731456994777583575L;
 
     // PROPERTIES
     private static final String PROPERTY_DEFAULT_ITEMS_PER_PAGE = "module.extend.opengraph.manage_opengraph_socialhub.itemsPerPage";
@@ -75,8 +84,7 @@ public class OpengraphJspBean extends AdminFeaturesPageJspBean
 
     // local variables
     private OpengraphService _opengraphService = SpringContextService.getBean( OpengraphService.BEAN_NAME );
-    private DataTableManager<OpengraphSocialHub> _dataTableManager = null;
-
+    private DataTableManager<OpengraphSocialHub> _dataTableManager;
 
     /**
      * Get the ManageOpengraphSocialHub page
@@ -97,10 +105,10 @@ public class OpengraphJspBean extends AdminFeaturesPageJspBean
             _dataTableManager.addActionColumn( MESSAGE_LABEL_ACTION );
         }
         _dataTableManager.filterSortAndPaginate( request, _opengraphService.findAll( ) );
-        
+
         Map<String, Object> model = new HashMap<String, Object>( );
         model.put( MARK_DATA_TABLE_MANAGER, _dataTableManager );
-        
+
         AdminUser user = AdminUserService.getAdminUser( request );
 
         Map<String, Boolean> mapPermissions = new HashMap<String, Boolean>( );
@@ -108,8 +116,7 @@ public class OpengraphJspBean extends AdminFeaturesPageJspBean
                 OpengraphSocialHub.RESOURCE_TYPE, null, OpengraphResourceIdService.PERMISSION_MODIFY_SOCIALHUB, user ) );
         mapPermissions.put( OpengraphResourceIdService.PERMISSION_ADD_SOCIALHUB, RBACService.isAuthorized(
                 OpengraphSocialHub.RESOURCE_TYPE, null, OpengraphResourceIdService.PERMISSION_ADD_SOCIALHUB, user ) );
-        mapPermissions
-                .put( OpengraphResourceIdService.PERMISSION_REMOVE_SOCIALHUB, RBACService.isAuthorized(
+        mapPermissions.put( OpengraphResourceIdService.PERMISSION_REMOVE_SOCIALHUB, RBACService.isAuthorized(
                 OpengraphSocialHub.RESOURCE_TYPE, null, OpengraphResourceIdService.PERMISSION_REMOVE_SOCIALHUB, user ) );
 
         model.put( MARK_PERMISSIONS, mapPermissions );
@@ -320,7 +327,7 @@ public class OpengraphJspBean extends AdminFeaturesPageJspBean
 
         UrlItem url = new UrlItem( JSP_URL_REMOVE_OPENGRAPH_SOCIALHUB );
         url.addParameter( PARAMETER_ID_SOCIALHUB, strId );
-        
+
         return AdminMessageService.getMessageUrl( request, MESSAGE_CONFIRM_REMOVE_SOCIALHUB, url.getUrl( ),
                 AdminMessage.TYPE_CONFIRMATION );
     }

@@ -11,9 +11,9 @@ import java.util.List;
  */
 public class OpengraphExtenderConfig extends ExtenderConfig
 {
-    List<Integer> _listOpengraphSocialHubId = new ArrayList<Integer>( );
-    List<Integer> _listAddedOpengraphSocialHubId = new ArrayList<Integer>( );
-    List<Integer> _listRemovedOpengraphSocialHubId = new ArrayList<Integer>( );
+    private List<Integer> _listOpengraphSocialHubId = new ArrayList<Integer>( );
+    private List<Integer> _listAddedOpengraphSocialHubId = new ArrayList<Integer>( );
+    private List<Integer> _listRemovedOpengraphSocialHubId = new ArrayList<Integer>( );
 
     /**
      * Get the list of id OpengraphSocialHub associated to this configuration
