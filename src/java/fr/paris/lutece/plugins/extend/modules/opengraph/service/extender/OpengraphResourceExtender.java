@@ -38,15 +38,16 @@ import fr.paris.lutece.plugins.extend.modules.opengraph.business.config.Opengrap
 import fr.paris.lutece.plugins.extend.service.extender.AbstractResourceExtender;
 import fr.paris.lutece.plugins.extend.service.extender.config.IResourceExtenderConfigService;
 
+import org.apache.commons.lang.StringUtils;
+
 import javax.inject.Inject;
 import javax.inject.Named;
-import javax.servlet.http.HttpServletRequest;
 
-import org.apache.commons.lang.StringUtils;
+import javax.servlet.http.HttpServletRequest;
 
 
 /**
- * 
+ *
  * Extender for social hub functionalities. <br />
  * Macro to use in the templates :
  * <strong>@Extender[idResource,resourceType,opengraph,{header:true|false}]@</
@@ -57,10 +58,8 @@ import org.apache.commons.lang.StringUtils;
  */
 public class OpengraphResourceExtender extends AbstractResourceExtender
 {
-
     /** The Constant EXTENDER_TYPE. */
     public static final String EXTENDER_TYPE = "opengraph";
-
     @Inject
     @Named( "extend-opengraph.opengraphExtenderConfigService" )
     private IResourceExtenderConfigService _configService;
@@ -96,15 +95,17 @@ public class OpengraphResourceExtender extends AbstractResourceExtender
     @Override
     public void doCreateResourceAddOn( ResourceExtenderDTO extender )
     {
-        OpengraphExtenderConfig config = new OpengraphExtenderConfig( );
-        config.setIdExtender( extender.getIdExtender( ) );
+        OpengraphExtenderConfig config = new OpengraphExtenderConfig(  );
+        config.setIdExtender( extender.getIdExtender(  ) );
 
         // Default values
         OpengraphExtenderConfig defaultConfig = _configService.find( -1 );
+
         if ( defaultConfig != null )
         {
-            config.setListOpengraphSocialHubId( defaultConfig.getListOpengraphSocialHubId( ) );
+            config.setListOpengraphSocialHubId( defaultConfig.getListOpengraphSocialHubId(  ) );
         }
+
         _configService.create( config );
     }
 
@@ -114,6 +115,6 @@ public class OpengraphResourceExtender extends AbstractResourceExtender
     @Override
     public void doDeleteResourceAddOn( ResourceExtenderDTO extender )
     {
-        _configService.remove( extender.getIdExtender( ) );
+        _configService.remove( extender.getIdExtender(  ) );
     }
 }
