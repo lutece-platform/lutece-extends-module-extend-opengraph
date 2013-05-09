@@ -1,11 +1,15 @@
-<meta property="og:title" content="${title!}"/>
-<meta property="og:image" content="${image_url!}"/>
-<meta property="og:description" content="${description!}"/>
-<meta property="og:url" content="${url!}"/>
-<meta property="og:site_name" content="${site_name!}" />
-	
-<link rel="canonical" href="${url!}" />
 
+<!-- Opengraph metas -->
+
+<meta property="og:title" content="${meta.title!}"/>
+<meta property="og:image" content="${meta.imageUrl!}"/>
+<meta property="og:description" content="${meta.description!}"/>
+<meta property="og:url" content="${meta.url!}"/>
+<meta property="og:site_name" content="${meta.siteName!}" />
+	
+<link rel="canonical" href="${meta.url!}" />
+
+<!-- Social networks includes -->
 <#list socialhubs as socialhub>
 	${socialhub}
 </#list>
