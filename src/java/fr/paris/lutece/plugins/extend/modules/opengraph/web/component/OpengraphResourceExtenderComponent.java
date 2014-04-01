@@ -65,7 +65,6 @@ import java.util.Map;
 
 import javax.inject.Inject;
 import javax.inject.Named;
-
 import javax.servlet.http.HttpServletRequest;
 
 
@@ -98,6 +97,8 @@ public class OpengraphResourceExtenderComponent extends AbstractResourceExtender
     private static final String CONSTANT_QUESTION_MARK = "?";
     private static final String CONSTANT_UNDERSCORE = "_";
     private static final String CONSTANT_HTTP = "http://";
+    private static final String CONSTANT_HTTPS = "https://";
+    private static final String CONSTANT_ANY_PROTOCOLE = "//";
 
     // SERVICES
     @Inject
@@ -274,6 +275,13 @@ public class OpengraphResourceExtenderComponent extends AbstractResourceExtender
         return Boolean.parseBoolean( strFooterParameter );
     }
 
+    /**
+     * Get the header of a social hub extender for a given resource
+     * @param config The configuration
+     * @param extendableResource The resource
+     * @param request The request
+     * @return The HTML content to display
+     */
     private String getHeader( OpengraphExtenderConfig config, IExtendableResource extendableResource,
         HttpServletRequest request )
     {
@@ -297,6 +305,12 @@ public class OpengraphResourceExtenderComponent extends AbstractResourceExtender
         return template.getHtml(  );
     }
 
+    /**
+     * Get the social hub footer of an extender
+     * @param config The config
+     * @param request The request
+     * @return The HTML content to display
+     */
     private String getFooter( OpengraphExtenderConfig config, HttpServletRequest request )
     {
         List<Integer> listSocialHubId = config.getListOpengraphSocialHubId(  );
@@ -318,6 +332,12 @@ public class OpengraphResourceExtenderComponent extends AbstractResourceExtender
         return template.getHtml(  );
     }
 
+    /**
+     * Get the social hub body of an extender
+     * @param config The extender configuration
+     * @param request The request
+     * @return The HTML content to display
+     */
     private String getBody( OpengraphExtenderConfig config, HttpServletRequest request )
     {
         List<Integer> listSocialHubId = config.getListOpengraphSocialHubId(  );
@@ -339,6 +359,12 @@ public class OpengraphResourceExtenderComponent extends AbstractResourceExtender
         return template.getHtml(  );
     }
 
+    /**
+     * Get the meta tags of a resource
+     * @param extendableResource The resource
+     * @param request The request
+     * @return The meta tags of the resource
+     */
     private OpengraphMetaTags getMetaTags( IExtendableResource extendableResource, HttpServletRequest request )
     {
         OpengraphMetaTags ogtags = new OpengraphMetaTags(  );
@@ -353,9 +379,10 @@ public class OpengraphResourceExtenderComponent extends AbstractResourceExtender
 
         if ( StringUtils.isNotEmpty( strImageUrl ) )
         {
-            if ( !strImageUrl.startsWith( CONSTANT_HTTP ) )
+            if ( !strImageUrl.startsWith( CONSTANT_HTTP ) && !strImageUrl.startsWith( CONSTANT_HTTPS )
+                    && !strImageUrl.startsWith( CONSTANT_ANY_PROTOCOLE ) )
             {
-                strImageUrl = AppPathService.getBaseUrl( request ) + strImageUrl;
+                strImageUrl = AppPathService.getProdUrl( request ) + strImageUrl;
             }
         }
 

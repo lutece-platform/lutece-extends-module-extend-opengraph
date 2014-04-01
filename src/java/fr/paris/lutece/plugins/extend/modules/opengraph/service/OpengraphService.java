@@ -38,19 +38,23 @@ import fr.paris.lutece.plugins.extend.modules.opengraph.business.OpengraphSocial
 import fr.paris.lutece.portal.service.plugin.Plugin;
 import fr.paris.lutece.portal.service.plugin.PluginService;
 
+import java.io.Serializable;
 import java.util.List;
 
 
 /**
  * OpengraphService
  */
-public class OpengraphService
+public class OpengraphService implements Serializable
 {
     /**
      * Name of the bean of this service.
      */
     public static final String BEAN_NAME = "extend-opengraph.opengraphService";
-    private Plugin _plugin;
+
+    private static final long serialVersionUID = -3513538664657153158L;
+
+    private transient Plugin _plugin;
 
     /**
      * Get the list of every OpengraphSocialHub
