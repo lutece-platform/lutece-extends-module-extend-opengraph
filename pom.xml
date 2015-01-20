@@ -53,8 +53,8 @@
 	</properties>
     
     <scm>
-        <connection>scm:svn:http://dev.lutece.paris.fr/svn/lutece/portal/trunk/plugins/extends/module-extend-opengraph</connection>
-        <developerConnection>scm:svn:https://dev.lutece.paris.fr/svn/lutece/portal/trunk/plugins/extends/module-extend-opengraph</developerConnection>
-        <url>http://dev.lutece.paris.fr/viewvc/lutece/portal/trunk/plugins/extends/module-extend-opengraph</url>
+        <connection>scm:git:https://github.com/lutece-platform/lutece-extends-module-extend-opengraph.git</connection>
+        <developerConnection>scm:git:https://github.com/lutece-platform/lutece-extends-module-extend-opengraph.git</developerConnection>
+        <url>https://github.com/lutece-platform/lutece-extends-module-extend-opengraph.git</url>
     </scm>
 </project>
