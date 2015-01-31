@@ -389,19 +389,26 @@ public class OpengraphResourceExtenderComponent extends AbstractResourceExtender
         ogtags.setImageUrl( strImageUrl );
 
         // url
-        StringBuffer sbUrl = request.getRequestURL(  );
-
-        if ( sbUrl != null )
+        String sUrl = _resourceExtenderService.getExtendableResourceUrl( extendableResource.getIdExtendableResource( ), extendableResource.getExtendableResourceType( ) );
+        if ( sUrl == null )
         {
-            String strQuery = request.getQueryString(  );
+            StringBuffer sbUrl = request.getRequestURL(  );
 
-            if ( StringUtils.isNotBlank( strQuery ) )
+            if ( sbUrl != null )
             {
-                sbUrl.append( CONSTANT_QUESTION_MARK );
-                sbUrl.append( strQuery );
-            }
+                String strQuery = request.getQueryString(  );
 
-            ogtags.setUrl( sbUrl.toString(  ) );
+                if ( StringUtils.isNotBlank( strQuery ) )
+                {
+                    sbUrl.append( CONSTANT_QUESTION_MARK );
+                    sbUrl.append( strQuery );
+                }
+
+                ogtags.setUrl( sbUrl.toString(  ) );
+            }
+        } else
+        {
+            ogtags.setUrl( AppPathService.getProdUrl( request ) + sUrl );
         }
 
         ogtags.setTitle( extendableResource.getExtendableResourceName(  ) );
