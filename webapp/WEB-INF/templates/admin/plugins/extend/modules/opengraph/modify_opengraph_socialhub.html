@@ -9,31 +9,31 @@
 				<form class="form-horizontal" method="post" action="jsp/admin/plugins/extend/modules/opengraph/DoModifyOpengraphSocialHub.jsp">
 					<input type="hidden" name="id_socialhub" name="id_socialhub" value="${socialhub.opengraphSocialHubId!}">
 					<div class="form-group">
-						<label class="control-label col-xs-12 col-sm-2 col-md-2" for="name"> #i18n{module.extend.opengraph.add_opengraph_socialhub.labelName} * </label>
-						<div class="col-xs-12 col-sm-4 col-md-4">
-							<input type="text" name="name" value="${socialhub.name!}" class="form-control" >
+						<label class="control-label col-xs-12 col-sm-12 col-md-3 col-lg-3" for="name">#i18n{module.extend.opengraph.add_opengraph_socialhub.labelName} * </label>
+						<div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+							<input type="text" name="name" value="${socialhub.name!}" class="form-control input-sm" >
 						</div>
 					</div>
 					<div class="form-group">
-						<label class="control-label col-xs-12 col-sm-2 col-md-2" for="content_header"> #i18n{module.extend.opengraph.add_opengraph_socialhub.labelContentHeader} : </label>
-						<div class="col-xs-12 col-sm-8 col-md-8">
-							<textarea rows="10" class="form-control" id="content_header" name="content_header" >${socialhub.contentHeader!}</textarea>
+						<label class="control-label col-xs-12 col-sm-12 col-md-3 col-lg-3" for="content_header">#i18n{module.extend.opengraph.add_opengraph_socialhub.labelContentHeader} : </label>
+						<div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+							<textarea rows="10" class="form-control input-sm" id="content_header" name="content_header" >${socialhub.contentHeader!}</textarea>
 						</div>
 					</div>
 					<div class="form-group">
-						<label class="control-label col-xs-12 col-sm-2 col-md-2" for="content_body"> #i18n{module.extend.opengraph.add_opengraph_socialhub.labelContentBody} *</label>
-						<div class="col-xs-12 col-sm-8 col-md-8">
-							<textarea rows="10" class="form-control" id="content_body" name="content_body" >${socialhub.contentBody!}</textarea>
+						<label class="control-label col-xs-12 col-sm-12 col-md-3 col-lg-3" for="content_body">#i18n{module.extend.opengraph.add_opengraph_socialhub.labelContentBody} *</label>
+						<div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+							<textarea rows="10" class="form-control input-sm" id="content_body" name="content_body" >${socialhub.contentBody!}</textarea>
 						</div>
 					</div>
 					<div class="form-group">
-						<label class="control-label col-xs-12 col-sm-2 col-md-2" for="content_footer"> #i18n{module.extend.opengraph.add_opengraph_socialhub.labelContentFooter} : </label>
-						<div class="col-xs-12 col-sm-8 col-md-8">
-							<textarea rows="10" class="form-control" id="content_footer" name="content_footer" >${socialhub.contentFooter!}</textarea>
+						<label class="control-label col-xs-12 col-sm-12 col-md-3 col-lg-3" for="content_footer">#i18n{module.extend.opengraph.add_opengraph_socialhub.labelContentFooter} : </label>
+						<div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+							<textarea rows="10" class="form-control input-sm" id="content_footer" name="content_footer" >${socialhub.contentFooter!}</textarea>
 						</div>
 					</div>
 					<div class="form-group">
-						<div class="col-xs-12 col-sm-offset-2 col-sm-10 col-md-offset-2 col-md-10">
+						<div class="col-xs-12 col-sm-12 col-md-offset-3 col-lg-offset-3">
 						<button class="btn btn-primary btn-flat" name="modify" value="#i18n{portal.util.labelModify}" id="modify" title="#i18n{portal.util.labelModify}">
 							<i class="fa fa-check"></i>&nbsp;#i18n{portal.util.labelModify}
 						</button>
