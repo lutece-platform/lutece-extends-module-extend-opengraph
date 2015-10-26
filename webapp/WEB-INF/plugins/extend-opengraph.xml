@@ -3,7 +3,7 @@
     <!-- Plugin Informations -->
     <name>extend-opengraph</name>
     <class>fr.paris.lutece.plugins.extend.modules.opengraph.service.OpengraphPlugin</class>
-    <version>1.2.1</version>
+    <version>1.2.2-SNAPSHOT</version>
     <description>module.extend.opengraph.module.description</description>
     <provider>module.extend.opengraph.module.provider</provider>
     <documentation/>
