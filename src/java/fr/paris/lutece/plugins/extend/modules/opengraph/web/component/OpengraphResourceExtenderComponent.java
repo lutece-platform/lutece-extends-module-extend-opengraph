@@ -58,6 +58,7 @@ import net.sf.json.JSONObject;
 import org.apache.commons.lang.StringUtils;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
@@ -286,13 +287,19 @@ public class OpengraphResourceExtenderComponent extends AbstractResourceExtender
         HttpServletRequest request )
     {
         List<Integer> listSocialHubId = config.getListOpengraphSocialHubId(  );
-        List<String> listSocialHubs = new ArrayList<String>(  );
-
-        for ( OpengraphSocialHub socialHub : _opengraphService.findAll(  ) )
+        List<String> listSocialHubs;
+        if ( listSocialHubId.isEmpty(  ) )
         {
-            if ( listSocialHubId.contains( socialHub.getOpengraphSocialHubId(  ) ) )
+            listSocialHubs = Collections.emptyList(  );
+        } else
+        {
+            listSocialHubs = new ArrayList<String>( listSocialHubId.size(  ) );
+            for ( OpengraphSocialHub socialHub : _opengraphService.findAll(  ) )
             {
-                listSocialHubs.add( socialHub.getContentHeader(  ) );
+                if ( listSocialHubId.contains( socialHub.getOpengraphSocialHubId(  ) ) )
+                {
+                    listSocialHubs.add( socialHub.getContentHeader(  ) );
+                }
             }
         }
 
@@ -314,13 +321,19 @@ public class OpengraphResourceExtenderComponent extends AbstractResourceExtender
     private String getFooter( OpengraphExtenderConfig config, HttpServletRequest request )
     {
         List<Integer> listSocialHubId = config.getListOpengraphSocialHubId(  );
-        List<String> listSocialHubs = new ArrayList<String>(  );
-
-        for ( OpengraphSocialHub socialHub : _opengraphService.findAll(  ) )
+        List<String> listSocialHubs;
+        if ( listSocialHubId.isEmpty(  ) )
         {
-            if ( listSocialHubId.contains( socialHub.getOpengraphSocialHubId(  ) ) )
+            listSocialHubs = Collections.emptyList(  );
+        } else
+        {
+            listSocialHubs = new ArrayList<String>( listSocialHubId.size(  ) );
+            for ( OpengraphSocialHub socialHub : _opengraphService.findAll(  ) )
             {
-                listSocialHubs.add( socialHub.getContentFooter(  ) );
+                if ( listSocialHubId.contains( socialHub.getOpengraphSocialHubId(  ) ) )
+                {
+                    listSocialHubs.add( socialHub.getContentFooter(  ) );
+                }
             }
         }
 
@@ -341,13 +354,19 @@ public class OpengraphResourceExtenderComponent extends AbstractResourceExtender
     private String getBody( OpengraphExtenderConfig config, HttpServletRequest request )
     {
         List<Integer> listSocialHubId = config.getListOpengraphSocialHubId(  );
-        List<String> listSocialHubs = new ArrayList<String>(  );
-
-        for ( OpengraphSocialHub socialHub : _opengraphService.findAll(  ) )
+        List<String> listSocialHubs;
+        if ( listSocialHubId.isEmpty(  ) )
         {
-            if ( listSocialHubId.contains( socialHub.getOpengraphSocialHubId(  ) ) )
+            listSocialHubs = Collections.emptyList(  );
+        } else
+        {
+            listSocialHubs = new ArrayList<String>( listSocialHubId.size(  ) );
+            for ( OpengraphSocialHub socialHub : _opengraphService.findAll(  ) )
             {
-                listSocialHubs.add( socialHub.getContentBody(  ) );
+                if ( listSocialHubId.contains( socialHub.getOpengraphSocialHubId(  ) ) )
+                {
+                    listSocialHubs.add( socialHub.getContentBody(  ) );
+                }
             }
         }
 
