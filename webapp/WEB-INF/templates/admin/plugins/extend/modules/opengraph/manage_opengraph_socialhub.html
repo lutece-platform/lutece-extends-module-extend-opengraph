@@ -1,34 +1,24 @@
-<div class="row">
-	<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-		<div class="box box-primary">
-			<div class="box-header">
-				<h3 class="box-title">#i18n{module.extend.opengraph.manage_opengraph_socialhub.pageTitle}</h3>
-				<div class="box-tools ">
-				<#if permissions.ADD_SOCIALHUB?? && permissions.ADD_SOCIALHUB>
-					<div class="pull-right">
-						<a class="btn btn-primary btn-xs btn-flat" href="jsp/admin/plugins/extend/modules/opengraph/GetAddOpengraphSocialHub.jsp" title="#i18n{module.extend.opengraph.manage_opengraph_socialhub.addSocialHub}" >
-							<i class="fa fa-plus">&nbsp;</i><span class="hidden-phone">&nbsp;#i18n{module.extend.opengraph.manage_opengraph_socialhub.addSocialHub}</span>
-						</a>
-					</div>
-				</#if>
-				</div>
-			</div>
-			<div class="box-body">
-				<@dataTable dataTableManager=dataTableManager actionMacro="getActionsOpengraphSocialHub" />
-			</div>
-		</div>
-	</div>
-</div>
+<#assign bTools>
+<#if permissions.ADD_SOCIALHUB?? && permissions.ADD_SOCIALHUB>
+	<@cLink href='jsp/admin/plugins/extend/modules/opengraph/GetAddOpengraphSocialHub.jsp' label='#i18n{module.extend.opengraph.manage_opengraph_socialhub.addSocialHub}' title='#i18n{module.extend.opengraph.manage_opengraph_socialhub.addSocialHub}' class='btn btn-primary' >
+		<@icon style='plus' /> 
+	</@cLink>
+</#if>
+</#assign>
+
+<@extendBox extendTitle='#i18n{module.extend.opengraph.manage_opengraph_socialhub.pageTitle}' hasBoxTools=true extendBoxTools=bTools >
+<@dataTable dataTableManager=dataTableManager actionMacro="getActionsOpengraphSocialHub" />
+</@extendBox>
 
 <#macro getActionsOpengraphSocialHub item >
-	<#if permissions.MODIFY_SOCIALHUB?? && permissions.MODIFY_SOCIALHUB>
-		<a class="btn btn-primary btn-xs btn-flat" href="jsp/admin/plugins/extend/modules/opengraph/GetModifyOpengraphSocialHub.jsp?id_socialhub=${item.opengraphSocialHubId}" title="#i18n{module.extend.opengraph.manage_opengraph_socialhub.modifySocialHub}">
-			<i class="fa fa-pencil"></i>
-		</a>
-	</#if>
-	<#if permissions.REMOVE_SOCIALHUB?? && permissions.REMOVE_SOCIALHUB>
-		<a class="btn btn-danger btn-xs btn-flat" href="jsp/admin/plugins/extend/modules/opengraph/ConfirmRemoveOpengraphSocialHub.jsp?id_socialhub=${item.opengraphSocialHubId}" title="#i18n{module.extend.opengraph.manage_opengraph_socialhub.removeSocialHub}">
-			<i class="fa fa-trash"></i>
-		</a>
-	</#if>
+<#if permissions.MODIFY_SOCIALHUB?? && permissions.MODIFY_SOCIALHUB>
+	<@cLink href='jsp/admin/plugins/extend/modules/opengraph/GetModifyOpengraphSocialHub.jsp?id_socialhub=${item.opengraphSocialHubId}' label='' title='#i18n{module.extend.opengraph.manage_opengraph_socialhub.modifySocialHub}' class='btn btn-primary' >
+		<@icon style='edit' /> 
+	</@cLink>
+</#if>
+<#if permissions.REMOVE_SOCIALHUB?? && permissions.REMOVE_SOCIALHUB>
+	<@cLink href='"jsp/admin/plugins/extend/modules/opengraph/ConfirmRemoveOpengraphSocialHub.jsp?id_socialhub=${item.opengraphSocialHubId}' label='' title='#i18n{module.extend.opengraph.manage_opengraph_socialhub.removeSocialHub}' class='btn btn-danger' >
+		<@icon style='trash' /> 
+	</@cLink>
+</#if>
 </#macro>

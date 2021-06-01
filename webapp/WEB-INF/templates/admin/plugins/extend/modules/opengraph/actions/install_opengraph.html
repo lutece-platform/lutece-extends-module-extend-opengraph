@@ -1,17 +1,10 @@
 <#include "../../../actions/create_extender_from_resource.html">
-<a data-toggle="dropdown" href="#">
-	<i class="fa fa-share-alt">&nbsp;</i>&nbsp;#i18n{module.extend.opengraph.extender.opengraph.label}
-</a>
-<ul class="dropdown-menu submenu-left">
-	<li>
-		<div class="form-inline">
-			<#assign installed = false>
-			<#assign unremovable = false>
-			<#if extenderTypesInstalled.opengraph??>
-				<#assign installed = true>
-				<#assign unremovable = extenderTypesInstalled.opengraph>
-			</#if>
-			<@createExtenderFromResource extenderType="opengraph" installed=installed unremovable=unremovable labelAdd="#i18n{module.extend.opengraph.create_extender_from_resource.labelAddExtender}" labelRemove="#i18n{module.extend.opengraph.create_extender_from_resource.labelRemoveExtender}" />
-		</div>
-	</li>
-</ul>
+<#assign installed = false>
+<#assign unremovable = false>
+<#if extenderTypesInstalled.opengraph??>
+	<#assign installed = true>
+	<#assign unremovable = extenderTypesInstalled.opengraph>
+</#if>
+<@createExtenderFromResource extenderType="opengraph" installed=installed unremovable=unremovable labelAdd="#i18n{module.extend.opengraph.create_extender_from_resource.labelAddExtender}" labelRemove="#i18n{module.extend.opengraph.create_extender_from_resource.labelRemoveExtender}" target="preview">
+	<@span><@icon style='share-alt' /> #i18n{module.extend.opengraph.extender.opengraph.label} </@span>
+</@createExtenderFromResource>

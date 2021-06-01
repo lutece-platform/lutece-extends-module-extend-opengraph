@@ -1,18 +1,14 @@
+<input type="hidden" name="id_extender" name="id_extender" value="${config.idExtender!}">
 <#if socialhubs?? && socialhubs?has_content>
-	<div class="form-group">
-			#i18n{module.extend.opengraph.modify_opengraph_config.labelSocialHubsToDisplay} :
-	</div>
+	<@fieldSet legend='#i18n{module.extend.opengraph.modify_opengraph_config.labelSocialHubsToDisplay}'>
 	<#list socialhubs as socialhub>
-		<div class="form-group">
-			<div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
-				<label class="checkbox" for="socialhub_${socialhub.opengraphSocialHubId}">
-					<input type="checkbox" name="socialhub_${socialhub.opengraphSocialHubId}" <#if config.listOpengraphSocialHubId?seq_contains(socialhub.opengraphSocialHubId)>checked="checked"</#if> size="100" />
-					${socialhub.name!}
-				</label>
-			</div>
-		</div>
+		<#assign cbxCheck><#if config.listOpengraphSocialHubId?seq_contains(socialhub.opengraphSocialHubId)>true<#else>false</#if></#assign>
+		<@formGroup rows=2>
+			<@checkBox name='socialhub_${socialhub.opengraphSocialHubId}' id='socialhub_${socialhub.opengraphSocialHubId}' labelKey='${socialhub.name!}' value='' checked=cbxCheck?boolean />
+		</@formGroup>
 	</#list>
+	</@fieldSet>
 <#else>
-	#i18n{module.extend.opengraph.modify_opengraph_config.labelNoSocialHub}
+	<@p>#i18n{module.extend.opengraph.modify_opengraph_config.labelNoSocialHub}</@p>
 </#if>
-<input type="hidden" name="id_extender" name="id_extender" value="${config.idExtender!}" />
+<@extendScript />

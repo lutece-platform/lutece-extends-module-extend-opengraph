@@ -1,49 +1,38 @@
 <#include "/admin/util/editor/editor.html" />
-<div class="row">
-	<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-		<div class="box box-primary">
-			<div class="box-header">
-				<h3 class="box-title">#i18n{module.extend.opengraph.add_opengraph_socialhub.pageTitle}</h3>
-			</div>
-			<div class="box-body table-responsive">
-				<form class="form-horizontal" method="post" action="jsp/admin/plugins/extend/modules/opengraph/DoAddOpengraphSocialHub.jsp">
-					<div class="form-group">
-						<label class="control-label col-xs-12 col-sm-12 col-md-3 col-lg-3" for="name"> #i18n{module.extend.opengraph.add_opengraph_socialhub.labelName} *</label>
-						<div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
-							<input type="text" name="name" value="" class="form-control input-sm">
-						</div>
-					</div>
-					<div class="form-group">
-						<label class="control-label col-xs-12 col-sm-12 col-md-3 col-lg-3" for="content_header"> #i18n{module.extend.opengraph.add_opengraph_socialhub.labelContentHeader}</label>
-						<div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
-							<textarea rows="10" class="form-control input-sm" id="content_header" name="content_header"></textarea>
-						</div>
-					</div>
-					<div class="form-group">
-						<label class="control-label col-xs-12 col-sm-12 col-md-3 col-lg-3" for="content_body"> #i18n{module.extend.opengraph.add_opengraph_socialhub.labelContentBody} *</label>
-						<div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
-							<textarea rows="10" class="form-control input-sm" id="content_body" name="content_body"></textarea>
-						</div>
-					</div>
-					<div class="form-group">
-						<label class="control-label col-xs-12 col-sm-12 col-md-3 col-lg-3" for="content_footer"> #i18n{module.extend.opengraph.add_opengraph_socialhub.labelContentFooter}</label>
-						<div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
-							<textarea rows="10" class="form-control input-sm" id="content_footer" name="content_footer"></textarea>
-						</div>
-					</div>
-					<div class="form-group">
-						<div class="col-xs-12 col-sm-12 col-md-offset-3 col-lg-offset-3">
-						<button class="btn btn-primary btn-flat" name="create" value="#i18n{portal.util.labelCreate}" id="create" title="#i18n{portal.util.labelCreate}">
-							<i class="fa fa-plus"></i>&nbsp;#i18n{portal.util.labelCreate}
-						</button>
-						<button class="btn btn-default btn-flat" name="cancel" id="cancel" value="#i18n{portal.util.labelBack}" title="#i18n{portal.util.labelBack}">
-							<i class="fa fa-close"></i>&nbsp;#i18n{portal.util.labelBack}
-						</button>
-						</div>
-					</div>
-				</form>
-			</div>
-		</div>
-	</div>
-</div>
-<@initEditor />
+<@extendBox extendTitle='#i18n{module.extend.opengraph.manage_opengraph_socialhub.pageTitle}'>
+<@row>
+	<@columns sm=7 offsetSm=2>
+	<@tform type='form' id='formAddOpengraph' action='jsp/admin/plugins/extend/modules/opengraph/DoModifyOpengraphSocialHub.jsp'>
+	<@formGroup rows=2 labelKey='#i18n{module.extend.opengraph.add_opengraph_socialhub.labelName}' labelFor='name' mandatory=true>
+		<@input name='name' value='' />
+	</@formGroup>
+	<@formGroup rows=2 labelKey='#i18n{module.extend.opengraph.add_opengraph_socialhub.labelContentHeader}' labelFor='content_header' helpKey='#i18n{module.extend.actionbar.add_action_button.labelResourceTypeHelp}' mandatory=true>
+		<@input type='textarea' class='richtext' rows=5 id='content_header' name='content_header' />
+	</@formGroup>
+	<@formGroup rows=2 labelKey='#i18n{module.extend.opengraph.add_opengraph_socialhub.labelContentBody}' labelFor='content_body' helpKey=helpText>
+		<@input type='textarea' class='richtext' rows=5 id='content_body' name='content_body' />
+	</@formGroup>
+	<@formGroup rows=2 labelKey='#i18n{module.extend.opengraph.add_opengraph_socialhub.labelContentFooter}' labelFor='content_footer' helpKey=helpText>
+		<@input type='textarea' class='richtext' rows=5 id='content_footer' name='content_footer' />
+	</@formGroup>
+	<@formGroup rows=2 params=' style="clear:both; padding-top: 15px"'>
+		<@row>
+			<@columns sm=3>
+				<@button type='submit' color='primary' style='btn-block' name='create' value='#i18n{portal.util.labelCreate}' id='create' title='#i18n{portal.util.labelCreate}' buttonIcon='plus' />
+			</@columns>
+			<@columns sm=3>
+				<@button color='default' style='btn-block' name='cancel' value='#i18n{portal.util.labelBack}' id='cancel' title='#i18n{portal.util.labelBack}' buttonIcon='times' params='' />
+			</@columns>
+		</@row>
+	</@formGroup>
+	</@tform>
+	</@columns>
+</@row>
+</@extendBox>
+<script>
+$( function(){
+	$('#cancel').click( function(){
+		window.location.replace('jsp/admin/plugins/extend/modules/opengraph/GetManageOpengraphSocialHub.jsp?plugin_name=extend-opengraph');
+	});
+})
+</script>
