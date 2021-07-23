@@ -52,8 +52,7 @@ import fr.paris.lutece.portal.service.util.AppPathService;
 import fr.paris.lutece.portal.service.util.AppPropertiesService;
 import fr.paris.lutece.util.html.HtmlTemplate;
 
-import net.sf.json.JSONException;
-import net.sf.json.JSONObject;
+import com.fasterxml.jackson.databind.node.ObjectNode;
 
 import org.apache.commons.lang.StringUtils;
 
@@ -232,15 +231,15 @@ public class OpengraphResourceExtenderComponent extends AbstractResourceExtender
     private boolean isHeader( String strParameters )
     {
         String strHeaderParameter = StringUtils.EMPTY;
-        JSONObject jsonParameters = JSONUtils.parseParameters( strParameters );
+        ObjectNode jsonParameters = JSONUtils.parseParameters( strParameters );
 
         if ( jsonParameters != null )
         {
-            try
+            if ( jsonParameters.has( JSON_KEY_HEADER ) )
             {
-                strHeaderParameter = jsonParameters.getString( JSON_KEY_HEADER );
+                strHeaderParameter = jsonParameters.get( JSON_KEY_HEADER ).asText( );
             }
-            catch ( JSONException je )
+            else
             {
                 return false;
             }
@@ -259,15 +258,15 @@ public class OpengraphResourceExtenderComponent extends AbstractResourceExtender
     private boolean isFooter( String strParameters )
     {
         String strFooterParameter = StringUtils.EMPTY;
-        JSONObject jsonParameters = JSONUtils.parseParameters( strParameters );
+        ObjectNode jsonParameters = JSONUtils.parseParameters( strParameters );
 
         if ( jsonParameters != null )
         {
-            try
+            if ( jsonParameters.has( JSON_KEY_FOOTER ) )
             {
-                strFooterParameter = jsonParameters.getString( JSON_KEY_FOOTER );
+                strFooterParameter = jsonParameters.get( JSON_KEY_FOOTER ).asText( );
             }
-            catch ( JSONException je )
+            else
             {
                 return false;
             }
