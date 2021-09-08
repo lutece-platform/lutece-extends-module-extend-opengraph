@@ -1,9 +1,9 @@
-<?xml version="1.0" encoding="ISO-8859-1" standalone="no"?><plug-in>
+<?xml version="1.0" encoding="UTF-8"?><plug-in>
 
     <!-- Plugin Informations -->
     <name>extend-opengraph</name>
     <class>fr.paris.lutece.plugins.extend.modules.opengraph.service.OpengraphPlugin</class>
-    <version>1.2.3-SNAPSHOT</version>
+    <version>1.2.3</version>
     <description>module.extend.opengraph.module.description</description>
     <provider>module.extend.opengraph.module.provider</provider>
     <documentation/>
