@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2014, Mairie de Paris
+ * Copyright (c) 2002-2021, City of Paris
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -33,13 +33,12 @@
  */
 package fr.paris.lutece.plugins.extend.modules.opengraph.web.component;
 
-
 /**
  * This is the business class for the object OpengraphMetaTags
  */
 public class OpengraphMetaTags
 {
-    // Variables declarations 
+    // Variables declarations
     private String _strTitle;
     private String _strDescription;
     private String _strUrl;
@@ -51,7 +50,7 @@ public class OpengraphMetaTags
      *
      * @return The Title
      */
-    public String getTitle(  )
+    public String getTitle( )
     {
         return _strTitle;
     }
@@ -59,7 +58,8 @@ public class OpengraphMetaTags
     /**
      * Sets the Title
      *
-     * @param strTitle The Title
+     * @param strTitle
+     *            The Title
      */
     public void setTitle( String strTitle )
     {
@@ -71,7 +71,7 @@ public class OpengraphMetaTags
      *
      * @return The Description
      */
-    public String getDescription(  )
+    public String getDescription( )
     {
         return _strDescription;
     }
@@ -79,7 +79,8 @@ public class OpengraphMetaTags
     /**
      * Sets the Description
      *
-     * @param strDescription The Description
+     * @param strDescription
+     *            The Description
      */
     public void setDescription( String strDescription )
     {
@@ -91,7 +92,7 @@ public class OpengraphMetaTags
      *
      * @return The Url
      */
-    public String getUrl(  )
+    public String getUrl( )
     {
         return _strUrl;
     }
@@ -99,7 +100,8 @@ public class OpengraphMetaTags
     /**
      * Sets the Url
      *
-     * @param strUrl The Url
+     * @param strUrl
+     *            The Url
      */
     public void setUrl( String strUrl )
     {
@@ -111,7 +113,7 @@ public class OpengraphMetaTags
      *
      * @return The ImageUrl
      */
-    public String getImageUrl(  )
+    public String getImageUrl( )
     {
         return _strImageUrl;
     }
@@ -119,7 +121,8 @@ public class OpengraphMetaTags
     /**
      * Sets the ImageUrl
      *
-     * @param strImageUrl The ImageUrl
+     * @param strImageUrl
+     *            The ImageUrl
      */
     public void setImageUrl( String strImageUrl )
     {
@@ -131,7 +134,7 @@ public class OpengraphMetaTags
      *
      * @return The SiteName
      */
-    public String getSiteName(  )
+    public String getSiteName( )
     {
         return _strSiteName;
     }
@@ -139,7 +142,8 @@ public class OpengraphMetaTags
     /**
      * Sets the SiteName
      *
-     * @param strSiteName The SiteName
+     * @param strSiteName
+     *            The SiteName
      */
     public void setSiteName( String strSiteName )
     {

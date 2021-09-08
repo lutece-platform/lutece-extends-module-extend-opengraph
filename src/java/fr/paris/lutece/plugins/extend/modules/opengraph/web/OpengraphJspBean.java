@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2014, Mairie de Paris
+ * Copyright (c) 2002-2021, City of Paris
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -59,7 +59,6 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
-
 /**
  * JspBean of module extend Opengraph.
  */
@@ -110,7 +109,7 @@ public class OpengraphJspBean extends AdminFeaturesPageJspBean
     private static final String TEMPLATE_ADD_OPENGRAPH_SOCIALHUB = "admin/plugins/extend/modules/opengraph/add_opengraph_socialhub.html";
     private static final String TEMPLATE_MODIFY_OPENGRAPH_SOCIALHUB = "admin/plugins/extend/modules/opengraph/modify_opengraph_socialhub.html";
 
-    //URL
+    // URL
     private static final String JSP_URL_MANAGE_OPENGRAPH_SOCIALHUB = "jsp/admin/plugins/extend/modules/opengraph/GetManageOpengraphSocialHub.jsp";
     private static final String JSP_URL_REMOVE_OPENGRAPH_SOCIALHUB = "jsp/admin/plugins/extend/modules/opengraph/DoRemoveOpengraphSocialHub.jsp";
 
@@ -120,7 +119,9 @@ public class OpengraphJspBean extends AdminFeaturesPageJspBean
 
     /**
      * Get the ManageOpengraphSocialHub page
-     * @param request The request
+     * 
+     * @param request
+     *            The request
      * @return The html of the content to display
      */
     public String getManageOpengraphSocialHub( HttpServletRequest request )
@@ -129,77 +130,74 @@ public class OpengraphJspBean extends AdminFeaturesPageJspBean
 
         if ( _dataTableManager == null )
         {
-            _dataTableManager = new DataTableManager<OpengraphSocialHub>( JSP_URL_MANAGE_OPENGRAPH_SOCIALHUB,
-                    JSP_URL_MANAGE_OPENGRAPH_SOCIALHUB,
+            _dataTableManager = new DataTableManager<OpengraphSocialHub>( JSP_URL_MANAGE_OPENGRAPH_SOCIALHUB, JSP_URL_MANAGE_OPENGRAPH_SOCIALHUB,
                     AppPropertiesService.getPropertyInt( PROPERTY_DEFAULT_ITEMS_PER_PAGE, 50 ), true );
             _dataTableManager.addColumn( MESSAGE_LABEL_SOCIALHUB_NAME, PARAMETER_SOCIALHUB_NAME, true );
             _dataTableManager.addActionColumn( MESSAGE_LABEL_ACTION );
         }
 
-        _dataTableManager.filterSortAndPaginate( request, _opengraphService.findAll(  ) );
+        _dataTableManager.filterSortAndPaginate( request, _opengraphService.findAll( ) );
 
-        Map<String, Object> model = new HashMap<String, Object>(  );
+        Map<String, Object> model = new HashMap<String, Object>( );
         model.put( MARK_DATA_TABLE_MANAGER, _dataTableManager );
 
         AdminUser user = AdminUserService.getAdminUser( request );
 
-        Map<String, Boolean> mapPermissions = new HashMap<String, Boolean>(  );
+        Map<String, Boolean> mapPermissions = new HashMap<String, Boolean>( );
         mapPermissions.put( OpengraphResourceIdService.PERMISSION_MODIFY_SOCIALHUB,
-            RBACService.isAuthorized( OpengraphSocialHub.RESOURCE_TYPE, null,
-                OpengraphResourceIdService.PERMISSION_MODIFY_SOCIALHUB, user ) );
+                RBACService.isAuthorized( OpengraphSocialHub.RESOURCE_TYPE, null, OpengraphResourceIdService.PERMISSION_MODIFY_SOCIALHUB, user ) );
         mapPermissions.put( OpengraphResourceIdService.PERMISSION_ADD_SOCIALHUB,
-            RBACService.isAuthorized( OpengraphSocialHub.RESOURCE_TYPE, null,
-                OpengraphResourceIdService.PERMISSION_ADD_SOCIALHUB, user ) );
+                RBACService.isAuthorized( OpengraphSocialHub.RESOURCE_TYPE, null, OpengraphResourceIdService.PERMISSION_ADD_SOCIALHUB, user ) );
         mapPermissions.put( OpengraphResourceIdService.PERMISSION_REMOVE_SOCIALHUB,
-            RBACService.isAuthorized( OpengraphSocialHub.RESOURCE_TYPE, null,
-                OpengraphResourceIdService.PERMISSION_REMOVE_SOCIALHUB, user ) );
+                RBACService.isAuthorized( OpengraphSocialHub.RESOURCE_TYPE, null, OpengraphResourceIdService.PERMISSION_REMOVE_SOCIALHUB, user ) );
 
         model.put( MARK_PERMISSIONS, mapPermissions );
 
-        HtmlTemplate template = AppTemplateService.getTemplate( TEMPLATE_MANAGE_OPENGRAPH_SOCIALHUB,
-                AdminUserService.getLocale( request ), model );
-        String strContent = getAdminPage( template.getHtml(  ) );
+        HtmlTemplate template = AppTemplateService.getTemplate( TEMPLATE_MANAGE_OPENGRAPH_SOCIALHUB, AdminUserService.getLocale( request ), model );
+        String strContent = getAdminPage( template.getHtml( ) );
 
-        _dataTableManager.clearItems(  );
+        _dataTableManager.clearItems( );
 
         return strContent;
     }
 
     /**
      * Get the page to add a social hub
-     * @param request The request
+     * 
+     * @param request
+     *            The request
      * @return The result
      */
     public IPluginActionResult getAddOpengraphSocialHub( HttpServletRequest request )
     {
-        if ( !RBACService.isAuthorized( OpengraphSocialHub.RESOURCE_TYPE, null,
-                    OpengraphResourceIdService.PERMISSION_ADD_SOCIALHUB, AdminUserService.getAdminUser( request ) ) )
+        if ( !RBACService.isAuthorized( OpengraphSocialHub.RESOURCE_TYPE, null, OpengraphResourceIdService.PERMISSION_ADD_SOCIALHUB,
+                AdminUserService.getAdminUser( request ) ) )
         {
-            IPluginActionResult result = new DefaultPluginActionResult(  );
-            result.setRedirect( AdminMessageService.getMessageUrl( request, MESSAGE_UNAUTHORIZED_ACTION,
-                    AdminMessage.TYPE_STOP ) );
+            IPluginActionResult result = new DefaultPluginActionResult( );
+            result.setRedirect( AdminMessageService.getMessageUrl( request, MESSAGE_UNAUTHORIZED_ACTION, AdminMessage.TYPE_STOP ) );
 
             return result;
         }
 
         setPageTitleProperty( PROPERTY_ADD_OPENGRAPH_PAGE_TITLE );
 
-        Map<String, Object> model = new HashMap<String, Object>(  );
+        Map<String, Object> model = new HashMap<String, Object>( );
         model.put( MARK_LOCALE, AdminUserService.getLocale( request ) );
         model.put( MARK_WEBAPP_URL, AppPathService.getBaseUrl( request ) );
 
-        HtmlTemplate template = AppTemplateService.getTemplate( TEMPLATE_ADD_OPENGRAPH_SOCIALHUB,
-                AdminUserService.getLocale( request ), model );
+        HtmlTemplate template = AppTemplateService.getTemplate( TEMPLATE_ADD_OPENGRAPH_SOCIALHUB, AdminUserService.getLocale( request ), model );
 
-        IPluginActionResult result = new DefaultPluginActionResult(  );
-        result.setHtmlContent( template.getHtml(  ) );
+        IPluginActionResult result = new DefaultPluginActionResult( );
+        result.setHtmlContent( template.getHtml( ) );
 
         return result;
     }
 
     /**
      * Do add a social hub
-     * @param request The request
+     * 
+     * @param request
+     *            The request
      * @return The URL of the next page to display
      */
     public String doAddOpengraphSocialHub( HttpServletRequest request )
@@ -209,8 +207,8 @@ public class OpengraphJspBean extends AdminFeaturesPageJspBean
             return AppPathService.getBaseUrl( request ) + JSP_URL_MANAGE_OPENGRAPH_SOCIALHUB;
         }
 
-        if ( !RBACService.isAuthorized( OpengraphSocialHub.RESOURCE_TYPE, null,
-                    OpengraphResourceIdService.PERMISSION_ADD_SOCIALHUB, AdminUserService.getAdminUser( request ) ) )
+        if ( !RBACService.isAuthorized( OpengraphSocialHub.RESOURCE_TYPE, null, OpengraphResourceIdService.PERMISSION_ADD_SOCIALHUB,
+                AdminUserService.getAdminUser( request ) ) )
         {
             return AdminMessageService.getMessageUrl( request, MESSAGE_UNAUTHORIZED_ACTION, AdminMessage.TYPE_STOP );
         }
@@ -232,7 +230,7 @@ public class OpengraphJspBean extends AdminFeaturesPageJspBean
 
         String strContentFooter = request.getParameter( PARAM_CONTENT_FOOTER );
 
-        OpengraphSocialHub opengraphSocialHub = new OpengraphSocialHub(  );
+        OpengraphSocialHub opengraphSocialHub = new OpengraphSocialHub( );
         opengraphSocialHub.setName( strName );
         opengraphSocialHub.setContentHeader( strContentHeader );
         opengraphSocialHub.setContentBody( strContentBody );
@@ -245,17 +243,18 @@ public class OpengraphJspBean extends AdminFeaturesPageJspBean
 
     /**
      * Get the page to modify a social hub
-     * @param request The request
+     * 
+     * @param request
+     *            The request
      * @return The result
      */
     public IPluginActionResult getModifyOpengraphSocialHub( HttpServletRequest request )
     {
-        if ( !RBACService.isAuthorized( OpengraphSocialHub.RESOURCE_TYPE, null,
-                    OpengraphResourceIdService.PERMISSION_MODIFY_SOCIALHUB, AdminUserService.getAdminUser( request ) ) )
+        if ( !RBACService.isAuthorized( OpengraphSocialHub.RESOURCE_TYPE, null, OpengraphResourceIdService.PERMISSION_MODIFY_SOCIALHUB,
+                AdminUserService.getAdminUser( request ) ) )
         {
-            IPluginActionResult result = new DefaultPluginActionResult(  );
-            result.setRedirect( AdminMessageService.getMessageUrl( request, MESSAGE_UNAUTHORIZED_ACTION,
-                    AdminMessage.TYPE_STOP ) );
+            IPluginActionResult result = new DefaultPluginActionResult( );
+            result.setRedirect( AdminMessageService.getMessageUrl( request, MESSAGE_UNAUTHORIZED_ACTION, AdminMessage.TYPE_STOP ) );
 
             return result;
         }
@@ -268,11 +267,10 @@ public class OpengraphJspBean extends AdminFeaturesPageJspBean
         {
             nOpengraphSocialHubId = Integer.parseInt( request.getParameter( PARAMETER_ID_SOCIALHUB ) );
         }
-        catch ( NumberFormatException e )
+        catch( NumberFormatException e )
         {
-            IPluginActionResult result = new DefaultPluginActionResult(  );
-            result.setRedirect( AdminMessageService.getMessageUrl( request, MESSAGE_SOCIALHUB_NOT_FOUND,
-                    AdminMessage.TYPE_STOP ) );
+            IPluginActionResult result = new DefaultPluginActionResult( );
+            result.setRedirect( AdminMessageService.getMessageUrl( request, MESSAGE_SOCIALHUB_NOT_FOUND, AdminMessage.TYPE_STOP ) );
 
             return result;
         }
@@ -281,30 +279,30 @@ public class OpengraphJspBean extends AdminFeaturesPageJspBean
 
         if ( opengraphSocialHub == null )
         {
-            IPluginActionResult result = new DefaultPluginActionResult(  );
-            result.setRedirect( AdminMessageService.getMessageUrl( request, MESSAGE_SOCIALHUB_NOT_FOUND,
-                    AdminMessage.TYPE_STOP ) );
+            IPluginActionResult result = new DefaultPluginActionResult( );
+            result.setRedirect( AdminMessageService.getMessageUrl( request, MESSAGE_SOCIALHUB_NOT_FOUND, AdminMessage.TYPE_STOP ) );
 
             return result;
         }
 
-        Map<String, Object> model = new HashMap<String, Object>(  );
+        Map<String, Object> model = new HashMap<String, Object>( );
         model.put( MARK_LOCALE, AdminUserService.getLocale( request ) );
         model.put( MARK_WEBAPP_URL, AppPathService.getBaseUrl( request ) );
         model.put( MARK_SOCIALHUB, opengraphSocialHub );
 
-        HtmlTemplate template = AppTemplateService.getTemplate( TEMPLATE_MODIFY_OPENGRAPH_SOCIALHUB,
-                AdminUserService.getLocale( request ), model );
+        HtmlTemplate template = AppTemplateService.getTemplate( TEMPLATE_MODIFY_OPENGRAPH_SOCIALHUB, AdminUserService.getLocale( request ), model );
 
-        IPluginActionResult result = new DefaultPluginActionResult(  );
-        result.setHtmlContent( template.getHtml(  ) );
+        IPluginActionResult result = new DefaultPluginActionResult( );
+        result.setHtmlContent( template.getHtml( ) );
 
         return result;
     }
 
     /**
      * Do modify a social hub
-     * @param request The request
+     * 
+     * @param request
+     *            The request
      * @return The URL of the next page to display
      */
     public String doModifyOpengraphSocialHub( HttpServletRequest request )
@@ -314,8 +312,8 @@ public class OpengraphJspBean extends AdminFeaturesPageJspBean
             return AppPathService.getBaseUrl( request ) + JSP_URL_MANAGE_OPENGRAPH_SOCIALHUB;
         }
 
-        if ( !RBACService.isAuthorized( OpengraphSocialHub.RESOURCE_TYPE, null,
-                    OpengraphResourceIdService.PERMISSION_MODIFY_SOCIALHUB, AdminUserService.getAdminUser( request ) ) )
+        if ( !RBACService.isAuthorized( OpengraphSocialHub.RESOURCE_TYPE, null, OpengraphResourceIdService.PERMISSION_MODIFY_SOCIALHUB,
+                AdminUserService.getAdminUser( request ) ) )
         {
             return AdminMessageService.getMessageUrl( request, MESSAGE_UNAUTHORIZED_ACTION, AdminMessage.TYPE_STOP );
         }
@@ -343,12 +341,12 @@ public class OpengraphJspBean extends AdminFeaturesPageJspBean
         {
             nOpengraphSocialHubId = Integer.parseInt( request.getParameter( PARAMETER_ID_SOCIALHUB ) );
         }
-        catch ( NumberFormatException e )
+        catch( NumberFormatException e )
         {
             return AdminMessageService.getMessageUrl( request, MESSAGE_MANDATORY_FIELDS, AdminMessage.TYPE_STOP );
         }
 
-        OpengraphSocialHub opengraphSocialHub = new OpengraphSocialHub(  );
+        OpengraphSocialHub opengraphSocialHub = new OpengraphSocialHub( );
         opengraphSocialHub.setName( strName );
         opengraphSocialHub.setContentHeader( strContentHeader );
         opengraphSocialHub.setContentBody( strContentBody );
@@ -361,9 +359,10 @@ public class OpengraphJspBean extends AdminFeaturesPageJspBean
     }
 
     /**
-     * Get a confirmation page to ask a user to confirm that he wants to remove
-     * a social hub
-     * @param request The request
+     * Get a confirmation page to ask a user to confirm that he wants to remove a social hub
+     * 
+     * @param request
+     *            The request
      * @return The URL of the next page to display
      */
     public String confirmRemoveOpengraphSocialHub( HttpServletRequest request )
@@ -378,13 +377,14 @@ public class OpengraphJspBean extends AdminFeaturesPageJspBean
         UrlItem url = new UrlItem( JSP_URL_REMOVE_OPENGRAPH_SOCIALHUB );
         url.addParameter( PARAMETER_ID_SOCIALHUB, strId );
 
-        return AdminMessageService.getMessageUrl( request, MESSAGE_CONFIRM_REMOVE_SOCIALHUB, url.getUrl(  ),
-            AdminMessage.TYPE_CONFIRMATION );
+        return AdminMessageService.getMessageUrl( request, MESSAGE_CONFIRM_REMOVE_SOCIALHUB, url.getUrl( ), AdminMessage.TYPE_CONFIRMATION );
     }
 
     /**
      * Remove a social hub
-     * @param request The request
+     * 
+     * @param request
+     *            The request
      * @return The URL of the next page to display
      */
     public String doRemoveOpengraphSocialHub( HttpServletRequest request )
@@ -402,7 +402,7 @@ public class OpengraphJspBean extends AdminFeaturesPageJspBean
         {
             nId = Integer.parseInt( strId );
         }
-        catch ( NumberFormatException e )
+        catch( NumberFormatException e )
         {
             return AdminMessageService.getMessageUrl( request, MESSAGE_MANDATORY_FIELDS, AdminMessage.TYPE_STOP );
         }

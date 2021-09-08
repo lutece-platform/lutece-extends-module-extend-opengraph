@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2014, Mairie de Paris
+ * Copyright (c) 2002-2021, City of Paris
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -45,12 +45,10 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-
 /**
  * OpengraphInstallerPluginAction
  */
-public class OpengraphInstallerPluginAction extends AbstractPluginAction<IExtendableResource>
-    implements IExtendableResourcePluginAction
+public class OpengraphInstallerPluginAction extends AbstractPluginAction<IExtendableResource> implements IExtendableResourcePluginAction
 {
     private static final String ACTION_NAME = "Open graph";
 
@@ -78,7 +76,7 @@ public class OpengraphInstallerPluginAction extends AbstractPluginAction<IExtend
      * {@inheritDoc}
      */
     @Override
-    public String getButtonTemplate(  )
+    public String getButtonTemplate( )
     {
         return TEMPLATE_BUTTON;
     }
@@ -87,7 +85,7 @@ public class OpengraphInstallerPluginAction extends AbstractPluginAction<IExtend
      * {@inheritDoc}
      */
     @Override
-    public String getName(  )
+    public String getName( )
     {
         return ACTION_NAME;
     }
@@ -96,8 +94,8 @@ public class OpengraphInstallerPluginAction extends AbstractPluginAction<IExtend
      * {@inheritDoc}
      */
     @Override
-    public IPluginActionResult process( HttpServletRequest request, HttpServletResponse response, AdminUser adminUser,
-        IExtendableResource sessionFields ) throws AccessDeniedException
+    public IPluginActionResult process( HttpServletRequest request, HttpServletResponse response, AdminUser adminUser, IExtendableResource sessionFields )
+            throws AccessDeniedException
     {
         return null;
     }

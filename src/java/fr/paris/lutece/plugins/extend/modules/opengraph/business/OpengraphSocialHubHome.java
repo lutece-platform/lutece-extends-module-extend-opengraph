@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2014, Mairie de Paris
+ * Copyright (c) 2002-2021, City of Paris
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -38,7 +38,6 @@ import fr.paris.lutece.portal.service.spring.SpringContextService;
 
 import java.util.List;
 
-
 /**
  * Home of OpengraphSocialHubDAO
  */
@@ -49,14 +48,17 @@ public final class OpengraphSocialHubHome
     /**
      * Private constructor
      */
-    private OpengraphSocialHubHome(  )
+    private OpengraphSocialHubHome( )
     {
     }
 
     /**
      * Find an OpengraphSocialHub by id
-     * @param nId Id
-     * @param plugin The plugin
+     * 
+     * @param nId
+     *            Id
+     * @param plugin
+     *            The plugin
      * @return The OpengraphSocialHub with the given Id
      */
     public static OpengraphSocialHub findById( int nId, Plugin plugin )
@@ -66,8 +68,11 @@ public final class OpengraphSocialHubHome
 
     /**
      * Insert a new OpengraphSocialHub into the database
-     * @param opengraphSocialHub The OpengraphSocialHub to save
-     * @param plugin The plugin
+     * 
+     * @param opengraphSocialHub
+     *            The OpengraphSocialHub to save
+     * @param plugin
+     *            The plugin
      */
     public static void insert( OpengraphSocialHub opengraphSocialHub, Plugin plugin )
     {
@@ -76,8 +81,11 @@ public final class OpengraphSocialHubHome
 
     /**
      * Update an OpengraphSocialHub
-     * @param opengraphSocialHub The OpengraphSocialHub tu update
-     * @param plugin The plugin
+     * 
+     * @param opengraphSocialHub
+     *            The OpengraphSocialHub tu update
+     * @param plugin
+     *            The plugin
      */
     public static void update( OpengraphSocialHub opengraphSocialHub, Plugin plugin )
     {
@@ -86,8 +94,11 @@ public final class OpengraphSocialHubHome
 
     /**
      * Remove an OpengraphSocialHub from the database
-     * @param nId The id of the OpengraphSocialHub to remove
-     * @param plugin The plugin
+     * 
+     * @param nId
+     *            The id of the OpengraphSocialHub to remove
+     * @param plugin
+     *            The plugin
      */
     public static void delete( int nId, Plugin plugin )
     {
@@ -96,7 +107,9 @@ public final class OpengraphSocialHubHome
 
     /**
      * Get every OpengraphSocialHub.
-     * @param plugin The plugin
+     * 
+     * @param plugin
+     *            The plugin
      * @return The list of every OpengraphSocialHub
      */
     public static List<OpengraphSocialHub> findAll( Plugin plugin )

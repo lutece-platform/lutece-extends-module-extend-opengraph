@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2014, Mairie de Paris
+ * Copyright (c) 2002-2021, City of Paris
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -42,7 +42,6 @@ import fr.paris.lutece.util.ReferenceList;
 
 import java.util.Locale;
 
-
 /**
  * OpengraphResourceIdService
  */
@@ -70,7 +69,7 @@ public class OpengraphResourceIdService extends ResourceIdService
     /**
      * Instantiates a new resource type resource id service.
      */
-    public OpengraphResourceIdService(  )
+    public OpengraphResourceIdService( )
     {
         setPluginName( OpengraphPlugin.PLUGIN_NAME );
     }
@@ -79,25 +78,25 @@ public class OpengraphResourceIdService extends ResourceIdService
      * {@inheritDoc}
      */
     @Override
-    public void register(  )
+    public void register( )
     {
-        ResourceType rt = new ResourceType(  );
-        rt.setResourceIdServiceClass( OpengraphResourceIdService.class.getName(  ) );
+        ResourceType rt = new ResourceType( );
+        rt.setResourceIdServiceClass( OpengraphResourceIdService.class.getName( ) );
         rt.setPluginName( OpengraphPlugin.PLUGIN_NAME );
         rt.setResourceTypeKey( OpengraphSocialHub.RESOURCE_TYPE );
         rt.setResourceTypeLabelKey( PROPERTY_LABEL_RESOURCE_TYPE );
 
-        Permission p = new Permission(  );
+        Permission p = new Permission( );
         p.setPermissionKey( PERMISSION_ADD_SOCIALHUB );
         p.setPermissionTitleKey( PROPERTY_LABEL_ADD_SOCIALHUB );
         rt.registerPermission( p );
 
-        p = new Permission(  );
+        p = new Permission( );
         p.setPermissionKey( PERMISSION_MODIFY_SOCIALHUB );
         p.setPermissionTitleKey( PROPERTY_LABEL_MODIFY_SOCIALHUB );
         rt.registerPermission( p );
 
-        p = new Permission(  );
+        p = new Permission( );
         p.setPermissionKey( PERMISSION_REMOVE_SOCIALHUB );
         p.setPermissionTitleKey( PROPERTY_LABEL_REMOVE_SOCIALHUB );
         rt.registerPermission( p );

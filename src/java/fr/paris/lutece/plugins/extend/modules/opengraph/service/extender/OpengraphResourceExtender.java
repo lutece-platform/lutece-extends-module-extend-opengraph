@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2014, Mairie de Paris
+ * Copyright (c) 2002-2021, City of Paris
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -44,14 +44,12 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.apache.commons.lang.StringUtils;
 
-
 /**
  *
  * Extender for social hub functionalities. <br />
- * Macro to use in the templates :
- * <strong>@Extender[idResource,resourceType,opengraph,{header:true|false}]@</
- * strong> <br />
+ * Macro to use in the templates : <strong>@Extender[idResource,resourceType,opengraph,{header:true|false}]@</ strong> <br />
  * Examples : @Extender[22,document,opengraph,{header:true}]@ for header<br />
+ * 
  * @Extender[25,PAGE,opengraph,{footer:true ]@ for footer
  * @Extender[25,PAGE,opengraph,{header:false, footer:false}]@ for body
  */
@@ -71,7 +69,7 @@ public class OpengraphResourceExtender extends AbstractResourceExtender
     {
         if ( StringUtils.isNotBlank( strExtenderType ) )
         {
-            return getKey(  ).equals( strExtenderType );
+            return getKey( ).equals( strExtenderType );
         }
 
         return false;
@@ -81,11 +79,9 @@ public class OpengraphResourceExtender extends AbstractResourceExtender
      * {@inheritDoc}
      */
     @Override
-    public String getContent( String strIdExtendableResource, String strExtendableResourceType, String strParameters,
-        HttpServletRequest request )
+    public String getContent( String strIdExtendableResource, String strExtendableResourceType, String strParameters, HttpServletRequest request )
     {
-        return getResourceExtenderComponent(  )
-                   .getPageAddOn( strIdExtendableResource, strExtendableResourceType, strParameters, request );
+        return getResourceExtenderComponent( ).getPageAddOn( strIdExtendableResource, strExtendableResourceType, strParameters, request );
     }
 
     /**
@@ -94,15 +90,15 @@ public class OpengraphResourceExtender extends AbstractResourceExtender
     @Override
     public void doCreateResourceAddOn( ResourceExtenderDTO extender )
     {
-        OpengraphExtenderConfig config = new OpengraphExtenderConfig(  );
-        config.setIdExtender( extender.getIdExtender(  ) );
+        OpengraphExtenderConfig config = new OpengraphExtenderConfig( );
+        config.setIdExtender( extender.getIdExtender( ) );
 
         // Default values
         OpengraphExtenderConfig defaultConfig = _configService.find( -1 );
 
         if ( defaultConfig != null )
         {
-            config.setListOpengraphSocialHubId( defaultConfig.getListOpengraphSocialHubId(  ) );
+            config.setListOpengraphSocialHubId( defaultConfig.getListOpengraphSocialHubId( ) );
         }
 
         _configService.create( config );

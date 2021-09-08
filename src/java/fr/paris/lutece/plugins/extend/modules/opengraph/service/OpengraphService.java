@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2014, Mairie de Paris
+ * Copyright (c) 2002-2021, City of Paris
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -41,7 +41,6 @@ import fr.paris.lutece.portal.service.plugin.PluginService;
 import java.io.Serializable;
 import java.util.List;
 
-
 /**
  * OpengraphService
  */
@@ -58,56 +57,65 @@ public class OpengraphService implements Serializable
 
     /**
      * Get the list of every OpengraphSocialHub
+     * 
      * @return The list of every OpengraphSocialHub
      */
-    public List<OpengraphSocialHub> findAll(  )
+    public List<OpengraphSocialHub> findAll( )
     {
-        return OpengraphSocialHubHome.findAll( getPlugin(  ) );
+        return OpengraphSocialHubHome.findAll( getPlugin( ) );
     }
 
     /**
      * Create an OpengraphSocialHub
-     * @param opengraphSocialHub The OpengraphSocialHub to create
+     * 
+     * @param opengraphSocialHub
+     *            The OpengraphSocialHub to create
      */
     public void createOpengraphSocialHub( OpengraphSocialHub opengraphSocialHub )
     {
-        OpengraphSocialHubHome.insert( opengraphSocialHub, getPlugin(  ) );
+        OpengraphSocialHubHome.insert( opengraphSocialHub, getPlugin( ) );
     }
 
     /**
      * Get an OpengraphSocialHub from the database
-     * @param nIdOpengraphSocialHub The id of the OpengraphSocialHub to find
-     * @return The OpengraphSocialHub with the given id, or null if it could not
-     *         be found.
+     * 
+     * @param nIdOpengraphSocialHub
+     *            The id of the OpengraphSocialHub to find
+     * @return The OpengraphSocialHub with the given id, or null if it could not be found.
      */
     public OpengraphSocialHub getOpengraphSocialHub( int nIdOpengraphSocialHub )
     {
-        return OpengraphSocialHubHome.findById( nIdOpengraphSocialHub, getPlugin(  ) );
+        return OpengraphSocialHubHome.findById( nIdOpengraphSocialHub, getPlugin( ) );
     }
 
     /**
      * Update an OpengraphSocialHub
-     * @param opengraphSocialHub The OpengraphSocialHub to update
+     * 
+     * @param opengraphSocialHub
+     *            The OpengraphSocialHub to update
      */
     public void updateOpengraphSocialHub( OpengraphSocialHub opengraphSocialHub )
     {
-        OpengraphSocialHubHome.update( opengraphSocialHub, getPlugin(  ) );
+        OpengraphSocialHubHome.update( opengraphSocialHub, getPlugin( ) );
     }
 
     /**
      * Remove an OpengraphSocialHub
-     * @param nIdOpengraphSocialHub The id of the OpengraphSocialHub to remove
+     * 
+     * @param nIdOpengraphSocialHub
+     *            The id of the OpengraphSocialHub to remove
      */
     public void removeOpengraphSocialHub( int nIdOpengraphSocialHub )
     {
-        OpengraphSocialHubHome.delete( nIdOpengraphSocialHub, getPlugin(  ) );
+        OpengraphSocialHubHome.delete( nIdOpengraphSocialHub, getPlugin( ) );
     }
 
     /**
      * Get the plugin associated to this service
+     * 
      * @return The plugin associated to this service
      */
-    private Plugin getPlugin(  )
+    private Plugin getPlugin( )
     {
         if ( _plugin == null )
         {

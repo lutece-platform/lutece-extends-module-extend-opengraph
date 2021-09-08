@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2014, Mairie de Paris
+ * Copyright (c) 2002-2021, City of Paris
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -33,7 +33,6 @@
  */
 package fr.paris.lutece.plugins.extend.modules.opengraph.business;
 
-
 /**
  * Class to represent a social hub html template
  */
@@ -51,16 +50,19 @@ public class OpengraphSocialHub
 
     /**
      * Get the id of the OpengraphSocialHub
+     * 
      * @return The id of the OpengraphSocialHub
      */
-    public int getOpengraphSocialHubId(  )
+    public int getOpengraphSocialHubId( )
     {
         return _nOpengraphSocialHubId;
     }
 
     /**
      * Set the id of the OpengraphSocialHub
-     * @param nOpengraphSocialHubId The id of the OpengraphSocialHub
+     * 
+     * @param nOpengraphSocialHubId
+     *            The id of the OpengraphSocialHub
      */
     public void setOpengraphSocialHubId( int nOpengraphSocialHubId )
     {
@@ -69,16 +71,19 @@ public class OpengraphSocialHub
 
     /**
      * Get the name of the OpengraphSocialHub
+     * 
      * @return The name of the OpengraphSocialHub
      */
-    public String getName(  )
+    public String getName( )
     {
         return _strName;
     }
 
     /**
      * Set the name of the OpengraphSocialHub
-     * @param strName The name of the OpengraphSocialHub
+     * 
+     * @param strName
+     *            The name of the OpengraphSocialHub
      */
     public void setName( String strName )
     {
@@ -87,16 +92,19 @@ public class OpengraphSocialHub
 
     /**
      * Get the html header content of the OpengraphSocialHub
+     * 
      * @return The html header content of the OpengraphSocialHub
      */
-    public String getContentHeader(  )
+    public String getContentHeader( )
     {
         return _strContentHeader;
     }
 
     /**
      * Set the html header content of the OpengraphSocialHub
-     * @param strContentHeader The html header content of the OpengraphSocialHub
+     * 
+     * @param strContentHeader
+     *            The html header content of the OpengraphSocialHub
      */
     public void setContentHeader( String strContentHeader )
     {
@@ -105,16 +113,19 @@ public class OpengraphSocialHub
 
     /**
      * Get the html body content of the OpengraphSocialHub
+     * 
      * @return The html body content of the OpengraphSocialHub
      */
-    public String getContentBody(  )
+    public String getContentBody( )
     {
         return _strContentBody;
     }
 
     /**
      * Set the html body content of the OpengraphSocialHub
-     * @param strContentBody The html body content of the OpengraphSocialHub
+     * 
+     * @param strContentBody
+     *            The html body content of the OpengraphSocialHub
      */
     public void setContentBody( String strContentBody )
     {
@@ -123,16 +134,19 @@ public class OpengraphSocialHub
 
     /**
      * Get the html footer content of the OpengraphSocialHub
+     * 
      * @return The html footer content of the OpengraphSocialHub
      */
-    public String getContentFooter(  )
+    public String getContentFooter( )
     {
         return _strContentFooter;
     }
 
     /**
      * Set the html footer content of the OpengraphSocialHub
-     * @param strContentFooter The html footer content of the OpengraphSocialHub
+     * 
+     * @param strContentFooter
+     *            The html footer content of the OpengraphSocialHub
      */
     public void setContentFooter( String strContentFooter )
     {

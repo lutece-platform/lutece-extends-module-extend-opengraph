@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2014, Mairie de Paris
+ * Copyright (c) 2002-2021, City of Paris
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -67,7 +67,6 @@ import javax.inject.Inject;
 import javax.inject.Named;
 import javax.servlet.http.HttpServletRequest;
 
-
 /**
  *
  * OpengraphResourceExtenderComponent
@@ -113,8 +112,7 @@ public class OpengraphResourceExtenderComponent extends AbstractResourceExtender
      * {@inheritDoc}
      */
     @Override
-    public void buildXmlAddOn( String strIdExtendableResource, String strExtendableResourceType, String strParameters,
-        StringBuffer strXml )
+    public void buildXmlAddOn( String strIdExtendableResource, String strExtendableResourceType, String strParameters, StringBuffer strXml )
     {
         // Nothing yet
     }
@@ -123,17 +121,14 @@ public class OpengraphResourceExtenderComponent extends AbstractResourceExtender
      * {@inheritDoc}
      */
     @Override
-    public String getPageAddOn( String strIdExtendableResource, String strExtendableResourceType, String strParameters,
-        HttpServletRequest request )
+    public String getPageAddOn( String strIdExtendableResource, String strExtendableResourceType, String strParameters, HttpServletRequest request )
     {
-        OpengraphExtenderConfig config = _configService.find( OpengraphResourceExtender.EXTENDER_TYPE,
-                strIdExtendableResource, strExtendableResourceType );
+        OpengraphExtenderConfig config = _configService.find( OpengraphResourceExtender.EXTENDER_TYPE, strIdExtendableResource, strExtendableResourceType );
 
         // header
         if ( isHeader( strParameters ) )
         {
-            IExtendableResource extendableResource = _resourceExtenderService.getExtendableResource( strIdExtendableResource,
-                    strExtendableResourceType );
+            IExtendableResource extendableResource = _resourceExtenderService.getExtendableResource( strIdExtendableResource, strExtendableResourceType );
 
             return getHeader( config, extendableResource, request );
         }
@@ -154,19 +149,18 @@ public class OpengraphResourceExtenderComponent extends AbstractResourceExtender
     @Override
     public String getConfigHtml( ResourceExtenderDTO resourceExtender, Locale locale, HttpServletRequest request )
     {
-        List<OpengraphSocialHub> listOpengraphSocialHub = _opengraphService.findAll(  );
+        List<OpengraphSocialHub> listOpengraphSocialHub = _opengraphService.findAll( );
 
-        IExtenderConfig extenderConfig = getConfig( resourceExtender.getIdExtender(  ) );
+        IExtenderConfig extenderConfig = getConfig( resourceExtender.getIdExtender( ) );
 
-        Map<String, Object> model = new HashMap<String, Object>(  );
+        Map<String, Object> model = new HashMap<String, Object>( );
 
         model.put( MARK_SOCIALHUBS, listOpengraphSocialHub );
         model.put( MARK_CONFIG, extenderConfig );
 
-        HtmlTemplate template = AppTemplateService.getTemplate( TEMPLATE_MODIFY_OPENGRAPH_CONFIG,
-                AdminUserService.getLocale( request ), model );
+        HtmlTemplate template = AppTemplateService.getTemplate( TEMPLATE_MODIFY_OPENGRAPH_CONFIG, AdminUserService.getLocale( request ), model );
 
-        return template.getHtml(  );
+        return template.getHtml( );
     }
 
     /**
@@ -182,28 +176,26 @@ public class OpengraphResourceExtenderComponent extends AbstractResourceExtender
      * {@inheritDoc}
      */
     @Override
-    public void doSaveConfig( HttpServletRequest request, IExtenderConfig config )
-        throws ExtendErrorException
+    public void doSaveConfig( HttpServletRequest request, IExtenderConfig config ) throws ExtendErrorException
     {
         OpengraphExtenderConfig extenderConfig = (OpengraphExtenderConfig) config;
-        List<OpengraphSocialHub> listOpengraphSocialHub = _opengraphService.findAll(  );
-        List<Integer> listSocialHubId = extenderConfig.getListOpengraphSocialHubId(  );
+        List<OpengraphSocialHub> listOpengraphSocialHub = _opengraphService.findAll( );
+        List<Integer> listSocialHubId = extenderConfig.getListOpengraphSocialHubId( );
 
         for ( OpengraphSocialHub socialHub : listOpengraphSocialHub )
         {
-            if ( StringUtils.isNotBlank( request.getParameter( PARAM_SOCIALHUB + CONSTANT_UNDERSCORE +
-                            socialHub.getOpengraphSocialHubId(  ) ) ) )
+            if ( StringUtils.isNotBlank( request.getParameter( PARAM_SOCIALHUB + CONSTANT_UNDERSCORE + socialHub.getOpengraphSocialHubId( ) ) ) )
             {
-                if ( !listSocialHubId.contains( socialHub.getOpengraphSocialHubId(  ) ) )
+                if ( !listSocialHubId.contains( socialHub.getOpengraphSocialHubId( ) ) )
                 {
-                    extenderConfig.addOpengraphSocialHubId( socialHub.getOpengraphSocialHubId(  ) );
+                    extenderConfig.addOpengraphSocialHubId( socialHub.getOpengraphSocialHubId( ) );
                 }
             }
             else
             {
-                if ( listSocialHubId.contains( socialHub.getOpengraphSocialHubId(  ) ) )
+                if ( listSocialHubId.contains( socialHub.getOpengraphSocialHubId( ) ) )
                 {
-                    extenderConfig.removeOpengraphSocialHubId( socialHub.getOpengraphSocialHubId(  ) );
+                    extenderConfig.removeOpengraphSocialHubId( socialHub.getOpengraphSocialHubId( ) );
                 }
             }
         }
@@ -217,16 +209,16 @@ public class OpengraphResourceExtenderComponent extends AbstractResourceExtender
     @Override
     public String getInfoHtml( ResourceExtenderDTO resourceExtender, Locale locale, HttpServletRequest request )
     {
-        //TODO : implement me
+        // TODO : implement me
         return StringUtils.EMPTY;
     }
 
     /**
      * Check if the <i>header</i> parameter is set to true
      *
-     * @param strParameters the parameters
-     * @return True if the <i>header</i> parameter is set to true, false
-     * otherwise
+     * @param strParameters
+     *            the parameters
+     * @return True if the <i>header</i> parameter is set to true, false otherwise
      */
     private boolean isHeader( String strParameters )
     {
@@ -251,9 +243,9 @@ public class OpengraphResourceExtenderComponent extends AbstractResourceExtender
     /**
      * Check if the <i>footer</i> parameter is set to true
      *
-     * @param strParameters the parameters
-     * @return True if the <i>footer</i> parameter is set to true, false
-     * otherwise
+     * @param strParameters
+     *            the parameters
+     * @return True if the <i>footer</i> parameter is set to true, false otherwise
      */
     private boolean isFooter( String strParameters )
     {
@@ -277,118 +269,133 @@ public class OpengraphResourceExtenderComponent extends AbstractResourceExtender
 
     /**
      * Get the header of a social hub extender for a given resource
-     * @param config The configuration
-     * @param extendableResource The resource
-     * @param request The request
+     * 
+     * @param config
+     *            The configuration
+     * @param extendableResource
+     *            The resource
+     * @param request
+     *            The request
      * @return The HTML content to display
      */
-    private String getHeader( OpengraphExtenderConfig config, IExtendableResource extendableResource,
-        HttpServletRequest request )
+    private String getHeader( OpengraphExtenderConfig config, IExtendableResource extendableResource, HttpServletRequest request )
     {
-        List<Integer> listSocialHubId = config.getListOpengraphSocialHubId(  );
+        List<Integer> listSocialHubId = config.getListOpengraphSocialHubId( );
         List<String> listSocialHubs;
-        if ( listSocialHubId.isEmpty(  ) )
+        if ( listSocialHubId.isEmpty( ) )
         {
-            listSocialHubs = Collections.emptyList(  );
-        } else
+            listSocialHubs = Collections.emptyList( );
+        }
+        else
         {
-            listSocialHubs = new ArrayList<String>( listSocialHubId.size(  ) );
-            for ( OpengraphSocialHub socialHub : _opengraphService.findAll(  ) )
+            listSocialHubs = new ArrayList<String>( listSocialHubId.size( ) );
+            for ( OpengraphSocialHub socialHub : _opengraphService.findAll( ) )
             {
-                if ( listSocialHubId.contains( socialHub.getOpengraphSocialHubId(  ) ) )
+                if ( listSocialHubId.contains( socialHub.getOpengraphSocialHubId( ) ) )
                 {
-                    listSocialHubs.add( socialHub.getContentHeader(  ) );
+                    listSocialHubs.add( socialHub.getContentHeader( ) );
                 }
             }
         }
 
-        Map<String, Object> model = new HashMap<String, Object>(  );
+        Map<String, Object> model = new HashMap<String, Object>( );
         model.put( MARK_META_TAGS, getMetaTags( extendableResource, request ) );
         model.put( MARK_SOCIALHUBS, listSocialHubs );
 
-        HtmlTemplate template = AppTemplateService.getTemplate( TEMPLATE_SOCIAL_HEADER, request.getLocale(  ), model );
+        HtmlTemplate template = AppTemplateService.getTemplate( TEMPLATE_SOCIAL_HEADER, request.getLocale( ), model );
 
-        return template.getHtml(  );
+        return template.getHtml( );
     }
 
     /**
      * Get the social hub footer of an extender
-     * @param config The config
-     * @param request The request
+     * 
+     * @param config
+     *            The config
+     * @param request
+     *            The request
      * @return The HTML content to display
      */
     private String getFooter( OpengraphExtenderConfig config, HttpServletRequest request )
     {
-        List<Integer> listSocialHubId = config.getListOpengraphSocialHubId(  );
+        List<Integer> listSocialHubId = config.getListOpengraphSocialHubId( );
         List<String> listSocialHubs;
-        if ( listSocialHubId.isEmpty(  ) )
+        if ( listSocialHubId.isEmpty( ) )
         {
-            listSocialHubs = Collections.emptyList(  );
-        } else
+            listSocialHubs = Collections.emptyList( );
+        }
+        else
         {
-            listSocialHubs = new ArrayList<String>( listSocialHubId.size(  ) );
-            for ( OpengraphSocialHub socialHub : _opengraphService.findAll(  ) )
+            listSocialHubs = new ArrayList<String>( listSocialHubId.size( ) );
+            for ( OpengraphSocialHub socialHub : _opengraphService.findAll( ) )
             {
-                if ( listSocialHubId.contains( socialHub.getOpengraphSocialHubId(  ) ) )
+                if ( listSocialHubId.contains( socialHub.getOpengraphSocialHubId( ) ) )
                 {
-                    listSocialHubs.add( socialHub.getContentFooter(  ) );
+                    listSocialHubs.add( socialHub.getContentFooter( ) );
                 }
             }
         }
 
-        Map<String, Object> model = new HashMap<String, Object>(  );
+        Map<String, Object> model = new HashMap<String, Object>( );
         model.put( MARK_SOCIALHUBS, listSocialHubs );
 
-        HtmlTemplate template = AppTemplateService.getTemplate( TEMPLATE_SOCIAL_FOOTER, request.getLocale(  ), model );
+        HtmlTemplate template = AppTemplateService.getTemplate( TEMPLATE_SOCIAL_FOOTER, request.getLocale( ), model );
 
-        return template.getHtml(  );
+        return template.getHtml( );
     }
 
     /**
      * Get the social hub body of an extender
-     * @param config The extender configuration
-     * @param request The request
+     * 
+     * @param config
+     *            The extender configuration
+     * @param request
+     *            The request
      * @return The HTML content to display
      */
     private String getBody( OpengraphExtenderConfig config, HttpServletRequest request )
     {
-        List<Integer> listSocialHubId = config.getListOpengraphSocialHubId(  );
+        List<Integer> listSocialHubId = config.getListOpengraphSocialHubId( );
         List<String> listSocialHubs;
-        if ( listSocialHubId.isEmpty(  ) )
+        if ( listSocialHubId.isEmpty( ) )
         {
-            listSocialHubs = Collections.emptyList(  );
-        } else
+            listSocialHubs = Collections.emptyList( );
+        }
+        else
         {
-            listSocialHubs = new ArrayList<String>( listSocialHubId.size(  ) );
-            for ( OpengraphSocialHub socialHub : _opengraphService.findAll(  ) )
+            listSocialHubs = new ArrayList<String>( listSocialHubId.size( ) );
+            for ( OpengraphSocialHub socialHub : _opengraphService.findAll( ) )
             {
-                if ( listSocialHubId.contains( socialHub.getOpengraphSocialHubId(  ) ) )
+                if ( listSocialHubId.contains( socialHub.getOpengraphSocialHubId( ) ) )
                 {
-                    listSocialHubs.add( socialHub.getContentBody(  ) );
+                    listSocialHubs.add( socialHub.getContentBody( ) );
                 }
             }
         }
 
-        Map<String, Object> model = new HashMap<String, Object>(  );
+        Map<String, Object> model = new HashMap<String, Object>( );
         model.put( MARK_SOCIALHUBS, listSocialHubs );
 
-        HtmlTemplate template = AppTemplateService.getTemplate( TEMPLATE_SOCIAL_BODY, request.getLocale(  ), model );
+        HtmlTemplate template = AppTemplateService.getTemplate( TEMPLATE_SOCIAL_BODY, request.getLocale( ), model );
 
-        return template.getHtml(  );
+        return template.getHtml( );
     }
 
     /**
      * Get the meta tags of a resource
-     * @param extendableResource The resource
-     * @param request The request
+     * 
+     * @param extendableResource
+     *            The resource
+     * @param request
+     *            The request
      * @return The meta tags of the resource
      */
     private OpengraphMetaTags getMetaTags( IExtendableResource extendableResource, HttpServletRequest request )
     {
-        OpengraphMetaTags ogtags = new OpengraphMetaTags(  );
+        OpengraphMetaTags ogtags = new OpengraphMetaTags( );
 
         // image
-        String strImageUrl = extendableResource.getExtendableResourceImageUrl(  );
+        String strImageUrl = extendableResource.getExtendableResourceImageUrl( );
 
         if ( StringUtils.isEmpty( strImageUrl ) )
         {
@@ -397,8 +404,7 @@ public class OpengraphResourceExtenderComponent extends AbstractResourceExtender
 
         if ( StringUtils.isNotEmpty( strImageUrl ) )
         {
-            if ( !strImageUrl.startsWith( CONSTANT_HTTP ) && !strImageUrl.startsWith( CONSTANT_HTTPS )
-                    && !strImageUrl.startsWith( CONSTANT_ANY_PROTOCOLE ) )
+            if ( !strImageUrl.startsWith( CONSTANT_HTTP ) && !strImageUrl.startsWith( CONSTANT_HTTPS ) && !strImageUrl.startsWith( CONSTANT_ANY_PROTOCOLE ) )
             {
                 strImageUrl = AppPathService.getProdUrl( request ) + strImageUrl;
             }
@@ -407,14 +413,15 @@ public class OpengraphResourceExtenderComponent extends AbstractResourceExtender
         ogtags.setImageUrl( strImageUrl );
 
         // url
-        String sUrl = _resourceExtenderService.getExtendableResourceUrl( extendableResource.getIdExtendableResource( ), extendableResource.getExtendableResourceType( ) );
+        String sUrl = _resourceExtenderService.getExtendableResourceUrl( extendableResource.getIdExtendableResource( ),
+                extendableResource.getExtendableResourceType( ) );
         if ( sUrl == null )
         {
-            StringBuffer sbUrl = request.getRequestURL(  );
+            StringBuffer sbUrl = request.getRequestURL( );
 
             if ( sbUrl != null )
             {
-                String strQuery = request.getQueryString(  );
+                String strQuery = request.getQueryString( );
 
                 if ( StringUtils.isNotBlank( strQuery ) )
                 {
@@ -422,16 +429,17 @@ public class OpengraphResourceExtenderComponent extends AbstractResourceExtender
                     sbUrl.append( strQuery );
                 }
 
-                ogtags.setUrl( sbUrl.toString(  ) );
+                ogtags.setUrl( sbUrl.toString( ) );
             }
-        } else
+        }
+        else
         {
             ogtags.setUrl( AppPathService.getProdUrl( request ) + sUrl );
         }
 
-        ogtags.setTitle( extendableResource.getExtendableResourceName(  ) );
-        ogtags.setDescription( extendableResource.getExtendableResourceDescription(  ) );
-        ogtags.setSiteName( PortalService.getSiteName(  ) );
+        ogtags.setTitle( extendableResource.getExtendableResourceName( ) );
+        ogtags.setDescription( extendableResource.getExtendableResourceDescription( ) );
+        ogtags.setSiteName( PortalService.getSiteName( ) );
 
         return ogtags;
     }
