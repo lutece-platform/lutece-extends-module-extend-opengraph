@@ -2,30 +2,30 @@
 <@extendBox extendTitle='#i18n{module.extend.opengraph.manage_opengraph_socialhub.pageTitle}'>
 <@row>
 	<@columns sm=7 offsetSm=2>
-	<@tform type='form' id='formAddOpengraph' action='jsp/admin/plugins/extend/modules/opengraph/DoModifyOpengraphSocialHub.jsp'>
-	<@formGroup rows=2 labelKey='#i18n{module.extend.opengraph.add_opengraph_socialhub.labelName}' labelFor='name' mandatory=true>
-		<@input name='name' value='' />
-	</@formGroup>
-	<@formGroup rows=2 labelKey='#i18n{module.extend.opengraph.add_opengraph_socialhub.labelContentHeader}' labelFor='content_header' helpKey='#i18n{module.extend.actionbar.add_action_button.labelResourceTypeHelp}' mandatory=true>
-		<@input type='textarea' class='richtext' rows=5 id='content_header' name='content_header' />
-	</@formGroup>
-	<@formGroup rows=2 labelKey='#i18n{module.extend.opengraph.add_opengraph_socialhub.labelContentBody}' labelFor='content_body' helpKey=helpText>
-		<@input type='textarea' class='richtext' rows=5 id='content_body' name='content_body' />
-	</@formGroup>
-	<@formGroup rows=2 labelKey='#i18n{module.extend.opengraph.add_opengraph_socialhub.labelContentFooter}' labelFor='content_footer' helpKey=helpText>
-		<@input type='textarea' class='richtext' rows=5 id='content_footer' name='content_footer' />
-	</@formGroup>
-	<@formGroup rows=2 params=' style="clear:both; padding-top: 15px"'>
-		<@row>
-			<@columns sm=3>
-				<@button type='submit' color='primary' style='btn-block' name='create' value='#i18n{portal.util.labelCreate}' id='create' title='#i18n{portal.util.labelCreate}' buttonIcon='plus' />
-			</@columns>
-			<@columns sm=3>
-				<@button color='default' style='btn-block' name='cancel' value='#i18n{portal.util.labelBack}' id='cancel' title='#i18n{portal.util.labelBack}' buttonIcon='times' params='' />
-			</@columns>
-		</@row>
-	</@formGroup>
-	</@tform>
+		<@tform type='form' id='formAddOpengraph' action='jsp/admin/plugins/extend/modules/opengraph/DoModifyOpengraphSocialHub.jsp'>
+			<@formGroup rows=2 labelKey='#i18n{module.extend.opengraph.add_opengraph_socialhub.labelName}' labelFor='name' mandatory=true>
+				<@input name='name' value='' />
+			</@formGroup>
+			<@formGroup rows=2 labelKey='#i18n{module.extend.opengraph.add_opengraph_socialhub.labelContentHeader}' labelFor='content_header' helpKey='#i18n{module.extend.actionbar.add_action_button.labelResourceTypeHelp}' mandatory=true>
+				<@input type='textarea' class='richtext' rows=5 id='content_header' name='content_header' />
+			</@formGroup>
+			<@formGroup rows=2 labelKey='#i18n{module.extend.opengraph.add_opengraph_socialhub.labelContentBody}' labelFor='content_body' helpKey=helpText>
+				<@input type='textarea' class='richtext' rows=5 id='content_body' name='content_body' />
+			</@formGroup>
+			<@formGroup rows=2 labelKey='#i18n{module.extend.opengraph.add_opengraph_socialhub.labelContentFooter}' labelFor='content_footer' helpKey=helpText>
+				<@input type='textarea' class='richtext' rows=5 id='content_footer' name='content_footer' />
+			</@formGroup>
+			<@formGroup rows=2 params=' style="clear:both; padding-top: 15px"'>
+				<@row>
+					<@columns sm=3>
+						<@button type='submit' color='primary' style='btn-block' name='create' value='#i18n{portal.util.labelCreate}' id='create' title='#i18n{portal.util.labelCreate}' buttonIcon='plus' />
+					</@columns>
+					<@columns sm=3>
+						<@button color='default' style='btn-block' name='cancel' value='#i18n{portal.util.labelBack}' id='cancel' title='#i18n{portal.util.labelBack}' buttonIcon='times' params='' />
+					</@columns>
+				</@row>
+			</@formGroup>
+		</@tform>
 	</@columns>
 </@row>
 </@extendBox>

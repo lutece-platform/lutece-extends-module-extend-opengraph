@@ -1,4 +1,4 @@
-<input type="hidden" name="id_extender" name="id_extender" value="${config.idExtender!}">
+<@input type='hidden' name='id_extender' name='id_extender' value='${config.idExtender!}' />
 <#if socialhubs?? && socialhubs?has_content>
 	<@fieldSet legend='#i18n{module.extend.opengraph.modify_opengraph_config.labelSocialHubsToDisplay}'>
 	<#list socialhubs as socialhub>
