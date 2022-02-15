@@ -1,13 +1,12 @@
+<h2>#i18n{module.extend.opengraph.modify_opengraph_config.labelSocialHubsToDisplay}</h2>
 <@input type='hidden' name='id_extender' name='id_extender' value='${config.idExtender!}' />
 <#if socialhubs?? && socialhubs?has_content>
-	<@fieldSet legend='#i18n{module.extend.opengraph.modify_opengraph_config.labelSocialHubsToDisplay}'>
 	<#list socialhubs as socialhub>
 		<#assign cbxCheck><#if config.listOpengraphSocialHubId?seq_contains(socialhub.opengraphSocialHubId)>true<#else>false</#if></#assign>
-		<@formGroup rows=2>
-			<@checkBox name='socialhub_${socialhub.opengraphSocialHubId}' id='socialhub_${socialhub.opengraphSocialHubId}' labelKey='${socialhub.name!}' value='' checked=cbxCheck?boolean />
+		<@formGroup rows=2 class='mt-3'>
+			<@checkBox orientation='switch' name='socialhub_${socialhub.opengraphSocialHubId}' id='socialhub_${socialhub.opengraphSocialHubId}' labelKey='${socialhub.name!}' value='' checked=cbxCheck?boolean />
 		</@formGroup>
 	</#list>
-	</@fieldSet>
 <#else>
 	<@p>#i18n{module.extend.opengraph.modify_opengraph_config.labelNoSocialHub}</@p>
 </#if>

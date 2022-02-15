@@ -1,24 +1,43 @@
 <#assign bTools>
 <#if permissions.ADD_SOCIALHUB?? && permissions.ADD_SOCIALHUB>
-	<@cLink href='jsp/admin/plugins/extend/modules/opengraph/GetAddOpengraphSocialHub.jsp' label='#i18n{module.extend.opengraph.manage_opengraph_socialhub.addSocialHub}' title='#i18n{module.extend.opengraph.manage_opengraph_socialhub.addSocialHub}' class='btn btn-primary' >
-		<@icon style='plus' /> 
+	<@cLink href='jsp/admin/plugins/extend/modules/opengraph/GetAddOpengraphSocialHub.jsp' label='' title='#i18n{module.extend.opengraph.manage_opengraph_socialhub.addSocialHub}' class='btn btn-primary btn-sm' >
+		<@icon style='plus mr-2 me-2' /> #i18n{module.extend.opengraph.manage_opengraph_socialhub.addSocialHub}
 	</@cLink>
 </#if>
 </#assign>
-
 <@extendBox extendTitle='#i18n{module.extend.opengraph.manage_opengraph_socialhub.pageTitle}' hasBoxTools=true extendBoxTools=bTools >
-<@dataTable dataTableManager=dataTableManager actionMacro="getActionsOpengraphSocialHub" />
+<@table>
+	<@tr>
+		<#list dataTableManager.listColumn as column>
+			<@th scope='col'>
+				#i18n{${column.titleKey}}
+				<#if !(column.typeColumn = "ACTION") && column.sortable>
+					<@sort jsp_url=dataTableManager.sortUrl attribute=column.parameterName />
+				</#if>
+			</@th>
+		</#list>
+	</@tr>
+	<#list dataTableManager.items as item>
+		<@tr>
+			<@td>${item.name!}</@td>
+			<@td>
+				<#if permissions.MODIFY_SOCIALHUB?? && permissions.MODIFY_SOCIALHUB>
+					<@cLink href='jsp/admin/plugins/extend/modules/opengraph/GetModifyOpengraphSocialHub.jsp?id_socialhub=${item.opengraphSocialHubId}' label='' title='#i18n{module.extend.opengraph.manage_opengraph_socialhub.modifySocialHub}' class='btn btn-primary btn-sm' >
+						<@icon style='edit' /> 
+					</@cLink>
+				</#if>
+				<#if permissions.REMOVE_SOCIALHUB?? && permissions.REMOVE_SOCIALHUB>
+					<@cLink href='jsp/admin/plugins/extend/modules/opengraph/ConfirmRemoveOpengraphSocialHub.jsp?id_socialhub=${item.opengraphSocialHubId}' label='' title='#i18n{module.extend.opengraph.manage_opengraph_socialhub.removeSocialHub}' class='btn btn-danger btn-sm' >
+						<@icon style='trash' /> 
+					</@cLink>
+				</#if>
+			</@td>
+		</@tr>
+	</#list>
+</@table>
 </@extendBox>
+<#import "dump.ftl" as dumper>
+<code>
+	<pre><@dumper.dump .data_model /></pre>
+</code>
 
-<#macro getActionsOpengraphSocialHub item >
-<#if permissions.MODIFY_SOCIALHUB?? && permissions.MODIFY_SOCIALHUB>
-	<@cLink href='jsp/admin/plugins/extend/modules/opengraph/GetModifyOpengraphSocialHub.jsp?id_socialhub=${item.opengraphSocialHubId}' label='' title='#i18n{module.extend.opengraph.manage_opengraph_socialhub.modifySocialHub}' class='btn btn-primary' >
-		<@icon style='edit' /> 
-	</@cLink>
-</#if>
-<#if permissions.REMOVE_SOCIALHUB?? && permissions.REMOVE_SOCIALHUB>
-	<@cLink href='"jsp/admin/plugins/extend/modules/opengraph/ConfirmRemoveOpengraphSocialHub.jsp?id_socialhub=${item.opengraphSocialHubId}' label='' title='#i18n{module.extend.opengraph.manage_opengraph_socialhub.removeSocialHub}' class='btn btn-danger' >
-		<@icon style='trash' /> 
-	</@cLink>
-</#if>
-</#macro>
