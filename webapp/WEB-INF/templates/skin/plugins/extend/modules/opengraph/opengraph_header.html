@@ -1,15 +1,9 @@
-
 <!-- Opengraph metas -->
-
 <meta property="og:title" content="${(meta.title!)?html}"/>
 <meta property="og:image" content="${(meta.imageUrl!)?html}"/>
 <meta property="og:description" content="${(meta.description!)?html}"/>
 <meta property="og:url" content="${(meta.url!)?html}"/>
 <meta property="og:site_name" content="${(meta.siteName!)?html}" />
-	
 <link rel="canonical" href="${(meta.url!)?html}" />
-
 <!-- Social networks includes -->
-<#list socialhubs as socialhub>
-	${socialhub}
-</#list>
+<#list socialhubs as socialhub>${socialhub!}</#list>
