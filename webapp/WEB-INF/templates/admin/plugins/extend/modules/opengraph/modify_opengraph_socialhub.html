@@ -1,31 +1,27 @@
-<@row class='mt-2'>
-	<@columns>
-		<@box>
-			<@boxHeader title='#i18n{module.extend.opengraph.manage_opengraph_socialhub.pageTitle}' />
-			<@boxBody>
-				<@tform type='form' action='jsp/admin/plugins/extend/modules/opengraph/DoModifyOpengraphSocialHub.jsp'>
-					<@input type='hidden' name='id_socialhub' name='id_socialhub' value='${socialhub.opengraphSocialHubId!}' />
-					<@formGroup rows=2 labelKey='#i18n{module.extend.opengraph.add_opengraph_socialhub.labelName}' labelFor='name' mandatory=true>
-					<@input name='name' value='${socialhub.name!}' />
-					</@formGroup>
-					<@formGroup rows=2 labelKey='#i18n{module.extend.opengraph.add_opengraph_socialhub.labelContentHeader}' labelFor='content_header' helpKey='#i18n{module.extend.actionbar.add_action_button.labelResourceTypeHelp}' mandatory=true>
-						<@input type='textarea' class='prism-live language-js language-html' rows=10 id='content_header' name='content_header'>${socialhub.contentHeader!}</@input>
-					</@formGroup>
-					<@formGroup rows=2 labelKey='#i18n{module.extend.opengraph.add_opengraph_socialhub.labelContentBody}' labelFor='content_body' helpKey=helpText>
-						<@input type='textarea' class='prism-live language-js language-html' rows=10 id='content_body' name='content_body'>${socialhub.contentBody!}</@input>
-					</@formGroup>
-					<@formGroup rows=2 labelKey='#i18n{module.extend.opengraph.add_opengraph_socialhub.labelContentFooter}' labelFor='content_footer' helpKey=helpText>
-						<@input type='textarea' class='prism-live language-html' rows=10 id='content_footer' name='content_footer' >${socialhub.contentBody!?html}</@input>
-					</@formGroup>
-					<@formGroup rows=2>
-						<@button type='submit' name='modify' id='modify' title='#i18n{portal.util.labelModify}' buttonIcon='plus' />
-						<@link href='jsp/admin/plugins/extend/modules/opengraph/GetManageOpengraphSocialHub.jsp?plugin_name=extend-opengraph' class='btn btn-default btn-sm' title='#i18n{portal.util.labelBack}' ><@icon style='times me-2 mr-2' /> #i18n{portal.util.labelBack}</@link>
-					</@formGroup>
-				</@tform>
-			</@boxBody>
-		</@box>
-	</@columns>
-</@row>
+<@pageContainer>
+	<@pageColumn>
+		<@pageHeader title='#i18n{module.extend.opengraph.manage_opengraph_socialhub.pageTitle}' />
+		<@tform type='form' action='jsp/admin/plugins/extend/modules/opengraph/DoModifyOpengraphSocialHub.jsp'>
+			<@input type='hidden' name='id_socialhub' name='id_socialhub' value='${socialhub.opengraphSocialHubId!}' />
+			<@formGroup labelKey='#i18n{module.extend.opengraph.add_opengraph_socialhub.labelName}' labelFor='name' mandatory=true>
+			<@input name='name' value='${socialhub.name!}' />
+			</@formGroup>
+			<@formGroup labelKey='#i18n{module.extend.opengraph.add_opengraph_socialhub.labelContentHeader}' labelFor='content_header' helpKey='#i18n{module.extend.actionbar.add_action_button.labelResourceTypeHelp}' mandatory=true>
+				<@input type='textarea' class='prism-live language-js language-html' rows=10 id='content_header' name='content_header'>${socialhub.contentHeader!}</@input>
+			</@formGroup>
+			<@formGroup labelKey='#i18n{module.extend.opengraph.add_opengraph_socialhub.labelContentBody}' labelFor='content_body' helpKey=helpText>
+				<@input type='textarea' class='prism-live language-js language-html' rows=10 id='content_body' name='content_body'>${socialhub.contentBody!}</@input>
+			</@formGroup>
+			<@formGroup labelKey='#i18n{module.extend.opengraph.add_opengraph_socialhub.labelContentFooter}' labelFor='content_footer' helpKey=helpText>
+				<@input type='textarea' class='prism-live language-html' rows=10 id='content_footer' name='content_footer' >${socialhub.contentBody!?html}</@input>
+			</@formGroup>
+			<@formGroup>
+				<@button type='submit' name='modify' id='modify' title='#i18n{portal.util.labelModify}' buttonIcon='device-floppy' />
+				<@aButton href='jsp/admin/plugins/extend/modules/opengraph/GetManageOpengraphSocialHub.jsp?plugin_name=extend-opengraph' title='#i18n{portal.util.labelBack}' buttonIcon='x' color='secondary' />
+			</@formGroup>
+		</@tform>
+	</@pageColumn>
+</@pageContainer>
 <link rel="stylesheet" href="js/admin/lib/prism/prism.css">
 <link rel="stylesheet" href="js/admin/lib/prism/prism-live.css">
 <script src="js/admin/lib/prism/prism.js"></script>

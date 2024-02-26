@@ -3,7 +3,7 @@
 <#if socialhubs?? && socialhubs?has_content>
 	<#list socialhubs as socialhub>
 		<#assign cbxCheck><#if config.listOpengraphSocialHubId?seq_contains(socialhub.opengraphSocialHubId)>true<#else>false</#if></#assign>
-		<@formGroup rows=2 class='mt-3'>
+		<@formGroup class='mt-3'>
 			<@checkBox orientation='switch' name='socialhub_${socialhub.opengraphSocialHubId}' id='socialhub_${socialhub.opengraphSocialHubId}' labelKey='${socialhub.name!}' value='' checked=cbxCheck?boolean />
 		</@formGroup>
 	</#list>

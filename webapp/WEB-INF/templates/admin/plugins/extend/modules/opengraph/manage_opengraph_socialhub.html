@@ -1,8 +1,6 @@
 <#assign bTools>
 <#if permissions.ADD_SOCIALHUB?? && permissions.ADD_SOCIALHUB>
-	<@cLink href='jsp/admin/plugins/extend/modules/opengraph/GetAddOpengraphSocialHub.jsp' label='' title='#i18n{module.extend.opengraph.manage_opengraph_socialhub.addSocialHub}' class='btn btn-primary btn-sm' >
-		<@icon style='plus mr-2 me-2' /> #i18n{module.extend.opengraph.manage_opengraph_socialhub.addSocialHub}
-	</@cLink>
+	<@aButton href='jsp/admin/plugins/extend/modules/opengraph/GetAddOpengraphSocialHub.jsp' title='#i18n{module.extend.opengraph.manage_opengraph_socialhub.addSocialHub}' buttonIcon='plus' />
 </#if>
 </#assign>
 <@extendBox extendTitle='#i18n{module.extend.opengraph.manage_opengraph_socialhub.pageTitle}' hasBoxTools=true extendBoxTools=bTools >
@@ -22,22 +20,14 @@
 			<@td>${item.name!}</@td>
 			<@td>
 				<#if permissions.MODIFY_SOCIALHUB?? && permissions.MODIFY_SOCIALHUB>
-					<@cLink href='jsp/admin/plugins/extend/modules/opengraph/GetModifyOpengraphSocialHub.jsp?id_socialhub=${item.opengraphSocialHubId}' label='' title='#i18n{module.extend.opengraph.manage_opengraph_socialhub.modifySocialHub}' class='btn btn-primary btn-sm' >
-						<@icon style='edit' /> 
-					</@cLink>
+					<@aButton href='jsp/admin/plugins/extend/modules/opengraph/GetModifyOpengraphSocialHub.jsp?id_socialhub=${item.opengraphSocialHubId}' title='#i18n{module.extend.opengraph.manage_opengraph_socialhub.modifySocialHub}' buttonIcon='edit' size='sm' hideTitle=['all'] />
 				</#if>
 				<#if permissions.REMOVE_SOCIALHUB?? && permissions.REMOVE_SOCIALHUB>
-					<@cLink href='jsp/admin/plugins/extend/modules/opengraph/ConfirmRemoveOpengraphSocialHub.jsp?id_socialhub=${item.opengraphSocialHubId}' label='' title='#i18n{module.extend.opengraph.manage_opengraph_socialhub.removeSocialHub}' class='btn btn-danger btn-sm' >
-						<@icon style='trash' /> 
-					</@cLink>
+					<@aButton href='jsp/admin/plugins/extend/modules/opengraph/ConfirmRemoveOpengraphSocialHub.jsp?id_socialhub=${item.opengraphSocialHubId}' title='#i18n{module.extend.opengraph.manage_opengraph_socialhub.removeSocialHub}' buttonIcon='trash' color='danger' size='sm' hideTitle=['all'] /> 
 				</#if>
 			</@td>
 		</@tr>
 	</#list>
 </@table>
 </@extendBox>
-<#import "dump.ftl" as dumper>
-<code>
-	<pre><@dumper.dump .data_model /></pre>
-</code>
 
