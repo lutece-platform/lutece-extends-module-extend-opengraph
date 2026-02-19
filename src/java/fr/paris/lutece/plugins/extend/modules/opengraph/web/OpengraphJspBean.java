@@ -41,7 +41,6 @@ import fr.paris.lutece.portal.service.admin.AdminUserService;
 import fr.paris.lutece.portal.service.message.AdminMessage;
 import fr.paris.lutece.portal.service.message.AdminMessageService;
 import fr.paris.lutece.portal.service.rbac.RBACService;
-import fr.paris.lutece.portal.service.spring.SpringContextService;
 import fr.paris.lutece.portal.service.template.AppTemplateService;
 import fr.paris.lutece.portal.service.util.AppPathService;
 import fr.paris.lutece.portal.service.util.AppPropertiesService;
@@ -57,11 +56,16 @@ import org.apache.commons.lang3.StringUtils;
 import java.util.HashMap;
 import java.util.Map;
 
-import javax.servlet.http.HttpServletRequest;
+import jakarta.enterprise.context.SessionScoped;
+import jakarta.inject.Inject;
+import jakarta.inject.Named;
+import jakarta.servlet.http.HttpServletRequest;
 
 /**
  * JspBean of module extend Opengraph.
  */
+@SessionScoped
+@Named
 public class OpengraphJspBean extends AdminFeaturesPageJspBean
 {
     /**
@@ -114,8 +118,9 @@ public class OpengraphJspBean extends AdminFeaturesPageJspBean
     private static final String JSP_URL_REMOVE_OPENGRAPH_SOCIALHUB = "jsp/admin/plugins/extend/modules/opengraph/DoRemoveOpengraphSocialHub.jsp";
 
     // local variables
-    private OpengraphService _opengraphService = SpringContextService.getBean( OpengraphService.BEAN_NAME );
-    private DataTableManager<OpengraphSocialHub> _dataTableManager;
+    @Inject
+    private OpengraphService _opengraphService;
+    private transient DataTableManager<OpengraphSocialHub> _dataTableManager;
 
     /**
      * Get the ManageOpengraphSocialHub page

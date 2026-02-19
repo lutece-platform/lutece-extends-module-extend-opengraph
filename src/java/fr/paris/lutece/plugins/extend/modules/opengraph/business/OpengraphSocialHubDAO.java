@@ -36,12 +36,17 @@ package fr.paris.lutece.plugins.extend.modules.opengraph.business;
 import fr.paris.lutece.portal.service.plugin.Plugin;
 import fr.paris.lutece.util.sql.DAOUtil;
 
+import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.inject.Named;
+
 import java.util.ArrayList;
 import java.util.List;
 
 /**
  * DAO to manage OpengraphSocialHub objects
  */
+@ApplicationScoped
+@Named( "extend-opengraph.opengraphSocialHubDAO" )
 public class OpengraphSocialHubDAO implements IOpengraphSocialHubDAO
 {
     private static final String SQL_QUERY_SELECT = " SELECT opengraph_socialhub_id, name, content_header, content_body, content_footer FROM extend_opengraph_socialhub WHERE opengraph_socialhub_id = ? ";
@@ -53,24 +58,25 @@ public class OpengraphSocialHubDAO implements IOpengraphSocialHubDAO
 
     /**
      * Get a new primary key
-     * 
+     *
      * @param plugin
      *            The plugin
      * @return The new primary key
      */
     private int getNewPrimaryKey( Plugin plugin )
     {
-        DAOUtil daoUtil = new DAOUtil( SQL_QUERY_NEW_PRIMARY_KEY, plugin );
         int nId = 1;
-        daoUtil.executeQuery( );
 
-        if ( daoUtil.next( ) )
+        try ( DAOUtil daoUtil = new DAOUtil( SQL_QUERY_NEW_PRIMARY_KEY, plugin ) )
         {
-            nId = daoUtil.getInt( 1 );
-            nId++;
-        }
+            daoUtil.executeQuery( );
 
-        daoUtil.free( );
+            if ( daoUtil.next( ) )
+            {
+                nId = daoUtil.getInt( 1 );
+                nId++;
+            }
+        }
 
         return nId;
     }
@@ -81,24 +87,23 @@ public class OpengraphSocialHubDAO implements IOpengraphSocialHubDAO
     @Override
     public OpengraphSocialHub findById( int nId, Plugin plugin )
     {
-        DAOUtil daoUtil = new DAOUtil( SQL_QUERY_SELECT, plugin );
-        daoUtil.setInt( 1, nId );
-
         OpengraphSocialHub opengraphSocialHub = null;
 
-        daoUtil.executeQuery( );
-
-        if ( daoUtil.next( ) )
+        try ( DAOUtil daoUtil = new DAOUtil( SQL_QUERY_SELECT, plugin ) )
         {
-            opengraphSocialHub = new OpengraphSocialHub( );
-            opengraphSocialHub.setOpengraphSocialHubId( daoUtil.getInt( 1 ) );
-            opengraphSocialHub.setName( daoUtil.getString( 2 ) );
-            opengraphSocialHub.setContentHeader( daoUtil.getString( 3 ) );
-            opengraphSocialHub.setContentBody( daoUtil.getString( 4 ) );
-            opengraphSocialHub.setContentFooter( daoUtil.getString( 5 ) );
-        }
+            daoUtil.setInt( 1, nId );
+            daoUtil.executeQuery( );
 
-        daoUtil.free( );
+            if ( daoUtil.next( ) )
+            {
+                opengraphSocialHub = new OpengraphSocialHub( );
+                opengraphSocialHub.setOpengraphSocialHubId( daoUtil.getInt( 1 ) );
+                opengraphSocialHub.setName( daoUtil.getString( 2 ) );
+                opengraphSocialHub.setContentHeader( daoUtil.getString( 3 ) );
+                opengraphSocialHub.setContentBody( daoUtil.getString( 4 ) );
+                opengraphSocialHub.setContentFooter( daoUtil.getString( 5 ) );
+            }
+        }
 
         return opengraphSocialHub;
     }
@@ -109,14 +114,15 @@ public class OpengraphSocialHubDAO implements IOpengraphSocialHubDAO
     @Override
     public void insert( OpengraphSocialHub opengraphSocialHub, Plugin plugin )
     {
-        DAOUtil daoUtil = new DAOUtil( SQL_INSERT, plugin );
-        daoUtil.setInt( 1, getNewPrimaryKey( plugin ) );
-        daoUtil.setString( 2, opengraphSocialHub.getName( ) );
-        daoUtil.setString( 3, opengraphSocialHub.getContentHeader( ) );
-        daoUtil.setString( 4, opengraphSocialHub.getContentBody( ) );
-        daoUtil.setString( 5, opengraphSocialHub.getContentFooter( ) );
-        daoUtil.executeUpdate( );
-        daoUtil.free( );
+        try ( DAOUtil daoUtil = new DAOUtil( SQL_INSERT, plugin ) )
+        {
+            daoUtil.setInt( 1, getNewPrimaryKey( plugin ) );
+            daoUtil.setString( 2, opengraphSocialHub.getName( ) );
+            daoUtil.setString( 3, opengraphSocialHub.getContentHeader( ) );
+            daoUtil.setString( 4, opengraphSocialHub.getContentBody( ) );
+            daoUtil.setString( 5, opengraphSocialHub.getContentFooter( ) );
+            daoUtil.executeUpdate( );
+        }
     }
 
     /**
@@ -125,14 +131,15 @@ public class OpengraphSocialHubDAO implements IOpengraphSocialHubDAO
     @Override
     public void update( OpengraphSocialHub opengraphSocialHub, Plugin plugin )
     {
-        DAOUtil daoUtil = new DAOUtil( SQL_UPDATE, plugin );
-        daoUtil.setString( 1, opengraphSocialHub.getName( ) );
-        daoUtil.setString( 2, opengraphSocialHub.getContentHeader( ) );
-        daoUtil.setString( 3, opengraphSocialHub.getContentBody( ) );
-        daoUtil.setString( 4, opengraphSocialHub.getContentFooter( ) );
-        daoUtil.setInt( 5, opengraphSocialHub.getOpengraphSocialHubId( ) );
-        daoUtil.executeUpdate( );
-        daoUtil.free( );
+        try ( DAOUtil daoUtil = new DAOUtil( SQL_UPDATE, plugin ) )
+        {
+            daoUtil.setString( 1, opengraphSocialHub.getName( ) );
+            daoUtil.setString( 2, opengraphSocialHub.getContentHeader( ) );
+            daoUtil.setString( 3, opengraphSocialHub.getContentBody( ) );
+            daoUtil.setString( 4, opengraphSocialHub.getContentFooter( ) );
+            daoUtil.setInt( 5, opengraphSocialHub.getOpengraphSocialHubId( ) );
+            daoUtil.executeUpdate( );
+        }
     }
 
     /**
@@ -141,10 +148,11 @@ public class OpengraphSocialHubDAO implements IOpengraphSocialHubDAO
     @Override
     public void delete( int nId, Plugin plugin )
     {
-        DAOUtil daoUtil = new DAOUtil( SQL_DELETE, plugin );
-        daoUtil.setInt( 1, nId );
-        daoUtil.executeUpdate( );
-        daoUtil.free( );
+        try ( DAOUtil daoUtil = new DAOUtil( SQL_DELETE, plugin ) )
+        {
+            daoUtil.setInt( 1, nId );
+            daoUtil.executeUpdate( );
+        }
     }
 
     /**
@@ -153,25 +161,23 @@ public class OpengraphSocialHubDAO implements IOpengraphSocialHubDAO
     @Override
     public List<OpengraphSocialHub> findAll( Plugin plugin )
     {
-        DAOUtil daoUtil = new DAOUtil( SQL_QUERY_FIND_ALL, plugin );
+        List<OpengraphSocialHub> listOpengraphSocialHub = new ArrayList<>( );
 
-        List<OpengraphSocialHub> listOpengraphSocialHub = new ArrayList<OpengraphSocialHub>( );
-        OpengraphSocialHub opengraphSocialHub = null;
-
-        daoUtil.executeQuery( );
-
-        while ( daoUtil.next( ) )
+        try ( DAOUtil daoUtil = new DAOUtil( SQL_QUERY_FIND_ALL, plugin ) )
         {
-            opengraphSocialHub = new OpengraphSocialHub( );
-            opengraphSocialHub.setOpengraphSocialHubId( daoUtil.getInt( 1 ) );
-            opengraphSocialHub.setName( daoUtil.getString( 2 ) );
-            opengraphSocialHub.setContentHeader( daoUtil.getString( 3 ) );
-            opengraphSocialHub.setContentBody( daoUtil.getString( 4 ) );
-            opengraphSocialHub.setContentFooter( daoUtil.getString( 5 ) );
-            listOpengraphSocialHub.add( opengraphSocialHub );
-        }
+            daoUtil.executeQuery( );
 
-        daoUtil.free( );
+            while ( daoUtil.next( ) )
+            {
+                OpengraphSocialHub opengraphSocialHub = new OpengraphSocialHub( );
+                opengraphSocialHub.setOpengraphSocialHubId( daoUtil.getInt( 1 ) );
+                opengraphSocialHub.setName( daoUtil.getString( 2 ) );
+                opengraphSocialHub.setContentHeader( daoUtil.getString( 3 ) );
+                opengraphSocialHub.setContentBody( daoUtil.getString( 4 ) );
+                opengraphSocialHub.setContentFooter( daoUtil.getString( 5 ) );
+                listOpengraphSocialHub.add( opengraphSocialHub );
+            }
+        }
 
         return listOpengraphSocialHub;
     }

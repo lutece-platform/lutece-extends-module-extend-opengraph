@@ -1,3 +1,7 @@
+-- liquibase formatted sql
+-- changeset lutece-global-pom:init_db_extend_opengraph.sql
+-- preconditions onFail:MARK_RAN onError:WARN
+
 INSERT INTO extend_opengraph_socialhub (opengraph_socialhub_id,name,content_header,content_body,content_footer) VALUES 
 (1,'Facebook','','<!-- facebook -->\r\n<div id=\"fb-root\"></div>\r\n<script>(function(d, s, id) {\r\n  var js, fjs = d.getElementsByTagName(s)[0];\r\n  if (d.getElementById(id)) return;\r\n  js = d.createElement(s); js.id = id;\r\n  js.src = \"//connect.facebook.net/fr_FR/all.js#xfbml=1\";\r\n  fjs.parentNode.insertBefore(js, fjs);\r\n}(document, \'script\', \'facebook-jssdk\'));</script>\r\n<div class=\"fb-like\" data-href=\"http://dev.lutece.paris.fr/site-demo/\" data-send=\"true\" data-layout=\"button_count\" data-show-faces=\"true\"></div>',''),
 (2,'Google+','','<div class=\"g-plusone\" data-size=\"medium\"></div>','<script type=\"text/javascript\">\r\n  (function() {\r\n    var po = document.createElement(\'script\'); po.type = \'text/javascript\'; po.async = true;\r\n    po.src = \'https://apis.google.com/js/plusone.js\';\r\n    var s = document.getElementsByTagName(\'script\')[0]; s.parentNode.insertBefore(po, s);\r\n  })();\r\n</script>'),

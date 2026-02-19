@@ -1,0 +1,15 @@
+<h3>#i18n{module.extend.opengraph.opengraph_info.labelEnabledSocialHubs}</h3>
+<#if socialhubs?? && socialhubs?has_content>
+	<@table>
+		<tr>
+			<th>#i18n{module.extend.opengraph.manage_opengraph_socialhub.socialhub.name}</th>
+		</tr>
+		<#list socialhubs as socialhub>
+		<tr>
+			<td>${socialhub.name!}</td>
+		</tr>
+		</#list>
+	</@table>
+<#else>
+	<@alert color='info'>#i18n{module.extend.opengraph.opengraph_info.labelNoSocialHub}</@alert>
+</#if>
