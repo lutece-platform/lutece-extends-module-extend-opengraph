@@ -38,12 +38,17 @@ import fr.paris.lutece.plugins.extend.modules.opengraph.service.OpengraphPlugin;
 import fr.paris.lutece.portal.service.plugin.Plugin;
 import fr.paris.lutece.util.sql.DAOUtil;
 
+import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.inject.Named;
+
 import java.util.ArrayList;
 import java.util.List;
 
 /**
  * DAO to manage OpengraphExtenderConfig objects.
  */
+@ApplicationScoped
+@Named( "extend-opengraph.opengraphExtenderConfigDAO" )
 public class OpengraphExtenderConfigDAO implements IExtenderConfigDAO<OpengraphExtenderConfig>
 {
     private static final String SQL_QUERY_SELECT = " SELECT id_socialhub FROM extend_opengraph_config WHERE id_extender = ? ";
@@ -58,7 +63,7 @@ public class OpengraphExtenderConfigDAO implements IExtenderConfigDAO<OpengraphE
 
     /**
      * Associate a list of social hub to an extender config
-     * 
+     *
      * @param nIdExtender
      *            The id of the extender
      * @param listIdSocialHub
@@ -83,22 +88,23 @@ public class OpengraphExtenderConfigDAO implements IExtenderConfigDAO<OpengraphE
 
         sbSql.append( SQL_VALUE_SOCIAL_HUB );
 
-        DAOUtil daoUtil = new DAOUtil( sbSql.toString( ), OpengraphPlugin.getPlugin( ) );
-        int nIndex = 0;
-
-        for ( Integer nId : listIdSocialHub )
+        try ( DAOUtil daoUtil = new DAOUtil( sbSql.toString( ), OpengraphPlugin.getPlugin( ) ) )
         {
-            daoUtil.setInt( ++nIndex, nIdExtender );
-            daoUtil.setInt( ++nIndex, nId );
-        }
+            int nIndex = 0;
 
-        daoUtil.executeUpdate( );
-        daoUtil.free( );
+            for ( Integer nId : listIdSocialHub )
+            {
+                daoUtil.setInt( ++nIndex, nIdExtender );
+                daoUtil.setInt( ++nIndex, nId );
+            }
+
+            daoUtil.executeUpdate( );
+        }
     }
 
     /**
      * Remove associations between a list of social hub and an extender config
-     * 
+     *
      * @param nIdExtender
      *            The id of the extender
      * @param listIdSocialHub
@@ -125,17 +131,18 @@ public class OpengraphExtenderConfigDAO implements IExtenderConfigDAO<OpengraphE
         sbSql.append( CONSTANT_QUESTION_MARK );
         sbSql.append( CONSTANT_CLOSE_PARENTHESIS );
 
-        DAOUtil daoUtil = new DAOUtil( sbSql.toString( ), OpengraphPlugin.getPlugin( ) );
-        int nIndex = 0;
-        daoUtil.setInt( ++nIndex, nIdExtender );
-
-        for ( Integer nId : listIdSocialHub )
+        try ( DAOUtil daoUtil = new DAOUtil( sbSql.toString( ), OpengraphPlugin.getPlugin( ) ) )
         {
-            daoUtil.setInt( ++nIndex, nId );
-        }
+            int nIndex = 0;
+            daoUtil.setInt( ++nIndex, nIdExtender );
 
-        daoUtil.executeUpdate( );
-        daoUtil.free( );
+            for ( Integer nId : listIdSocialHub )
+            {
+                daoUtil.setInt( ++nIndex, nId );
+            }
+
+            daoUtil.executeUpdate( );
+        }
     }
 
     /**
@@ -165,22 +172,23 @@ public class OpengraphExtenderConfigDAO implements IExtenderConfigDAO<OpengraphE
     @Override
     public OpengraphExtenderConfig load( int nIdExtender )
     {
-        DAOUtil daoUtil = new DAOUtil( SQL_QUERY_SELECT, OpengraphPlugin.getPlugin( ) );
-        daoUtil.setInt( 1, nIdExtender );
-        daoUtil.executeQuery( );
-
         OpengraphExtenderConfig opengraphExtenderConfig = new OpengraphExtenderConfig( );
         opengraphExtenderConfig.setIdExtender( nIdExtender );
 
-        List<Integer> listSocialHubIds = new ArrayList<Integer>( );
+        List<Integer> listSocialHubIds = new ArrayList<>( );
 
-        while ( daoUtil.next( ) )
+        try ( DAOUtil daoUtil = new DAOUtil( SQL_QUERY_SELECT, OpengraphPlugin.getPlugin( ) ) )
         {
-            listSocialHubIds.add( daoUtil.getInt( 1 ) );
+            daoUtil.setInt( 1, nIdExtender );
+            daoUtil.executeQuery( );
+
+            while ( daoUtil.next( ) )
+            {
+                listSocialHubIds.add( daoUtil.getInt( 1 ) );
+            }
         }
 
         opengraphExtenderConfig.setListOpengraphSocialHubId( listSocialHubIds );
-        daoUtil.free( );
 
         return opengraphExtenderConfig;
     }
@@ -191,9 +199,10 @@ public class OpengraphExtenderConfigDAO implements IExtenderConfigDAO<OpengraphE
     @Override
     public void delete( int nIdExtender )
     {
-        DAOUtil daoUtil = new DAOUtil( SQL_DELETE_CONFIG, OpengraphPlugin.getPlugin( ) );
-        daoUtil.setInt( 1, nIdExtender );
-        daoUtil.executeUpdate( );
-        daoUtil.free( );
+        try ( DAOUtil daoUtil = new DAOUtil( SQL_DELETE_CONFIG, OpengraphPlugin.getPlugin( ) ) )
+        {
+            daoUtil.setInt( 1, nIdExtender );
+            daoUtil.executeUpdate( );
+        }
     }
 }

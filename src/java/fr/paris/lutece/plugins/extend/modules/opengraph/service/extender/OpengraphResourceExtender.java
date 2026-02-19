@@ -35,12 +35,15 @@ package fr.paris.lutece.plugins.extend.modules.opengraph.service.extender;
 
 import fr.paris.lutece.plugins.extend.business.extender.ResourceExtenderDTO;
 import fr.paris.lutece.plugins.extend.modules.opengraph.business.config.OpengraphExtenderConfig;
+import fr.paris.lutece.plugins.extend.modules.opengraph.web.component.OpengraphResourceExtenderComponent;
 import fr.paris.lutece.plugins.extend.service.extender.AbstractResourceExtender;
 import fr.paris.lutece.plugins.extend.service.extender.config.IResourceExtenderConfigService;
 
-import javax.inject.Inject;
-import javax.inject.Named;
-import javax.servlet.http.HttpServletRequest;
+import jakarta.annotation.PostConstruct;
+import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.inject.Inject;
+import jakarta.inject.Named;
+import jakarta.servlet.http.HttpServletRequest;
 
 import org.apache.commons.lang3.StringUtils;
 
@@ -49,10 +52,12 @@ import org.apache.commons.lang3.StringUtils;
  * Extender for social hub functionalities. <br />
  * Macro to use in the templates : <strong>@Extender[idResource,resourceType,opengraph,{header:true|false}]@</ strong> <br />
  * Examples : @Extender[22,document,opengraph,{header:true}]@ for header<br />
- * 
+ *
  * @Extender[25,PAGE,opengraph,{footer:true ]@ for footer
  * @Extender[25,PAGE,opengraph,{header:false, footer:false}]@ for body
  */
+@ApplicationScoped
+@Named( "extend-opengraph.opengraphResourceExtender" )
 public class OpengraphResourceExtender extends AbstractResourceExtender
 {
     /** The Constant EXTENDER_TYPE. */
@@ -60,6 +65,18 @@ public class OpengraphResourceExtender extends AbstractResourceExtender
     @Inject
     @Named( "extend-opengraph.opengraphExtenderConfigService" )
     private IResourceExtenderConfigService _configService;
+    @Inject
+    private OpengraphResourceExtenderComponent _opengraphResourceExtenderComponent;
+
+    @PostConstruct
+    public void init( )
+    {
+        setKey( EXTENDER_TYPE );
+        setI18nTitleKey( "module.extend.opengraph.extender.opengraph.label" );
+        setConfigRequired( true );
+        setHistoryEnable( false );
+        setResourceExtenderComponent( _opengraphResourceExtenderComponent );
+    }
 
     /**
      * {@inheritDoc}

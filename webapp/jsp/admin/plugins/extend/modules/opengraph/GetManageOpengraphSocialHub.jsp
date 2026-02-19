@@ -1,9 +1,9 @@
 <%@ page errorPage="../../../../ErrorPage.jsp" %>
-<jsp:include page="../../../../AdminHeader.jsp"  flush="true" />
+<jsp:include page="../../../../AdminHeader.jsp" />
 
-<jsp:useBean id="opengraphJspBean" scope="session" class="fr.paris.lutece.plugins.extend.modules.opengraph.web.OpengraphJspBean" />
+<%@page import="fr.paris.lutece.plugins.extend.modules.opengraph.web.OpengraphJspBean"%>
 
-<% opengraphJspBean.init( request, opengraphJspBean.MANAGE_OPENGRAPH_SOCIALHUB ) ; %>
-<%= opengraphJspBean.getManageOpengraphSocialHub( request ) %>
+${ opengraphJspBean.init( pageContext.request, OpengraphJspBean.MANAGE_OPENGRAPH_SOCIALHUB ) }
+${ opengraphJspBean.getManageOpengraphSocialHub( pageContext.request ) }
 
 <%@ include file="../../../../AdminFooter.jsp" %>

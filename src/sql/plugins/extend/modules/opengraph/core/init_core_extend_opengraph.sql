@@ -1,3 +1,7 @@
+-- liquibase formatted sql
+-- changeset lutece-global-pom:init_core_extend_opengraph.sql
+-- preconditions onFail:MARK_RAN onError:WARN
+
 --
 -- Init  table core_admin_right
 --

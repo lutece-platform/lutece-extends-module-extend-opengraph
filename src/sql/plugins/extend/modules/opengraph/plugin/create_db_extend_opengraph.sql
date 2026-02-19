@@ -1,3 +1,7 @@
+-- liquibase formatted sql
+-- changeset lutece-global-pom:create_db_extend_opengraph.sql
+-- preconditions onFail:MARK_RAN onError:WARN
+
 DROP TABLE IF EXISTS extend_opengraph_socialhub;
 CREATE TABLE extend_opengraph_socialhub (
 	opengraph_socialhub_id INT NOT NULL,

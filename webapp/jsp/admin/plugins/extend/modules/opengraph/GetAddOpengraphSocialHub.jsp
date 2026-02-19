@@ -1,23 +1,13 @@
-<%@page import="fr.paris.lutece.portal.web.pluginaction.IPluginActionResult"%>
+<%@ page errorPage="../../../../ErrorPage.jsp" %>
 
-<jsp:useBean id="opengraphJspBean" scope="session" class="fr.paris.lutece.plugins.extend.modules.opengraph.web.OpengraphJspBean" />
+<%@page import="fr.paris.lutece.plugins.extend.modules.opengraph.web.OpengraphJspBean"%>
 
-<% 
-	opengraphJspBean.init( request, opengraphJspBean.MANAGE_OPENGRAPH_SOCIALHUB );
-	IPluginActionResult result = opengraphJspBean.getAddOpengraphSocialHub( request );
-	if ( result.getRedirect(  ) != null )
-	{
-		response.sendRedirect( result.getRedirect(  ) );
-	}
-	else if ( result.getHtmlContent(  ) != null )
-	{
-%>
-		<%@ page errorPage="../../../../ErrorPage.jsp" %>
-		<jsp:include page="../../../../AdminHeader.jsp" />
+${ opengraphJspBean.init( pageContext.request, OpengraphJspBean.MANAGE_OPENGRAPH_SOCIALHUB ) }
+${ pageContext.setAttribute( 'pluginActionResult', opengraphJspBean.getAddOpengraphSocialHub( pageContext.request ) ) }
+${ not empty pageContext.getAttribute( 'pluginActionResult' ).redirect ? pageContext.response.sendRedirect( pageContext.getAttribute( 'pluginActionResult' ).redirect ) : '' }
 
-		<%= result.getHtmlContent(  ) %>
+<jsp:include page="../../../../AdminHeader.jsp" />
 
-		<%@ include file="../../../../AdminFooter.jsp" %>
-<%
-	}
-%>
+${ not empty pageContext.getAttribute( 'pluginActionResult' ).htmlContent ? pageContext.getAttribute( 'pluginActionResult' ).htmlContent : '' }
+
+<%@ include file="../../../../AdminFooter.jsp" %>

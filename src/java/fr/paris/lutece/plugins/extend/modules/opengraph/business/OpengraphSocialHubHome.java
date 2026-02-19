@@ -34,16 +34,17 @@
 package fr.paris.lutece.plugins.extend.modules.opengraph.business;
 
 import fr.paris.lutece.portal.service.plugin.Plugin;
-import fr.paris.lutece.portal.service.spring.SpringContextService;
+
+import jakarta.enterprise.inject.spi.CDI;
 
 import java.util.List;
 
 /**
  * Home of OpengraphSocialHubDAO
  */
-public final class OpengraphSocialHubHome
+public class OpengraphSocialHubHome
 {
-    private static IOpengraphSocialHubDAO _dao = SpringContextService.getBean( "extend-opengraph.opengraphSocialHubDAO" );
+    private static IOpengraphSocialHubDAO _dao = CDI.current( ).select( IOpengraphSocialHubDAO.class ).get( );
 
     /**
      * Private constructor

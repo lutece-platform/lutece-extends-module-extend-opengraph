@@ -38,12 +38,17 @@ import fr.paris.lutece.plugins.extend.modules.opengraph.business.OpengraphSocial
 import fr.paris.lutece.portal.service.plugin.Plugin;
 import fr.paris.lutece.portal.service.plugin.PluginService;
 
+import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.inject.Named;
+
 import java.io.Serializable;
 import java.util.List;
 
 /**
  * OpengraphService
  */
+@ApplicationScoped
+@Named( "extend-opengraph.opengraphService" )
 public class OpengraphService implements Serializable
 {
     /**
