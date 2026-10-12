@@ -1,22 +1,26 @@
 <@pageContainer>
 	<@pageColumn>
-		<@pageHeader title='#i18n{module.extend.opengraph.manage_opengraph_socialhub.pageTitle}' />
-		<@tform type='form' action='jsp/admin/plugins/extend/modules/opengraph/DoAddOpengraphSocialHub.jsp'>
-			<@formGroup labelKey='#i18n{module.extend.opengraph.add_opengraph_socialhub.labelName}' labelFor='name' mandatory=true>
-				<@input name='name' value='' />
+		<@pageHeader title='#i18n{module.extend.opengraph.add_opengraph_socialhub.pageTitle}'>
+			<@aButton href='jsp/admin/plugins/extend/modules/opengraph/ManageOpengraphSocialHubs.jsp?view=manageSocialHubs' buttonIcon='arrow-left' title='#i18n{portal.util.labelBack}' color='light' />
+		</@pageHeader>
+		<@messages errors=errors![] />
+		<@tform method='post' name='createSocialHub' action='jsp/admin/plugins/extend/modules/opengraph/ManageOpengraphSocialHubs.jsp' boxed=true>
+			<@input type='hidden' name='action' value='createSocialHub' />
+			<@formGroup labelFor='name' labelKey='#i18n{module.extend.opengraph.add_opengraph_socialhub.labelName}' mandatory=true rows=2>
+				<@input type='text' name='name' id='name' value='' mandatory=true />
 			</@formGroup>
-			<@formGroup labelKey='#i18n{module.extend.opengraph.add_opengraph_socialhub.labelContentHeader}' labelFor='content_header' helpKey='#i18n{module.extend.actionbar.add_action_button.labelResourceTypeHelp}' >
-				<@input type='textarea' class='richtext language-js' rows=10 id='content_header' name='content_header'></@input>
+			<@formGroup labelFor='content_header' labelKey='#i18n{module.extend.opengraph.add_opengraph_socialhub.labelContentHeader}' rows=2>
+				<@input type='textarea' name='content_header' id='content_header' rows=8></@input>
 			</@formGroup>
-			<@formGroup labelKey='#i18n{module.extend.opengraph.add_opengraph_socialhub.labelContentBody}' labelFor='content_body' mandatory=true>
-				<@input type='textarea' class='richtext language-js' rows=10 id='content_body' name='content_body'></@input>
+			<@formGroup labelFor='content_body' labelKey='#i18n{module.extend.opengraph.add_opengraph_socialhub.labelContentBody}' mandatory=true rows=2>
+				<@input type='textarea' name='content_body' id='content_body' rows=8 mandatory=true></@input>
 			</@formGroup>
-			<@formGroup labelKey='#i18n{module.extend.opengraph.add_opengraph_socialhub.labelContentFooter}' labelFor='content_footer'>
-				<@input type='textarea' class='richtext language-js' rows=10 id='content_footer' name='content_footer' ></@input>
+			<@formGroup labelFor='content_footer' labelKey='#i18n{module.extend.opengraph.add_opengraph_socialhub.labelContentFooter}' rows=2>
+				<@input type='textarea' name='content_footer' id='content_footer' rows=8></@input>
 			</@formGroup>
-			<@formGroup>
-				<@button type='submit' name='create' id='create' title='#i18n{portal.util.labelCreate}' buttonIcon='device-floppy' />
-				<@aButton href='jsp/admin/plugins/extend/modules/opengraph/GetManageOpengraphSocialHub.jsp?plugin_name=extend-opengraph' title='#i18n{portal.util.labelBack}' buttonIcon='x' color='secondary' />
+			<@formGroup rows=2>
+				<@button type='submit' buttonIcon='device-floppy' title='#i18n{portal.util.labelCreate}' color='primary' />
+				<@aButton href='jsp/admin/plugins/extend/modules/opengraph/ManageOpengraphSocialHubs.jsp?view=manageSocialHubs' buttonIcon='x' title='#i18n{portal.util.labelCancel}' color='light' />
 			</@formGroup>
 		</@tform>
 	</@pageColumn>

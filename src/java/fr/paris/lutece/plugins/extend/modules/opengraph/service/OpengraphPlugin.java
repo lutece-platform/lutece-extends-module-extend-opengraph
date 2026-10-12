@@ -45,9 +45,6 @@ public class OpengraphPlugin extends PluginDefaultImplementation
     /** The Constant PLUGIN_NAME. */
     public static final String PLUGIN_NAME = "extend-opengraph";
 
-    /** The Constant TRANSACTION_MANAGER. */
-    public static final String TRANSACTION_MANAGER = PLUGIN_NAME + ".transactionManager";
-
     /**
      * Gets the plugin.
      *

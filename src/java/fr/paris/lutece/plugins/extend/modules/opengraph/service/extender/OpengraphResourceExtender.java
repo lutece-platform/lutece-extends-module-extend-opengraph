@@ -37,10 +37,13 @@ import fr.paris.lutece.plugins.extend.business.extender.ResourceExtenderDTO;
 import fr.paris.lutece.plugins.extend.modules.opengraph.business.config.OpengraphExtenderConfig;
 import fr.paris.lutece.plugins.extend.service.extender.AbstractResourceExtender;
 import fr.paris.lutece.plugins.extend.service.extender.config.IResourceExtenderConfigService;
+import fr.paris.lutece.plugins.extend.modules.opengraph.web.component.OpengraphResourceExtenderComponent;
 
-import javax.inject.Inject;
-import javax.inject.Named;
-import javax.servlet.http.HttpServletRequest;
+import jakarta.annotation.PostConstruct;
+import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.inject.Inject;
+import jakarta.inject.Named;
+import jakarta.servlet.http.HttpServletRequest;
 
 import org.apache.commons.lang3.StringUtils;
 
@@ -53,13 +56,37 @@ import org.apache.commons.lang3.StringUtils;
  * @Extender[25,PAGE,opengraph,{footer:true ]@ for footer
  * @Extender[25,PAGE,opengraph,{header:false, footer:false}]@ for body
  */
+@ApplicationScoped
+@Named( OpengraphResourceExtender.BEAN_NAME )
 public class OpengraphResourceExtender extends AbstractResourceExtender
 {
     /** The Constant EXTENDER_TYPE. */
     public static final String EXTENDER_TYPE = "opengraph";
+
+    /** Name of this bean. */
+    public static final String BEAN_NAME = "extend-opengraph.opengraphResourceExtender";
+
+    private static final String PROPERTY_TITLE_KEY = "module.extend.opengraph.extender.opengraph.label";
+
     @Inject
-    @Named( "extend-opengraph.opengraphExtenderConfigService" )
+    @Named( OpengraphExtenderConfigServiceProducer.BEAN_CONFIG_SERVICE )
     private IResourceExtenderConfigService _configService;
+
+    @Inject
+    private OpengraphResourceExtenderComponent _resourceExtenderComponent;
+
+    /**
+     * Sets up the extender: its key, its title key, its component and its options.
+     */
+    @PostConstruct
+    public void init( )
+    {
+        setResourceExtenderComponent( _resourceExtenderComponent );
+        setKey( EXTENDER_TYPE );
+        setI18nTitleKey( PROPERTY_TITLE_KEY );
+        setConfigRequired( true );
+        setHistoryEnable( false );
+    }
 
     /**
      * {@inheritDoc}
