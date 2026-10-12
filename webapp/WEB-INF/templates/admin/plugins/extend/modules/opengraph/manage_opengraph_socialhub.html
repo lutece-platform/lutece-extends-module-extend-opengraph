@@ -1,33 +1,30 @@
-<#assign bTools>
-<#if permissions.ADD_SOCIALHUB?? && permissions.ADD_SOCIALHUB>
-	<@aButton href='jsp/admin/plugins/extend/modules/opengraph/GetAddOpengraphSocialHub.jsp' title='#i18n{module.extend.opengraph.manage_opengraph_socialhub.addSocialHub}' buttonIcon='plus' />
-</#if>
-</#assign>
-<@extendBox extendTitle='#i18n{module.extend.opengraph.manage_opengraph_socialhub.pageTitle}' hasBoxTools=true extendBoxTools=bTools >
-<@table>
-	<@tr>
-		<#list dataTableManager.listColumn as column>
-			<@th scope='col'>
-				#i18n{${column.titleKey}}
-				<#if !(column.typeColumn = "ACTION") && column.sortable>
-					<@sort jsp_url=dataTableManager.sortUrl attribute=column.parameterName />
-				</#if>
-			</@th>
-		</#list>
-	</@tr>
-	<#list dataTableManager.items as item>
-		<@tr>
-			<@td>${item.name!}</@td>
-			<@td>
-				<#if permissions.MODIFY_SOCIALHUB?? && permissions.MODIFY_SOCIALHUB>
-					<@aButton href='jsp/admin/plugins/extend/modules/opengraph/GetModifyOpengraphSocialHub.jsp?id_socialhub=${item.opengraphSocialHubId}' title='#i18n{module.extend.opengraph.manage_opengraph_socialhub.modifySocialHub}' buttonIcon='edit' size='sm' hideTitle=['all'] />
-				</#if>
-				<#if permissions.REMOVE_SOCIALHUB?? && permissions.REMOVE_SOCIALHUB>
-					<@aButton href='jsp/admin/plugins/extend/modules/opengraph/ConfirmRemoveOpengraphSocialHub.jsp?id_socialhub=${item.opengraphSocialHubId}' title='#i18n{module.extend.opengraph.manage_opengraph_socialhub.removeSocialHub}' buttonIcon='trash' color='danger' size='sm' hideTitle=['all'] /> 
-				</#if>
-			</@td>
-		</@tr>
-	</#list>
-</@table>
-</@extendBox>
-
+<@pageContainer>
+	<@pageColumn>
+		<@pageHeader title='#i18n{module.extend.opengraph.manage_opengraph_socialhub.pageTitle}'>
+			<#if permissions.ADD_SOCIALHUB!false>
+			<@aButton href='jsp/admin/plugins/extend/modules/opengraph/ManageOpengraphSocialHubs.jsp?view=createSocialHub' buttonIcon='plus' title='#i18n{module.extend.opengraph.manage_opengraph_socialhub.addSocialHub}' color='primary' />
+			</#if>
+		</@pageHeader>
+		<@messages infos=infos![] errors=errors![] warnings=warnings![] />
+		<#if socialhub_list?has_content>
+			<@manageFeature>
+				<#list socialhub_list as socialhub>
+				<@manageFeatureItem>
+					<@manageFeatureItemColumn auto=true flex=false>${socialhub.name!}</@manageFeatureItemColumn>
+					<@manageFeatureItemColumn align='end'>
+						<#if permissions.MODIFY_SOCIALHUB!false>
+						<@aButton href='jsp/admin/plugins/extend/modules/opengraph/ManageOpengraphSocialHubs.jsp?view=modifySocialHub&amp;id_socialhub=${socialhub.opengraphSocialHubId?c}' buttonIcon='edit' title='#i18n{module.extend.opengraph.manage_opengraph_socialhub.modifySocialHub}' hideTitle=['xs'] />
+						</#if>
+						<#if permissions.REMOVE_SOCIALHUB!false>
+						<@aButton href='jsp/admin/plugins/extend/modules/opengraph/ManageOpengraphSocialHubs.jsp?view=confirmRemoveSocialHub&amp;id_socialhub=${socialhub.opengraphSocialHubId?c}' buttonIcon='trash' color='danger' title='#i18n{module.extend.opengraph.manage_opengraph_socialhub.removeSocialHub}' hideTitle=['xs'] />
+						</#if>
+					</@manageFeatureItemColumn>
+				</@manageFeatureItem>
+				</#list>
+			</@manageFeature>
+			<@paginationAdmin paginator=paginator combo=1 />
+		<#else>
+			<@empty title='#i18n{portal.util.labelNoItem}' />
+		</#if>
+	</@pageColumn>
+</@pageContainer>
